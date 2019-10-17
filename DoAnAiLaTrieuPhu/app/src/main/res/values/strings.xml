@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">DoAnAiLaTrieuPhu</string>
+    <string name="ten_dang_nhap">Tên đăng nhập</string>
+    <string name="mat_khau">Mật Khẩu</string>
+    <string name="dang_nhap">Đăng Nhập</string>
+    <string name="quen_mat_khau">Quên Mật Khẩu</string>
+    <string name="dang_ky">Đăng ký</string>
+    <string name="dang_nhap_voi_facebook">Đăng Nhập Với FaceBook</string>
+    <string name="dang_nhap_voi_google">Đăng Nhập Với Google</string>
+    <string name="tb_dang_nhap">Tên Tài Khoản hoặc Mật Khẩu Không đúng</string>
+    <string name="tb_dang_ky_tb">Đăng Kí Thất Bại</string>
+    <string name="tb_dang_ky_tc">Đăng Kí Thành Công</string>
+    <string name="email">Email</string>
+    <string name="xac_nhan_mat_khau">Xác Nhận Mật Khẩu</string>
+    <string name="lay_lai_mat_khau">Lấy lại mật khẩu</string>
+    <string name="tb_quen_mat_khau_tb">User Không tồn tại</string>
+    <string name="tb_quen_mat_khau_tc">Password đã được reset</string>
+    <string name="tb_update_user_tc">Update user thành công</string>
+    <string name="tb_update_user_tb">Update user thất bại</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
