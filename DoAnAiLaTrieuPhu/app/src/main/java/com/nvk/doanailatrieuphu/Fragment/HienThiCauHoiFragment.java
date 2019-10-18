@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,17 +25,19 @@ import com.nvk.doanailatrieuphu.Utilities.TimeCounter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HienThiCauHoiFragment extends Fragment{
+public class HienThiCauHoiFragment extends Fragment {
     private List<CauHoi> cauHoiList;
     private int position;
     private Context context;
     private HienThiCauHoiActivity hienThiCauHoiActivity;
     private ViewHolder viewHolder;
     public  Boolean isChecked = false;
+    private String[] phuongAn = {"A","B","C","D"};
     public HienThiCauHoiFragment() {
         // Required empty public constructor
     }
@@ -137,16 +140,17 @@ public class HienThiCauHoiFragment extends Fragment{
 
     private void InvisiablePhuongAn(CauHoi cauHoi) {
         Button[] btnCheckPhuongAn = {viewHolder.btnPhuongAnA,viewHolder.btnPhuongAnB,viewHolder.btnPhuongAnC,viewHolder.btnPhuongAnD};
-        for (int i = 0; i < 4 ; i++) {
-            if (cauHoi.getDapAn().equals(btnCheckPhuongAn[i])){
-
+        int soLuong =0;
+        for (int i = 0; i < phuongAn.length ; i++) {
+            if (!cauHoi.getDapAn().equals(phuongAn[i])){
+                if (soLuong == 2){
+                    break;
+                }else {
+                    btnCheckPhuongAn[i].setVisibility(View.INVISIBLE);
+                    soLuong++;
+                }
             }
         }
-        if (cauHoi.getDapAn() == "A"){
-
-        }
-        viewHolder.btnPhuongAnA.setVisibility(View.INVISIBLE);
-        viewHolder.btnPhuongAnB.setVisibility(View.INVISIBLE);
     }
 
     private void CheckCauTraLoi(View v,String ansert,String noiDung){
@@ -163,7 +167,7 @@ public class HienThiCauHoiFragment extends Fragment{
             public void onClick(View v) {
                 if (!HienThiCauHoiFragment.this.isChecked){
                     HienThiCauHoiFragment.this.isChecked = true;
-                    CheckCauTraLoi(v,"A",cauHoi.getNoiDung());
+                    CheckCauTraLoi(v,phuongAn[0],cauHoi.getNoiDung());
                 }
 
             }
@@ -173,7 +177,7 @@ public class HienThiCauHoiFragment extends Fragment{
             public void onClick(View v) {
                 if (!HienThiCauHoiFragment.this.isChecked){
                     ChonCauTraLoi(v);
-                    CheckCauTraLoi(v,"B",cauHoi.getNoiDung());
+                    CheckCauTraLoi(v,phuongAn[1],cauHoi.getNoiDung());
                     HienThiCauHoiFragment.this.isChecked = true;
                 }
 
@@ -183,7 +187,7 @@ public class HienThiCauHoiFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 if (!HienThiCauHoiFragment.this.isChecked){
-                    CheckCauTraLoi(v,"C",cauHoi.getNoiDung());
+                    CheckCauTraLoi(v,phuongAn[2],cauHoi.getNoiDung());
                     HienThiCauHoiFragment.this.isChecked = true;
                 }
 
@@ -193,7 +197,7 @@ public class HienThiCauHoiFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 if (!HienThiCauHoiFragment.this.isChecked){
-                    CheckCauTraLoi(v,"D",cauHoi.getNoiDung());
+                    CheckCauTraLoi(v,phuongAn[3],cauHoi.getNoiDung());
                     HienThiCauHoiFragment.this.isChecked = true;
                 }
 
