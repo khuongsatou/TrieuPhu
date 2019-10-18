@@ -8,12 +8,13 @@ public class CauHoi {
     private String phuongAnC;
     private String phuongAnD;
     private String dapAn;
+    private Boolean Checked;
 
 
     public CauHoi() {
     }
 
-    public CauHoi(String noiDung, int linhVucId, String phuongAnA, String phuongAnB, String phuongAnC, String phuongAnD, String dapAn) {
+    public CauHoi(String noiDung, int linhVucId, String phuongAnA, String phuongAnB, String phuongAnC, String phuongAnD, String dapAn, Boolean checked) {
         this.noiDung = noiDung;
         this.linhVucId = linhVucId;
         this.phuongAnA = phuongAnA;
@@ -21,6 +22,7 @@ public class CauHoi {
         this.phuongAnC = phuongAnC;
         this.phuongAnD = phuongAnD;
         this.dapAn = dapAn;
+        Checked = checked;
     }
 
     public String getNoiDung() {
@@ -77,5 +79,13 @@ public class CauHoi {
 
     public void setDapAn(String dapAn) {
         this.dapAn = dapAn;
+    }
+
+    public Boolean getChecked() {
+        return Checked;
+    }
+
+    public void setChecked(Boolean checked) {
+        Checked = checked;
     }
 }

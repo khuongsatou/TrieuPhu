@@ -22,10 +22,10 @@
         android:text="2.790 điểm" />
 
     <Button
-        android:id="@+id/btnThemLuoc"
+        android:id="@+id/btnThemLuot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thêm 1 lược chơi 300" />
+        android:text="Thêm 1 lượt chơi 300" />
 
     <Button
         android:id="@+id/btnKetThuc"
