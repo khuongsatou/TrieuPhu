@@ -11,99 +11,8 @@
         android:orientation="vertical"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:weightSum="3"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_weight="2"
-                android:layout_width="0dp"
-                android:background="#03A9F4"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/tvTen"
-                    android:textColor="#fff"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="nvKhuong"
-                    />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:gravity="end"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/ivMang"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_action_heart_full"
-                        />
-                    <ImageView
-                        android:id="@+id/ivMang1"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_action_heart_full"
-                        />
-                    <ImageView
-                        android:id="@+id/ivMang2"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_action_heart_full"
-                        />
-                    <ImageView
-                        android:id="@+id/ivMang3"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_action_heart_low"
-                        />
-                </LinearLayout>
 
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginLeft="30dp"
-                android:gravity="end"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:background="#FFD600"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textColor="#fff"
-                    android:id="@+id/tvTinDung"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2000"
-                    />
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_action_diamon"
-                    />
-            </LinearLayout>
-
-        </LinearLayout>
-        <LinearLayout
-
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/tvDiem"
-                android:textSize="50sp"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Điểm : 0"
-                android:textColor="#E613AB"
-                />
-            <TextView
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Câu Hỏi"
-                />
-        </LinearLayout>
 
 
         <LinearLayout
@@ -130,6 +39,7 @@
                 />
 
             <Button
+                android:tag="A"
                 android:id="@+id/btnPhuongAnA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -137,6 +47,7 @@
                 />
 
             <Button
+                android:tag="B"
                 android:id="@+id/btnPhuongAnB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -144,12 +55,14 @@
                 />
 
             <Button
+                android:tag="C"
                 android:id="@+id/btnPhuongAnC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Phương Án C" />
 
             <Button
+                android:tag="D"
                 android:id="@+id/btnPhuongAnD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -18,7 +18,6 @@ public class NguoiChoiController {
 
     private static final String TABLE_NGUOICHOI = "NguoiChoi";
 
-
     private static final String COLUMN_TEN_DANG_NHAP = "ten_dang_nhap";
     private static final String COLUMN_MAT_KHAU = "mat_khau";
     private static final String COLUMN_EMAIL = "email";
@@ -39,7 +38,7 @@ public class NguoiChoiController {
                         + COLUMN_TEN_DANG_NHAP + " =  '" + tenTaiKhoan + "' AND "
                         + COLUMN_MAT_KHAU      + " =  '" + matKhau +"' "
                 ,null);
-        Boolean result = false;
+        boolean result = false;
         if (cursor.getCount() > 0){
             result = true;
         }

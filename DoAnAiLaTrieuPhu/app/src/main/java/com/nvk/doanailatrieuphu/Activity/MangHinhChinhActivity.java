@@ -36,8 +36,14 @@ public class MangHinhChinhActivity extends AppCompatActivity {
         this.tenDangNhap = intent.getStringExtra(KEY_DANGNHAP_TENDANGNHAP);
         nguoiChoiController = new NguoiChoiController(this);
         NguoiChoi nguoiChoi = nguoiChoiController.getTK(this.tenDangNhap);
+        //LayThongTinNguoiChoi(nguoiChoi);
         tvCredit.setText(String.valueOf(nguoiChoi.getCredit()));
         tvTenDangNhap.setText(nguoiChoi.getTenDangNhap());
+    }
+
+    public void LayThongTinNguoiChoi(NguoiChoi nguoiChoi){
+
+
     }
 
     private void Radiation() {
