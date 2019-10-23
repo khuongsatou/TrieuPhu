@@ -6,12 +6,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.nvk.doanailatrieuphu.Adapter.MuaCreditAdapter;
 import com.nvk.doanailatrieuphu.Controller.MuaCreditController;
+import com.nvk.doanailatrieuphu.Controller.NguoiChoiController;
 import com.nvk.doanailatrieuphu.Model.GoiCredit;
+import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
 
 import java.util.ArrayList;
@@ -23,7 +28,12 @@ public class MuaCreaditActivity extends AppCompatActivity {
     private MuaCreditAdapter muaCreditAdapter;
     private List<GoiCredit> goiCreditList;
     private RecyclerView.LayoutManager layoutManager;
+    private TextView tvTinDung;
+
     private MuaCreditController muaCreditController;
+    private NguoiChoiController nguoiChoiController;
+
+    private String tenDangNhap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +42,26 @@ public class MuaCreaditActivity extends AppCompatActivity {
 
         Radiation();
         CreaterAdapter();
+        nguoiChoiController = new NguoiChoiController(this);
+        muaCreditController = new MuaCreditController(this);
+    }
+
+    private void SetNameUser() {
+        Intent intent = getIntent();
+        this.tenDangNhap = intent.getStringExtra("Ten_dang_nhap");
+
+        NguoiChoi nguoiChoi = nguoiChoiController.getTK(this.tenDangNhap);
+        tvTinDung.setText(String.valueOf(nguoiChoi.getCredit()));
+    }
+
+    public void CapNhatCredit(int credit) {
+        Intent intent = getIntent();
+        this.tenDangNhap = intent.getStringExtra("Ten_dang_nhap");
+        NguoiChoi nguoiChoi = nguoiChoiController.getTK(this.tenDangNhap);
+        nguoiChoi.setCredit(nguoiChoi.getCredit()+credit);
+
+        boolean result=nguoiChoiController.UpdateGoiCredit(nguoiChoi);
+        Log.d("AAAAAA",result+"");
     }
 
     private void CreaterAdapter() {
@@ -49,5 +79,6 @@ public class MuaCreaditActivity extends AppCompatActivity {
 
     private void Radiation() {
         rcvShowCredit = findViewById(R.id.rcvShowCredit);
+        tvTinDung = findViewById(R.id.tvTinDung);
     }
 }

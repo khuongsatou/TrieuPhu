@@ -9,76 +9,74 @@
     android:paddingRight="16dp"
     android:weightSum="10"
     android:gravity="center"
-    >
+    tools:context=".Activity.DangNhapActivity" >
 
     <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:layout_weight="3"
-        android:id="@+id/ivLogo"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:src="@drawable/logo_android"
-        />
+        android:src="@drawable/logo_android" />
 
     <EditText
-        android:textColor="#8B333333"
-        android:paddingLeft="5dp"
-        android:background="@drawable/custom_edittext"
         android:id="@+id/edtTenDangNhap"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:hint="@string/ten_dang_nhap"
-        android:text="khuong" />
+        android:text="khuong"
+        android:visibility="visible"
+        android:layout_margin="5sp"/>
 
     <EditText
-        android:textColor="#8B333333"
-        android:paddingLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/custom_edittext"
+        android:text="123"
+        android:layout_weight="1"
         android:id="@+id/edtMatKhau"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:hint="@string/mat_khau"
-        android:text="123" />
+        android:layout_margin="5sp"
+        />
 
     <Button
-        android:layout_marginTop="10dp"
-        android:textColor="#fff"
-        android:background="@drawable/custom_button"
-        android:layout_weight="1"
-        android:onClick="XuLiDangNhap"
         android:id="@+id/btnDangNhap"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="@string/dang_nhap"
-        android:gravity="center"
-        />
-    <Button
-        android:layout_marginTop="10dp"
-        android:textColor="#fff"
-        android:background="@drawable/custom_button"
         android:layout_weight="1"
+        android:background="#0DA8EE"
+        android:gravity="center"
+        android:onClick="XuLiDangNhap"
+        android:text="@string/dang_nhap"
+        android:textColor="#F5FFFBFB"
+        android:textColorHighlight="#00F3ECEC"
+        android:textColorHint="#FCF7F7"
+        android:textColorLink="#FAFFFFFF"
+        android:layout_margin="5sp"/>
+
+    <Button
         android:id="@+id/btnQuenMatKhau"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="@string/quen_mat_khau"
+        android:layout_weight="1"
+        android:background="#DFAD36F8"
         android:gravity="center"
         android:onClick="XuLiQuenMatKhau"
-        />
+        android:text="@string/quen_mat_khau"
+        android:textColor="#EEFCF4F4"
+        android:layout_margin="5sp"/>
+
     <Button
-        android:layout_marginTop="10dp"
-        android:textColor="#fff"
-        android:background="@drawable/custom_button"
-        android:layout_weight="1"
         android:id="@+id/btnDangKi"
-        android:onClick="XuLiDangKi"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="@string/dang_ky"
+        android:layout_weight="1"
+        android:background="#F3F10A0A"
         android:gravity="center"
-        />
+        android:onClick="XuLiDangKi"
+        android:text="@string/dang_ky"
+        android:textColor="#EEF5EDED"
+        android:layout_margin="5sp"/>
 
     <LinearLayout
         android:layout_weight="2"
@@ -95,12 +93,13 @@
             android:layout_height="0dp"
             android:orientation="horizontal"
             >
+
             <ImageView
                 android:id="@+id/ivIconFB"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/fb"
-                />
+                android:src="@drawable/fb" />
+
             <TextView
                 android:id="@+id/tvDangNhapVoiFB"
                 android:layout_gravity="center"

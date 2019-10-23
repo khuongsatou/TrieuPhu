@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:gravity="center"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:layout_height="match_parent">
+
     <ImageView
-        android:layout_marginTop="16dp"
-        android:id="@+id/ivLogo"
+        android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/logo_android"
-        />
+        android:layout_height="93dp"
+        app:srcCompat="@drawable/logo_user" />
 
     <EditText
         android:id="@+id/edtTenDangNhap"
@@ -44,7 +44,9 @@
         android:id="@+id/btnDangKi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dang_ky"
+        android:background="#2196F3"
         android:onClick="DangKy"
-        />
+        android:text="@string/dang_ky"
+        android:textColor="#EDF1EAEA" />
+
 </LinearLayout>

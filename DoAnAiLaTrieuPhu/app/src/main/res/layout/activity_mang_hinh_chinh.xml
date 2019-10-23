@@ -1,83 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:gravity="center"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:layout_height="match_parent">
-    <ImageView
-        android:layout_marginTop="16dp"
-        android:id="@+id/ivLogo"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/user"
-        />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="253dp"
         android:orientation="vertical">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="189dp"
+            app:srcCompat="@drawable/logo_user" />
+
         <TextView
             android:id="@+id/tvTenDangNhap"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="nvKhuong"/>
+            android:gravity="center"
+            android:text="nvKhuong"
+            android:textColor="#2196F3"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            >
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/ivDiamon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/diamon"
-                />
+                android:src="@drawable/diamon" />
+
             <TextView
                 android:id="@+id/tvCredit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2000"/>
+                android:text="2000"
+                android:textColor="#FF9800" />
         </LinearLayout>
+
     </LinearLayout>
+
     <Button
         android:id="@+id/btnQuanLiTaiKhoan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Quản lí tài khoản"
+        android:background="#4CAF50"
         android:onClick="XuLiQuanLiTaiKhoan"
-        />
+        android:text="Quản lí tài khoản"
+        android:textColor="#F5F5EEEE"
+        android:layout_margin="5sp"/>
+
     <Button
         android:id="@+id/btnTroChoiMoi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Trò chơi mới"
+        android:background="#2196F3"
         android:onClick="XuLiTroChoiMoi"
-        />
+        android:text="Trò chơi mới"
+        android:textColor="#F2F3EEEE"
+        android:layout_margin="5sp"/>
+
     <Button
         android:id="@+id/btnLichSuChoi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lịch sử chơi"
+        android:background="#9C27B0"
         android:onClick="XuLiLichSuChoi"
-        />
+        android:text="Lịch sử chơi"
+        android:textColor="#F3F3EDED"
+        android:layout_margin="5sp"/>
+
     <Button
         android:id="@+id/btnDangKi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bảng xếp hạng"
+        android:background="#E91E63"
         android:onClick="XuLiBangXepHang"
-        />
+        android:text="Bảng xếp hạng"
+        android:textColor="#FCFAF3F3"
+        android:layout_margin="5sp"/>
+
     <Button
         android:id="@+id/btnMuaCredit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mua credit"
+        android:background="#FFC107"
         android:onClick="XuLiMuaCreadit"
-        />
+        android:text="Mua credit"
+        android:textColor="#F5F7EDED"
+        android:layout_margin="5sp"/>
 
 </LinearLayout>

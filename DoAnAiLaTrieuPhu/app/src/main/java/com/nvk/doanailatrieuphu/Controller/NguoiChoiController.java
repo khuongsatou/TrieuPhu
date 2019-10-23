@@ -63,6 +63,19 @@ public class NguoiChoiController {
         return result;
     }
 
+
+    public Boolean UpdateGoiCredit(NguoiChoi nguoiChoi){
+        sqLiteDatabase = db.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_CREDIT,nguoiChoi.getCredit());
+        long result = sqLiteDatabase.update(TABLE_NGUOICHOI,contentValues,COLUMN_TEN_DANG_NHAP + " = ? ",new String[]{nguoiChoi.getTenDangNhap()+""});
+        db.close();
+        if (result > 0){
+            return true;
+        }
+        return  false;
+    }
+
     //err
     public List<NguoiChoi> getAllTK(String tenTaiKhoan){
         sqLiteDatabase = db.getReadableDatabase();

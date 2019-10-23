@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:gravity="center"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:layout_height="match_parent">
+
     <ImageView
-        android:layout_marginTop="16dp"
-        android:id="@+id/ivLogo"
+        android:id="@+id/imageView4"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/user"
-        />
+        android:layout_height="203dp"
+        app:srcCompat="@drawable/logo_user" />
+
     <Button
         android:id="@+id/btnDoiHinhDaiDien"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Đổi hình đại diện"
-        android:background="@null"
         android:layout_marginBottom="20dp"
+        android:background="@null"
+        android:gravity="center"
         android:onClick="XuLiDoiHinhDaiHien"
-        />
+        android:text="Đổi hình đại diện"
+        android:textColor="#2196F3" />
 
     <EditText
         android:id="@+id/edtTenDangNhap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Tên Đăng Nhập"
-        android:enabled="false"
         />
 
     <EditText
@@ -55,7 +55,8 @@
         android:id="@+id/btnDangKi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#2196F3"
         android:text="Cập Nhật"
-        android:onClick="XuLiCapNhap"
-        />
+        android:textColor="#F5F7EDED" />
+
 </LinearLayout>

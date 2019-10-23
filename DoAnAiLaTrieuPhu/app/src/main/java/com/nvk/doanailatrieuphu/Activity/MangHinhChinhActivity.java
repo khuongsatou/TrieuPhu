@@ -36,15 +36,11 @@ public class MangHinhChinhActivity extends AppCompatActivity {
         this.tenDangNhap = intent.getStringExtra(KEY_DANGNHAP_TENDANGNHAP);
         nguoiChoiController = new NguoiChoiController(this);
         NguoiChoi nguoiChoi = nguoiChoiController.getTK(this.tenDangNhap);
-        //LayThongTinNguoiChoi(nguoiChoi);
-        tvCredit.setText(String.valueOf(nguoiChoi.getCredit()));
+        tvCredit.setText(nguoiChoi.getCredit()+"");
         tvTenDangNhap.setText(nguoiChoi.getTenDangNhap());
     }
 
-    public void LayThongTinNguoiChoi(NguoiChoi nguoiChoi){
 
-
-    }
 
     private void Radiation() {
         tvTenDangNhap = findViewById(R.id.tvTenDangNhap);
@@ -71,6 +67,8 @@ public class MangHinhChinhActivity extends AppCompatActivity {
     }
 
     public void XuLiMuaCreadit(View view) {
-        startActivity(new Intent(this,MuaCreaditActivity.class));
+        Intent i = new Intent(this,MuaCreaditActivity.class);
+        i.putExtra("Ten_dang_nhap",this.tenDangNhap);
+        startActivity(i);
     }
 }

@@ -1,14 +1,17 @@
 package com.nvk.doanailatrieuphu.Adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nvk.doanailatrieuphu.Activity.MuaCreaditActivity;
 import com.nvk.doanailatrieuphu.Model.GoiCredit;
 import com.nvk.doanailatrieuphu.R;
 
@@ -18,10 +21,12 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
 
     private List<GoiCredit> goiCredits;
     private Context context;
+    private MuaCreaditActivity muaCreaditActivity;
 
     public MuaCreditAdapter(List<GoiCredit> goiCredits, Context context) {
         this.goiCredits = goiCredits;
         this.context = context;
+        this.muaCreaditActivity = (MuaCreaditActivity) context;
     }
 
     @NonNull
@@ -47,9 +52,34 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
         private TextView tvCredit,tvTien;
         public MuaCreditHolder(@NonNull View itemView) {
             super(itemView);
-
             tvCredit = itemView.findViewById(R.id.tvCredit);
             tvTien = itemView.findViewById(R.id.tvTien);
+            tvCredit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("Mua Credit");
+                    builder.setMessage("Bạn Có Muốn Mua Gem Không");
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            int credit =Integer.parseInt(tvCredit.getText().toString());
+                            muaCreaditActivity.CapNhatCredit(credit);
+                        }});
+
+                    builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+            });
+
         }
     }
 }

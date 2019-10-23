@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:gravity="center"
     android:layout_height="match_parent">
+
     <ImageView
-        android:layout_marginTop="16dp"
-        android:id="@+id/ivLogo"
+        android:id="@+id/imageView3"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/logo_android"
-        />
+        android:layout_height="108dp"
+        app:srcCompat="@drawable/logo_user" />
+
     <EditText
         android:id="@+id/edtTenDangNhap"
         android:layout_width="match_parent"
@@ -25,11 +26,13 @@
         android:layout_height="wrap_content"
         android:hint="@string/email"
         />
+
     <Button
         android:id="@+id/btnLayLaiMatKhau"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/lay_lai_mat_khau"
+        android:background="#2196F3"
         android:onClick="QuenMatKhau"
-        />
+        android:text="@string/lay_lai_mat_khau"
+        android:textColor="#FCECE7E7" />
 </LinearLayout>
