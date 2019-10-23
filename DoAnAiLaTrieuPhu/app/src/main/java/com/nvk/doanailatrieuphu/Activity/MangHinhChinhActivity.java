@@ -42,8 +42,6 @@ public class MangHinhChinhActivity extends AppCompatActivity {
     }
 
     public void LayThongTinNguoiChoi(NguoiChoi nguoiChoi){
-
-
     }
 
     private void Radiation() {
@@ -71,6 +69,9 @@ public class MangHinhChinhActivity extends AppCompatActivity {
     }
 
     public void XuLiMuaCreadit(View view) {
-        startActivity(new Intent(this,MuaCreaditActivity.class));
+        Intent i = new Intent(this,MuaCreaditActivity.class);
+        i.putExtra("Ten_dang_nhap",this.tenDangNhap);
+        startActivity(i);
+
     }
 }

@@ -32,6 +32,10 @@ public class NguoiChoiController {
         db = new DBHelper(context);
     }
 
+
+
+
+
     public Boolean CheckUser(String tenTaiKhoan,String matKhau){
         sqLiteDatabase = db.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+TABLE_NGUOICHOI + " WHERE "
@@ -170,6 +174,18 @@ public class NguoiChoiController {
         return  false;
     }
 
+    public Boolean UpdateGoiCredit(NguoiChoi nguoiChoi){
+        sqLiteDatabase = db.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_CREDIT,nguoiChoi.getCredit());
+        long result = sqLiteDatabase.update(TABLE_NGUOICHOI,contentValues,COLUMN_TEN_DANG_NHAP + " = ? ",new String[]{nguoiChoi.getTenDangNhap()+""});
+        db.close();
+        if (result > 0){
+            return true;
+        }
+        return  false;
+    }
+
     public List<NguoiChoi> getBangXepHang(){
         sqLiteDatabase = db.getReadableDatabase();
         List<NguoiChoi> nguoiChois = new ArrayList<>();
@@ -194,4 +210,7 @@ public class NguoiChoiController {
         sqLiteDatabase.close();
         return nguoiChois;
     }
+
+
+
 }

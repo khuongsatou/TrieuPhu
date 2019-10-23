@@ -1,5 +1,6 @@
 package com.nvk.doanailatrieuphu.Controller;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.nvk.doanailatrieuphu.Database.DBHelper;
 import com.nvk.doanailatrieuphu.Model.CauHoi;
 import com.nvk.doanailatrieuphu.Model.GoiCredit;
+import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,4 +49,7 @@ public class MuaCreditController {
         sqLiteDatabase.close();
         return goiCredits;
     }
+
+
+
 }
