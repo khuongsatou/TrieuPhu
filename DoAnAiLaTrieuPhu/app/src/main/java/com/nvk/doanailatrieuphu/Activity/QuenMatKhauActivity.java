@@ -42,7 +42,6 @@ public class QuenMatKhauActivity extends AppCompatActivity {
         Boolean result      = nguoiChoiController.CheckTKAndEmail(tenDangNhap,email);
         if (result){
             String matKhau = nguoiChoiController.GetMatKhau(tenDangNhap,email);
-
             final Dialog dialog = new Dialog(this);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.custom_dialog_quen_mat_khau);

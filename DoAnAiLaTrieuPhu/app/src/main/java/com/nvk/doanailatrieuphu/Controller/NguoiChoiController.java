@@ -154,7 +154,7 @@ public class NguoiChoiController {
         return matkhau;
     }
 
-    public Boolean DangKiUser(NguoiChoi nguoiChoi){
+    public long DangKiUser(NguoiChoi nguoiChoi){
         sqLiteDatabase = db.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_TEN_DANG_NHAP,nguoiChoi.getTenDangNhap());
@@ -162,11 +162,7 @@ public class NguoiChoiController {
         contentValues.put(COLUMN_EMAIL,nguoiChoi.getEmail());
         long result = sqLiteDatabase.insert(TABLE_NGUOICHOI,null,contentValues);
         db.close();
-
-        if (result > 0){
-            return true;
-        }
-        return  false;
+        return result;
     }
 
     public Boolean UpdateUser(NguoiChoi nguoiChoi){

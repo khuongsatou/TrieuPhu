@@ -21,7 +21,6 @@ public class DangKiTaiKhoanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dang_ki_tai_khoan);
 
         Radiation();
-
     }
 
     private void Radiation() {
@@ -36,14 +35,21 @@ public class DangKiTaiKhoanActivity extends AppCompatActivity {
         nguoiChoi.setTenDangNhap(edtTenDangNhap.getText().toString());
         nguoiChoi.setEmail(edtEmail.getText().toString());
         nguoiChoi.setMatKhau(edtMatKhau.getText().toString());
-        nguoiChoiController = new NguoiChoiController(this);
-        Boolean result = nguoiChoiController.DangKiUser(nguoiChoi);
-        if (result){
-            Toast.makeText(this,getString(R.string.tb_dang_ky_tc),Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this,DangNhapActivity.class));
+
+        if (!nguoiChoi.getMatKhau().equals(edtXacNhanMatKhau.getText().toString())){
+            Toast.makeText(this,getString(R.string.tb_mat_khau_khong_giong_nhau),Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(this,getString(R.string.tb_dang_ky_tb),Toast.LENGTH_LONG).show();
+            nguoiChoiController = new NguoiChoiController(this);
+            long result = nguoiChoiController.DangKiUser(nguoiChoi);
+            if (result > 0){
+                Toast.makeText(this,getString(R.string.tb_dang_ky_tc),Toast.LENGTH_LONG).show();
+                startActivity(new Intent(this,DangNhapActivity.class));
+            }else{
+                Toast.makeText(this,getString(R.string.tb_dang_ky_tb),Toast.LENGTH_LONG).show();
+            }
         }
+
+
     }
 
 

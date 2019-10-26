@@ -17,7 +17,7 @@
     <string name="tb_quen_mat_khau_tc">Password đã được reset</string>
     <string name="tb_update_user_tc">Update user thành công</string>
     <string name="tb_update_user_tb">Update user thất bại</string>
-
+    <string name="tb_mat_khau_khong_giong_nhau">Mật khẩu xác nhận không giống nhau</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -50,13 +50,12 @@ public class DangNhapActivity extends AppCompatActivity {
 
     public void XuLiDangNhap(View v){
         nguoiChoiController = new NguoiChoiController(this);
-        String tenDangNhap =edtTenDangNhap.getText().toString();
+        String tenDangNhap = edtTenDangNhap.getText().toString();
         String matKhau = edtMatKhau.getText().toString();
         Boolean result = nguoiChoiController.CheckUser(tenDangNhap,matKhau);
         if (result){
             Intent intent = new Intent(this,MangHinhChinhActivity.class);
             intent.putExtra(KEY_DANGNHAP_TENDANGNHAP,tenDangNhap);
-            //intent.putExtra(KEY_DANGNHAP_DIEM,)
             startActivity(intent);
 
 
