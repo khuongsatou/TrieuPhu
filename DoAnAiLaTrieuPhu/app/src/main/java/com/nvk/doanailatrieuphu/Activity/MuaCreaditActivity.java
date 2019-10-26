@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,63 +23,58 @@ import com.nvk.doanailatrieuphu.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
+
 public class MuaCreaditActivity extends AppCompatActivity {
     private RecyclerView rcvShowCredit;
 
     private MuaCreditAdapter muaCreditAdapter;
     private List<GoiCredit> goiCreditList;
     private RecyclerView.LayoutManager layoutManager;
-    private TextView tvTinDung;
 
-    private MuaCreditController muaCreditController;
-    private NguoiChoiController nguoiChoiController;
-
+    private MuaCreditController muaCreditController = new MuaCreditController(this);
+    private NguoiChoiController nguoiChoiController = new NguoiChoiController(this);
     private String tenDangNhap;
+
+    public TextView tvTen,tvTinDung;
+    public int id_nguoiChoi = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mua_credit);
 
-        Radiation();
-        CreaterAdapter();
-        nguoiChoiController = new NguoiChoiController(this);
-        muaCreditController = new MuaCreditController(this);
+        radiation();
+        showUserAndCredit();
+        createrAdapter();
     }
 
-    private void SetNameUser() {
-        Intent intent = getIntent();
-        this.tenDangNhap = intent.getStringExtra("Ten_dang_nhap");
-
-        NguoiChoi nguoiChoi = nguoiChoiController.getTK(this.tenDangNhap);
-        tvTinDung.setText(String.valueOf(nguoiChoi.getCredit()));
+    private void showUserAndCredit() {
+        NguoiChoi nguoiChoi = (NguoiChoi) getIntent().getSerializableExtra(KEY_DANGNHAP);
+        this.id_nguoiChoi = nguoiChoi.getId();
+        tvTen.setText(nguoiChoi.getTenDangNhap());
+        tvTinDung.setText(nguoiChoi.getCredit()+"");
     }
 
-    public void CapNhatCredit(int credit) {
-        Intent intent = getIntent();
-        this.tenDangNhap = intent.getStringExtra("Ten_dang_nhap");
-        NguoiChoi nguoiChoi = nguoiChoiController.getTK(this.tenDangNhap);
-        nguoiChoi.setCredit(nguoiChoi.getCredit()+credit);
 
-        boolean result=nguoiChoiController.UpdateGoiCredit(nguoiChoi);
-        Log.d("AAAAAA",result+"");
-    }
 
-    private void CreaterAdapter() {
+
+    private void createrAdapter() {
         muaCreditController = new MuaCreditController(this);
         goiCreditList = new ArrayList<>();
 
         goiCreditList.addAll(muaCreditController.getAllGoiCredit());
-        muaCreditAdapter = new MuaCreditAdapter(goiCreditList,this);
+        muaCreditAdapter = new MuaCreditAdapter(goiCreditList,this,nguoiChoiController);
 
         layoutManager = new GridLayoutManager(this,2);
         rcvShowCredit.setLayoutManager(layoutManager);
         rcvShowCredit.setAdapter(muaCreditAdapter);
-
     }
 
-    private void Radiation() {
+    private void radiation() {
         rcvShowCredit = findViewById(R.id.rcvShowCredit);
-        tvTinDung = findViewById(R.id.tvTinDung);
+        View vHeaderNormal = findViewById(R.id.vHeaderNormal);
+        tvTen = vHeaderNormal.findViewById(R.id.tvTen);
+        tvTinDung = vHeaderNormal.findViewById(R.id.tvTinDung);
     }
 }

@@ -26,7 +26,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:hint="@string/ten_dang_nhap"
-        android:text="khuong"
+        android:text="admin"
         android:visibility="visible"
         android:layout_margin="5sp"/>
 

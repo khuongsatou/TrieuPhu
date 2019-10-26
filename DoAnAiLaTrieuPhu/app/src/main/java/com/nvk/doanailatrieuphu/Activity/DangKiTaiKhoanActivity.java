@@ -14,7 +14,7 @@ import com.nvk.doanailatrieuphu.R;
 
 public class DangKiTaiKhoanActivity extends AppCompatActivity {
     private EditText edtTenDangNhap,edtEmail,edtMatKhau,edtXacNhanMatKhau;
-    private NguoiChoiController nguoiChoiController;
+    private NguoiChoiController nguoiChoiController = new NguoiChoiController(this);;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,26 +31,40 @@ public class DangKiTaiKhoanActivity extends AppCompatActivity {
     }
 
     public void DangKy(View view) {
-        NguoiChoi nguoiChoi = new NguoiChoi();
-        nguoiChoi.setTenDangNhap(edtTenDangNhap.getText().toString());
-        nguoiChoi.setEmail(edtEmail.getText().toString());
-        nguoiChoi.setMatKhau(edtMatKhau.getText().toString());
-
-        if (!nguoiChoi.getMatKhau().equals(edtXacNhanMatKhau.getText().toString())){
-            Toast.makeText(this,getString(R.string.tb_mat_khau_khong_giong_nhau),Toast.LENGTH_SHORT).show();
+        //Lấy text
+        String tenDangNhap = edtTenDangNhap.getText().toString().trim();
+        String email = edtEmail.getText().toString().trim();
+        String matKhau = edtMatKhau.getText().toString().trim();
+        String xacNhanMatKhau = edtXacNhanMatKhau.getText().toString().trim();
+        //Kiểm tra rỗng
+        if (tenDangNhap.equals("") || email.equals("") || matKhau.equals("") || xacNhanMatKhau.equals("")){
+            Toast.makeText(getApplicationContext(), getString(R.string.tb_chua_nhap_du),Toast.LENGTH_SHORT).show();
         }else{
-            nguoiChoiController = new NguoiChoiController(this);
-            long result = nguoiChoiController.DangKiUser(nguoiChoi);
-            if (result > 0){
-                Toast.makeText(this,getString(R.string.tb_dang_ky_tc),Toast.LENGTH_LONG).show();
-                startActivity(new Intent(this,DangNhapActivity.class));
+            //kiểm tra xác nhận mật khẩu
+            if (!matKhau.equals(xacNhanMatKhau)){
+                Toast.makeText(getApplicationContext(), getString(R.string.tb_mat_khau_khong_giong_nhau),Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(this,getString(R.string.tb_dang_ky_tb),Toast.LENGTH_LONG).show();
+                //kiểm tra có chưa
+                Boolean checkTaiKhoanTonTai = nguoiChoiController.getTKTonTai(tenDangNhap);
+                if (checkTaiKhoanTonTai){
+                    Toast.makeText(getApplicationContext(), getString(R.string.tb_ton_tai),Toast.LENGTH_SHORT).show();
+                }else{
+                    //thêm người chơi
+                    NguoiChoi nguoiChoi = new NguoiChoi();
+                    nguoiChoi.setTenDangNhap(tenDangNhap);
+                    nguoiChoi.setEmail(email);
+                    nguoiChoi.setMatKhau(matKhau);
+                    long result = nguoiChoiController.insertNguoiChoi(nguoiChoi);
+                    if (result > 0){
+                        Toast.makeText(this,getString(R.string.tb_dang_ky_tc),Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(this,DangNhapActivity.class));
+                    }else{
+                        Toast.makeText(this,getString(R.string.tb_dang_ky_tb),Toast.LENGTH_LONG).show();
+                    }
+                }
             }
+
+
         }
-
-
     }
-
-
 }

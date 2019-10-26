@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:weightSum="3"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:background="#03A9F4"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tvTen"
+                android:textColor="#fff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nvKhuong"
+                />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginLeft="30dp"
+            android:gravity="end"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:background="#FFD600"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="#fff"
+                android:id="@+id/tvTinDung"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2000"
+                />
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_action_diamon"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

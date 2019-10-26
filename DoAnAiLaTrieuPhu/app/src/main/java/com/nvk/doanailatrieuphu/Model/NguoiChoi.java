@@ -1,6 +1,9 @@
 package com.nvk.doanailatrieuphu.Model;
 
-public class NguoiChoi {
+import java.io.Serializable;
+
+public class NguoiChoi implements Serializable {
+    private int id;
     private String tenDangNhap;
     private String matKhau;
     private String email;
@@ -12,7 +15,8 @@ public class NguoiChoi {
     public NguoiChoi() {
     }
 
-    public NguoiChoi(String tenDangNhap, String matKhau, String email, String hinhDaiDien, int diemCaoNhat, int credit, boolean xoa) {
+    public NguoiChoi(int id, String tenDangNhap, String matKhau, String email, String hinhDaiDien, int diemCaoNhat, int credit, boolean xoa) {
+        this.id = id;
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
         this.email = email;
@@ -20,6 +24,14 @@ public class NguoiChoi {
         this.diemCaoNhat = diemCaoNhat;
         this.credit = credit;
         this.xoa = xoa;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTenDangNhap() {

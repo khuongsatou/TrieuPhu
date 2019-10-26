@@ -25,6 +25,8 @@
         android:textColor="#2196F3" />
 
     <EditText
+        android:inputType="textPersonName"
+        android:enabled="false"
         android:id="@+id/edtTenDangNhap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,19 +34,22 @@
         />
 
     <EditText
+        android:inputType="textEmailAddress"
         android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
         />
     <EditText
+        android:inputType="textPassword"
         android:id="@+id/edtMatKhau"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Mật Khẩu"
+        android:hint="Đổi Mật Khẩu"
         />
 
     <EditText
+        android:inputType="textPassword"
         android:id="@+id/edtXacNhanMatKhau"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,6 +57,7 @@
         />
 
     <Button
+        android:onClick="xuLiCapNhap"
         android:id="@+id/btnDangKi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -6,13 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nvk.doanailatrieuphu.Activity.MuaCreaditActivity;
+import com.nvk.doanailatrieuphu.Controller.NguoiChoiController;
 import com.nvk.doanailatrieuphu.Model.GoiCredit;
+import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
 
 import java.util.List;
@@ -21,19 +25,19 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
 
     private List<GoiCredit> goiCredits;
     private Context context;
-    private MuaCreaditActivity muaCreaditActivity;
+    private NguoiChoiController nguoiChoiController;
 
-    public MuaCreditAdapter(List<GoiCredit> goiCredits, Context context) {
+    public MuaCreditAdapter(List<GoiCredit> goiCredits, Context context, NguoiChoiController nguoiChoiController) {
         this.goiCredits = goiCredits;
         this.context = context;
-        this.muaCreaditActivity = (MuaCreaditActivity) context;
+        this.nguoiChoiController = nguoiChoiController;
     }
 
     @NonNull
     @Override
     public MuaCreditHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.custom_item_goi_credit,parent,false);
-        return new MuaCreditHolder(view);
+        return new MuaCreditHolder(view,this);
     }
 
     @Override
@@ -48,38 +52,50 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
         return goiCredits.size();
     }
 
-    public class MuaCreditHolder extends RecyclerView.ViewHolder{
+    public class MuaCreditHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView tvCredit,tvTien;
-        public MuaCreditHolder(@NonNull View itemView) {
+        private CardView cvItem;
+        private MuaCreditAdapter adapter;
+        public MuaCreditHolder(@NonNull View itemView, MuaCreditAdapter adapter) {
             super(itemView);
+            this.adapter = adapter;
             tvCredit = itemView.findViewById(R.id.tvCredit);
             tvTien = itemView.findViewById(R.id.tvTien);
-            tvCredit.setOnClickListener(new View.OnClickListener() {
+            cvItem = itemView.findViewById(R.id.cvItem);
+            cvItem.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Mua Credit");
+            builder.setMessage("Bạn Có Muốn Mua Gem Không");
+            builder.setCancelable(false);
+            builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Mua Credit");
-                    builder.setMessage("Bạn Có Muốn Mua Gem Không");
-                    builder.setCancelable(false);
-                    builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            int credit =Integer.parseInt(tvCredit.getText().toString());
-                            muaCreaditActivity.CapNhatCredit(credit);
-                        }});
-
-                    builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-                        }
-                    });
-
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    int credit = Integer.parseInt(tvCredit.getText().toString());
+                    MuaCreaditActivity muaCreaditActivity = (MuaCreaditActivity) context;
+                    NguoiChoi nguoiChoi = nguoiChoiController.getTKByID(muaCreaditActivity.id_nguoiChoi);
+                    credit+=nguoiChoi.getCredit();
+                    nguoiChoi.setCredit(credit);
+                    Boolean result = nguoiChoiController.updateGoiCredit(nguoiChoi);
+                    if (result){
+                        Toast.makeText(context,"OK",Toast.LENGTH_SHORT).show();
+                        muaCreaditActivity.tvTinDung.setText(nguoiChoi.getCredit()+"");
+                    }else{
+                        Toast.makeText(context,"Fail",Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
-
+            builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         }
     }
 }
