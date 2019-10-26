@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.nvk.doanailatrieuphu.Controller.NguoiChoiController;
 import com.nvk.doanailatrieuphu.R;
+import com.nvk.doanailatrieuphu.Utilities.Validation;
 
 public class QuenMatKhauActivity extends AppCompatActivity {
     private EditText edtTenDangNhap,edtEmail;
@@ -38,28 +41,31 @@ public class QuenMatKhauActivity extends AppCompatActivity {
     public void QuenMatKhau(View view) {
         nguoiChoiController = new NguoiChoiController(this);
         String tenDangNhap  = edtTenDangNhap.getText().toString();
-        String email        = edtEmail.getText().toString();
-        Boolean result      = nguoiChoiController.CheckTKAndEmail(tenDangNhap,email);
-        if (result){
-            String matKhau = nguoiChoiController.GetMatKhau(tenDangNhap,email);
-            final Dialog dialog = new Dialog(this);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.custom_dialog_quen_mat_khau);
-            btnClose = dialog.findViewById(R.id.btnClose);
-            tvHienThiPass = dialog.findViewById(R.id.tvHienThiPass);
-            tvHienThiPass.setText(matKhau);
+        final String email        = edtEmail.getText().toString();
 
-            Toast.makeText(this,getString(R.string.tb_quen_mat_khau_tc),Toast.LENGTH_LONG).show();
-            btnClose.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
-            dialog.show();
-        }else{
-            Toast.makeText(this,getString(R.string.tb_quen_mat_khau_tb),Toast.LENGTH_LONG).show();
-        }
+
+
+//        Boolean result      = nguoiChoiController.CheckTKAndEmail(tenDangNhap,email);
+//        if (result){
+//            String matKhau = nguoiChoiController.GetMatKhau(tenDangNhap,email);
+//            final Dialog dialog = new Dialog(this);
+//            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//            dialog.setContentView(R.layout.custom_dialog_quen_mat_khau);
+//            btnClose = dialog.findViewById(R.id.btnClose);
+//            tvHienThiPass = dialog.findViewById(R.id.tvHienThiPass);
+//            tvHienThiPass.setText(matKhau);
+//
+//            Toast.makeText(this,getString(R.string.tb_quen_mat_khau_tc),Toast.LENGTH_LONG).show();
+//            btnClose.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    dialog.dismiss();
+//                }
+//            });
+//            dialog.show();
+//        }else{
+//            Toast.makeText(this,getString(R.string.tb_quen_mat_khau_tb),Toast.LENGTH_LONG).show();
+//        }
 
     }
 }
