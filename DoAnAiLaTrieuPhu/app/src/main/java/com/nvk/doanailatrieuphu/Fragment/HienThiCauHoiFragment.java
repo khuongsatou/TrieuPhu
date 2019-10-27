@@ -3,6 +3,7 @@ package com.nvk.doanailatrieuphu.Fragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nvk.doanailatrieuphu.Activity.HienThiCauHoiActivity;
+import com.nvk.doanailatrieuphu.Activity.TroGiupKhanGia;
 import com.nvk.doanailatrieuphu.Model.CauHoi;
 import com.nvk.doanailatrieuphu.R;
 import com.nvk.doanailatrieuphu.Utilities.TimeCounter;
@@ -268,18 +270,21 @@ public class HienThiCauHoiFragment extends Fragment {
     }
 
     private void ShowDiaLogTroGiupKhangGia(CauHoi cauHoi) {
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-        View view = LayoutInflater.from(context).inflate(R.layout.custom_dialog_tro_giup_khang_gia,null,false);
-        dialog.setView(view);
-        final AlertDialog dialog2 = dialog.create();
-        Button btnXinCamOn = view.findViewById(R.id.btnXinCamOn);
-        btnXinCamOn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog2.dismiss();
-            }
-        });
-        dialog2.show();
+//        final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+//        View view = LayoutInflater.from(context).inflate(R.layout.activity_tro_giup_khan_gia,null,false);
+//        dialog.setView(view);
+//        final AlertDialog dialog2 = dialog.create();
+//        Button btnXinCamOn = view.findViewById(R.id.btnXinCamOn);
+//        btnXinCamOn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog2.dismiss();
+//            }
+//        });
+//        dialog2.show();
+
+        Intent i =new Intent(context, TroGiupKhanGia.class);
+        context.startActivity(i);
     }
 
     //millisInFuture  1* 30 * 1000 = 30000ms / 1000 = 30s // Hết 30s chạy onFinish

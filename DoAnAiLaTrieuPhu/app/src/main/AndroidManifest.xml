@@ -9,20 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.BangXepHangActivity"></activity>
+        <activity android:name=".Activity.TroGiupKhanGia"></activity>
+        <activity android:name=".Activity.BangXepHangActivity" />
         <activity android:name=".Activity.MuaCreaditActivity" />
         <activity android:name=".Activity.QuenMatKhauActivity" />
         <activity android:name=".Activity.QuanLiTaiKhoanActivity" />
-        <activity android:name=".Activity.MangHinhTroChoiActivity">
-
-        </activity>
-        <activity android:name=".Activity.MangHinhChinhActivity" >
-
-        </activity>
+        <activity android:name=".Activity.MangHinhTroChoiActivity"></activity>
+        <activity android:name=".Activity.MangHinhChinhActivity"></activity>
         <activity android:name=".Activity.LichSuCauHoiActivity" />
-        <activity android:name=".Activity.HienThiCauHoiActivity" >
-
-        </activity>
+        <activity android:name=".Activity.HienThiCauHoiActivity"></activity>
         <activity android:name=".Activity.DangKiTaiKhoanActivity" />
         <activity android:name=".Activity.DangNhapActivity">
             <intent-filter>
@@ -30,7 +25,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 
