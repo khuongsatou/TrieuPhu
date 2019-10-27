@@ -31,7 +31,7 @@ public class TroGiupKhanGia extends AppCompatActivity {
     private void setdata()
     {
         ArrayList<BarEntry> yBarChart = new ArrayList<>();
-
+        //kasjdfka
         float random = (float)(Math.random()*100);
         float r2 = 100-random;
         float random_2= (float)(Math.random()*100%(r2 + 1));
