@@ -9,7 +9,7 @@
         android:id="@+id/tvTroGiup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Trợ Giúp Của Kháng Giả" />
+        android:text="Trợ Giúp Của Người Thân" />
 
     <TextView
         android:gravity="center"

@@ -2,6 +2,7 @@ package com.nvk.doanailatrieuphu.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,9 @@ import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
 
 import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
+import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
 
 public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaCreditHolder> {
 
@@ -69,7 +73,7 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
         public void onClick(View v) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Mua Credit");
-            builder.setMessage("Bạn Có Muốn Mua Gem Không");
+            builder.setMessage("Bạn Có Muốn Mua Gem Không?");
             builder.setCancelable(false);
             builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                 @Override
@@ -83,6 +87,10 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
                     if (result){
                         Toast.makeText(context,"OK",Toast.LENGTH_SHORT).show();
                         muaCreaditActivity.tvTinDung.setText(nguoiChoi.getCredit()+"");
+                        Intent intent = new Intent();
+                        intent.putExtra(KEY_DANGNHAP,nguoiChoi);
+                        muaCreaditActivity.setResult(RESULT_OK,intent);
+                        muaCreaditActivity.finish();
                     }else{
                         Toast.makeText(context,"Fail",Toast.LENGTH_SHORT).show();
                     }

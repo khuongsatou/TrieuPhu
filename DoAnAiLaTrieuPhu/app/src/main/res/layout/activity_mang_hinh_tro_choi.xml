@@ -3,58 +3,42 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
+    android:weightSum="2"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_weight="0.7"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <include
+            android:id="@+id/vHeader"
+            layout="@layout/header_hien_thi_cau_hoi"
+            />
+        <TextView
+            android:id="@+id/tvCauHoiSo"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="#00BCD4"
+            android:text="1"
+            android:textColor="#fff"
+            android:textSize="50sp"
+            />
 
-    <include
-        android:id="@+id/vHeader"
-        layout="@layout/header_hien_thi_cau_hoi"
-        />
-    <TextView
-        android:id="@+id/tvCauHoiSo"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="#00BCD4"
-        android:text="1"
-        android:textColor="#fff"
-        android:textSize="50sp"
-        />
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chọn lĩnh vực"
+            />
+    </LinearLayout>
 
-    <TextView
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Chọn lĩnh vực"
-        />
 
-    <Button
-        android:id="@+id/btnKHKT"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvLinhVuc"
+        android:layout_weight="1.3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Khoa học kỹ thuật"
-        android:onClick="KHKT"
-        />
-    <Button
-        android:id="@+id/btnVH_XH_NT"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Văn hóa - Xã hội - Nghệ thuật"
-        android:onClick="VHXHNT"
-        />
-    <Button
-        android:id="@+id/btnLS_DL"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lịch sử - Địa ly"
-        android:onClick="LSDL"
-        />
-    <Button
-        android:id="@+id/btnTT"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Thể Thao"
-        android:onClick="TT"
-        />
+        android:layout_height="0dp" />
 
 </LinearLayout>

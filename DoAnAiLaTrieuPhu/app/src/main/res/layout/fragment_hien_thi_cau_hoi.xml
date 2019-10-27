@@ -2,72 +2,64 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".Fragment.HienThiCauHoiFragment">
-
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
-
-
-
-
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tvCauHoiSo"
-                android:layout_gravity="center"
-                android:gravity="center"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_gravity="center"
                 android:background="#00BCD4"
+                android:gravity="center"
                 android:text="1"
                 android:textColor="#fff"
-                android:textSize="50sp"
-                />
+                android:textSize="50sp" />
+
             <TextView
                 android:id="@+id/tvCauHoi"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Đại ngu là quốc hiệu của triều đại nào?"
-                />
+                android:gravity="center"
+                android:text="Đại ngu là quốc hiệu của triều đại nào?" />
 
             <Button
-                android:tag="A"
                 android:id="@+id/btnPhuongAnA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Phương Án A"
-                />
+                android:tag="A"
+                android:text="Phương Án A" />
 
             <Button
-                android:tag="B"
                 android:id="@+id/btnPhuongAnB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Phương Án B"
-                />
+                android:tag="B"
+                android:text="Phương Án B" />
 
             <Button
-                android:tag="C"
                 android:id="@+id/btnPhuongAnC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:tag="C"
                 android:text="Phương Án C" />
 
             <Button
-                android:tag="D"
                 android:id="@+id/btnPhuongAnD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Phương Án D"
-                />
+                android:tag="D"
+                android:text="Phương Án D" />
 
 
         </LinearLayout>
@@ -75,67 +67,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                >
+                android:gravity="center">
+
                 <ImageView
                     android:id="@+id/ivTimer"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_action_timeline"
-                    />
+                    android:src="@drawable/ic_action_timeline" />
+
                 <TextView
                     android:id="@+id/tvtimer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10s"
-                    android:textSize="20sp"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                >
-
-                <ImageButton
-                    android:id="@+id/ivbtnDoiCauHoi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_restart2" />
-                <ImageButton
-                    android:id="@+id/ivbtnNamMoi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_fifty"/>
-                <ImageButton
-                    android:id="@+id/ivbtnTroGiupKhangGia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_people"/>
-                <ImageButton
-                    android:id="@+id/ivbtnGioNguoiThan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_phone"/>
-                <ImageButton
-                    android:id="@+id/ivbtnMuaCredit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_diamon"/>
+                    android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>
 
+        <include android:id="@+id/vFooter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/footer_hien_thi_cau_hoi"
+            />
     </LinearLayout>
 
-    <!-- TODO: Update blank fragment layout -->
+
 
 
 </FrameLayout>

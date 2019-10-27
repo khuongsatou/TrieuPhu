@@ -2,11 +2,13 @@ package com.nvk.doanailatrieuphu.Fragment;
 
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.LongDef;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -23,200 +25,98 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nvk.doanailatrieuphu.Activity.HienThiCauHoiActivity;
+import com.nvk.doanailatrieuphu.Adapter.CauHoiAdapter;
+import com.nvk.doanailatrieuphu.Controller.CauHoiController;
 import com.nvk.doanailatrieuphu.Model.CauHoi;
 import com.nvk.doanailatrieuphu.R;
 import com.nvk.doanailatrieuphu.Utilities.TimeCounter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
  */
+
 public class HienThiCauHoiFragment extends Fragment {
-    private List<CauHoi> cauHoiList;
+    //nó sẽ bị reset khi cập nhật adapter
+    private List<CauHoi> cauHois;
+    private CauHoi cauHoi;
     private int position;
     private Context context;
+    private CauHoiAdapter adapter;
+    private TextView tvCauHoiSo, tvCauHoi;
+    private Button[] btnPhuongAn;
+    private CauHoiController cauHoiController;
     private HienThiCauHoiActivity hienThiCauHoiActivity;
-    private ViewHolder viewHolder;
-    public  Boolean isChecked = false;
-    private String[] phuongAn = {"A","B","C","D"};
+    private boolean isChecked = false;
+    private ImageButton[] ivbtnSP;
 
-    private int totalTime= 1;
-    private int secondTime = 30;
-    private int countTime = 1000;
-
-    private int timeChuyenCauHoi = 2000;
+    private final int timeChuyenCauHoi = 2000;
+    private final int countTime = 1000;
 
 
 
     public HienThiCauHoiFragment() {
-        // Required empty public constructor
     }
 
-
-
-    public HienThiCauHoiFragment(List<CauHoi> cauHoiList, int position,Context context) {
-        this.cauHoiList = cauHoiList;
+    public HienThiCauHoiFragment(List<CauHoi> cauHois, int position, Context context, CauHoiAdapter adapter) {
+        this.cauHois = cauHois;
         this.position = position;
         this.context = context;
+        this.adapter = adapter;
         this.hienThiCauHoiActivity = (HienThiCauHoiActivity) context;
+        this.cauHoiController = new CauHoiController(context);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_hien_thi_cau_hoi, container, false);
 
-        Log.d("PAGER","Đã load");
-        Radiation(view);
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = LayoutInflater.from(context).inflate(R.layout.fragment_hien_thi_cau_hoi, container, false);
+        radiation(view);
         return view;
     }
 
-    private void Radiation(View view) {
-        viewHolder = new ViewHolder();
-        viewHolder.tvCauHoiSo = view.findViewById(R.id.tvCauHoiSo);
-        viewHolder.tvCauHoi = view.findViewById(R.id.tvCauHoi);
+    private CauHoi getItem(int position) {
+        return cauHois.get(position);
+    }
 
 
-        viewHolder.btnPhuongAn = new Button[4];
+    private void radiation(View v) {
 
-        viewHolder.btnPhuongAn[0] = view.findViewById(R.id.btnPhuongAnA);
-        viewHolder.btnPhuongAn[1] = view.findViewById(R.id.btnPhuongAnB);
-        viewHolder.btnPhuongAn[2] = view.findViewById(R.id.btnPhuongAnC);
-        viewHolder.btnPhuongAn[3] = view.findViewById(R.id.btnPhuongAnD);
+        tvCauHoiSo = v.findViewById(R.id.tvCauHoiSo);
+        tvCauHoi = v.findViewById(R.id.tvCauHoi);
+        btnPhuongAn = new Button[4];
+        btnPhuongAn[0] = v.findViewById(R.id.btnPhuongAnA);
+        btnPhuongAn[1] = v.findViewById(R.id.btnPhuongAnB);
+        btnPhuongAn[2] = v.findViewById(R.id.btnPhuongAnC);
+        btnPhuongAn[3] = v.findViewById(R.id.btnPhuongAnD);
 
-        viewHolder.tvTimer =  view.findViewById(R.id.tvtimer);
-        viewHolder.ivbtnDoiCauHoi=  view.findViewById(R.id.ivbtnDoiCauHoi);
-        viewHolder.ivbtnGioNguoiThan=  view.findViewById(R.id.ivbtnGioNguoiThan);
-        viewHolder.ivbtnMuaCredit=  view.findViewById(R.id.ivbtnMuaCredit);
-        viewHolder.ivbtnTroGiupKhangGia=  view.findViewById(R.id.ivbtnTroGiupKhangGia);
-        viewHolder.ivbtnNamMoi=  view.findViewById(R.id.ivbtnNamMoi);
-
-
-
+        View vFooter = v.findViewById(R.id.vFooter);
+        ivbtnSP = new ImageButton[5];
+        ivbtnSP[0] = vFooter.findViewById(R.id.ivbtnDoiCauHoi);
+        ivbtnSP[1] = vFooter.findViewById(R.id.ivbtnNamMoi);
+        ivbtnSP[2] = vFooter.findViewById(R.id.ivbtnTroGiupKhangGia);
+        ivbtnSP[3] = vFooter.findViewById(R.id.ivbtnGioNguoiThan);
+        ivbtnSP[4] = vFooter.findViewById(R.id.ivbtnMuaCredit);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Event();
-        if (position ==0){// vi trí đầu tiên
-            CounterLimited();
-        }
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {// load 3 page trước.
-        super.setUserVisibleHint(isVisibleToUser);
-        Log.d("PAGER","setUser Đã vào hàm hiện "+isVisibleToUser+" "+isResumed());
-        if (isVisibleToUser && isResumed()){//cho page 2
-            CounterLimited();
-            Log.d("PAGER","setUser Hiện");
-        }
-    }
-
-    private void Event() {
-        final CauHoi cauHoi = cauHoiList.get(position);
-        CreateData(cauHoi);
-        CheckPhuongAn(cauHoi);
-        CheckSupport(cauHoi);
-    }
-
-
-
-    private void CreateData(CauHoi cauHoi) {
-        viewHolder.tvCauHoiSo.setText((position+1)+"");
-        viewHolder.tvCauHoi.setText(cauHoi.getNoiDung());
-        viewHolder.btnPhuongAn[0].setText("" + cauHoi.getPhuongAnA());
-        viewHolder.btnPhuongAn[1].setText("" + cauHoi.getPhuongAnB());
-        viewHolder.btnPhuongAn[2].setText("" + cauHoi.getPhuongAnC());
-        viewHolder.btnPhuongAn[3].setText("" + cauHoi.getPhuongAnD());
-    }
-
-    private void CheckSupport(final CauHoi cauHoi) {
-        viewHolder.ivbtnDoiCauHoi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hienThiCauHoiActivity.DoiCauHoi();
-            }
-        });
-
-        viewHolder.ivbtnNamMoi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                InvisiablePhuongAn(cauHoi);
-            }
-        });
-
-        viewHolder.ivbtnTroGiupKhangGia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowDiaLogTroGiupKhangGia(cauHoi);
-            }
-        });
-
-        viewHolder.ivbtnGioNguoiThan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowDialogGoiDien(cauHoi);
-            }
-        });
-
-        viewHolder.ivbtnMuaCredit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-    }
-
-    //phân tích việc loại đi 2 Phương Án
-    // phải tìm ra câu trả lời , còn 3 câu sai
-    // dùng 3 câu sai chon 2 câu bất kì và ẩn đi
-
-
-    private void InvisiablePhuongAn(CauHoi cauHoi) {
-        int soLuong =0;
-        for (int i = 0; i < phuongAn.length ; i++) {
-            if (!cauHoi.getDapAn().equals(phuongAn[i])){
-                if (soLuong == 2){
-                    break;
-                }else {
-                    viewHolder.btnPhuongAn[i].setVisibility(View.INVISIBLE);
-                    soLuong++;
-                }
-            }
-        }
-    }
-
-    private void CheckCauTraLoi(View v,String ansert,String noiDung){
-
-        ChonCauTraLoi(v);
-        if (hienThiCauHoiActivity.checkAnsert(ansert,noiDung)){
-            hienThiCauHoiActivity.SetDapAnDung(v);
-            SetBaGiaySauDoiCauHoi();
-        }else{
-            if (HienThiCauHoiFragment.this.isChecked){
-                String DapAn = cauHoiList.get(position).getDapAn();
-                for (int i = 0; i < viewHolder.btnPhuongAn.length ; i++) {
-                    if (DapAn.equals(viewHolder.btnPhuongAn[i].getTag())){
-                        viewHolder.btnPhuongAn[i].setBackgroundColor(Color.RED);
-                        hienThiCauHoiActivity.CheckHeart();
-                        SetBaGiaySauDoiCauHoi();
-                    }
-                }
-            }
-        }
-
+        setDataText();
+        chonCauHoi();
+        loaiBatSuKienSupport();
 
     }
 
-    private void SetBaGiaySauDoiCauHoi() {
-        CountDownTimer countDownTimer = new CountDownTimer(timeChuyenCauHoi,countTime) {
+    private void chuyenCauSauHaiGiay() {
+        CountDownTimer timer = new CountDownTimer(timeChuyenCauHoi,countTime) {
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -224,86 +124,163 @@ public class HienThiCauHoiFragment extends Fragment {
 
             @Override
             public void onFinish() {
-                hienThiCauHoiActivity.ChuyenCauTiepTheo();
+                chuyenPage();
             }
         };
-        countDownTimer.start();
+        timer.start();
+    }
+
+    private void chuyenPage() {
+        if (hienThiCauHoiActivity.vpgShowCauHoi.getCurrentItem() == cauHois.size() -1){
+            Toast.makeText(context,"HẾT CÂU",Toast.LENGTH_SHORT).show();
+        }else{
+            hienThiCauHoiActivity.vpgShowCauHoi.setCurrentItem(position+1);
+        }
+
+    }
+
+    private void loaiBatSuKienSupport() {
+        ivbtnSP[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doiCauHoi();
+            }
+        });
+        ivbtnSP[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                anHaiDapAnSai();
+            }
+        });
+        ivbtnSP[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                troGiupKhangGia();
+            }
+        });
+
+        ivbtnSP[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goiDienNguoiThan();
+            }
+        });
+
+    }
+
+    private void goiDienNguoiThan() {
+        if (!hienThiCauHoiActivity.ischeckedSP[2]){
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+            View view = LayoutInflater.from(context).inflate(R.layout.custom_dialog_goi_dien,null,false);
+            alertDialog.setView(view);
+            final AlertDialog dialog = alertDialog.create();
+            TextView tvCauTraLoi = view.findViewById(R.id.tvCauTraLoi);
+            Button btnXinCamOn = view.findViewById(R.id.btnXinCamOn);
+            tvCauTraLoi.setText(cauHoi.getDapAn());
+            btnXinCamOn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+            hienThiCauHoiActivity.ischeckedSP[2] = true;
+        }
+
+    }
+
+    private void troGiupKhangGia() {
+
+    }
+
+    private void anHaiDapAnSai() {
+        if (!hienThiCauHoiActivity.ischeckedSP[1]){
+            int dem =0;
+            for (int i = 0; i < btnPhuongAn.length ; i++) {
+                if (!btnPhuongAn[i].getTag().equals(cauHoi.getDapAn())){
+                    if (dem == 2){
+                        break;
+                    }else{
+                        btnPhuongAn[i].setVisibility(View.INVISIBLE);
+                        dem++;
+                    }
+
+                }
+            }
+            hienThiCauHoiActivity.ischeckedSP[1] = true;
+        }
+
     }
 
 
-    private void CheckPhuongAn(final CauHoi cauHoi) {
-        for (int i = 0; i < viewHolder.btnPhuongAn.length ; i++) {
-            EventClickPhuongAn(i,cauHoi);
+    private void restartAdapterSuport(){
+        adapter.notifyDataSetChanged();
+    }
+
+    private void doiCauHoi() {
+        if (!hienThiCauHoiActivity.ischeckedSP[0]){
+            Collections.shuffle(cauHois);
+            restartAdapterSuport();
+            hienThiCauHoiActivity.ischeckedSP[0] = true;
+        }
+
+    }
+
+    private void chonCauHoi() {
+        for (int i = 0; i < btnPhuongAn.length; i++) {
+            setSuKienPhuongAn(i);
         }
     }
 
-    private void EventClickPhuongAn(final int position ,final CauHoi cauHoi) {
-        viewHolder.btnPhuongAn[position].setOnClickListener(new View.OnClickListener() {
+    private void setSuKienPhuongAn(final int i) {
+        //1 hàm bắt 4 sự kiện ấn vào nút
+        btnPhuongAn[i].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!HienThiCauHoiFragment.this.isChecked){
-                    HienThiCauHoiFragment.this.isChecked = true;
-                    CheckCauTraLoi(v,phuongAn[position],cauHoi.getNoiDung());
+                checkDapAn(v);
+                chuyenCauSauHaiGiay();
+            }
+        });
+    }
+
+    private void checkDapAn(View v) {
+        //nếu chưa chọn thì chọn , nếu đã chọn thì không cho nhấn nữa
+        if (!isChecked) {
+            //kiểm tra nhấn vào lần đầu hiện câu đúng lên
+            if (v.getTag().equals(cauHoi.getDapAn())) {
+                v.setBackgroundColor(Color.RED);
+                tangDiemLen();
+            } else {
+                v.setBackgroundColor(Color.GREEN);
+            }
+
+            //Kiểm tra xem khi đã ấn vào câu sai thì hiện câu đúng lên
+            for (int i = 0; i < btnPhuongAn.length; i++) {
+                if (btnPhuongAn[i].getTag().equals(cauHoi.getDapAn())) {
+                    btnPhuongAn[i].setBackgroundColor(Color.RED);
+                    break;
                 }
-
             }
-        });
-    }
-
-    private void ShowDialogGoiDien(CauHoi cauHoi) {
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-        View view = LayoutInflater.from(context).inflate(R.layout.custom_dialog_goi_dien,null,false);
-        dialog.setView(view);
-        final AlertDialog dialog2 = dialog.create();
-        Button btnXinCamOn = view.findViewById(R.id.btnXinCamOn);
-        TextView tvTroGiup = view.findViewById(R.id.tvCauTraLoi);
-        tvTroGiup.setText(cauHoi.getDapAn());
-        btnXinCamOn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog2.dismiss();
-            }
-        });
-        dialog2.show();
-    }
-
-    private void ShowDiaLogTroGiupKhangGia(CauHoi cauHoi) {
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-        View view = LayoutInflater.from(context).inflate(R.layout.custom_dialog_tro_giup_khang_gia,null,false);
-        dialog.setView(view);
-        final AlertDialog dialog2 = dialog.create();
-        Button btnXinCamOn = view.findViewById(R.id.btnXinCamOn);
-        btnXinCamOn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog2.dismiss();
-            }
-        });
-        dialog2.show();
-    }
-
-    //millisInFuture  1* 30 * 1000 = 30000ms / 1000 = 30s // Hết 30s chạy onFinish
-    //countDownInterval : 1000 ms = 1s thì mỗi giây sẽ chạy hàm lại onTick
-    private void CounterLimited() {
-        TimeCounter counter = new TimeCounter(totalTime*secondTime*countTime,countTime,viewHolder.tvTimer,hienThiCauHoiActivity);
-
-        counter.start();
-    }
-
-
-
-
-
-    private void ChonCauTraLoi(View v) {
-       v.setBackgroundColor(Color.GREEN);
-    }
-
-    private class ViewHolder{
-        private TextView tvCauHoiSo,tvCauHoi;
-        private Button[] btnPhuongAn;
-        private TextView tvTimer;
-        private ImageButton ivbtnDoiCauHoi,ivbtnNamMoi,ivbtnTroGiupKhangGia,ivbtnGioNguoiThan,ivbtnMuaCredit;
-
+            //đã chọn xong
+            isChecked = true;
+        }
 
     }
+
+    private void tangDiemLen() {
+        hienThiCauHoiActivity.tongDiem+=50;
+        hienThiCauHoiActivity.tvDiem.setText("Điểm: "+hienThiCauHoiActivity.tongDiem);
+    }
+
+    private void setDataText() {
+        //hiện khi start view
+        this.cauHoi = getItem(position);
+        tvCauHoiSo.setText((position + 1) + "");
+        tvCauHoi.setText(cauHoi.getNoiDung());
+        btnPhuongAn[0].setText(cauHoi.getPhuongAnA());
+        btnPhuongAn[1].setText(cauHoi.getPhuongAnB());
+        btnPhuongAn[2].setText(cauHoi.getPhuongAnC());
+        btnPhuongAn[3].setText(cauHoi.getPhuongAnD());
+    }
+
 }

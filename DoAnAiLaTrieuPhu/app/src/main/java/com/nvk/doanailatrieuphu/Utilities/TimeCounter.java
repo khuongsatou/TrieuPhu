@@ -48,7 +48,7 @@ public class TimeCounter extends CountDownTimer {
     @Override
     public void onFinish() {
         tvTimer.setText("0s");
-        hienThiCauHoiActivity.CheckHeart();
-        hienThiCauHoiActivity.ChuyenCauTiepTheo();
+//        hienThiCauHoiActivity.CheckHeart();
+//        hienThiCauHoiActivity.ChuyenCauTiepTheo();
     }
 }

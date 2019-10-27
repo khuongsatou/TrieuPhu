@@ -1,5 +1,6 @@
 package com.nvk.doanailatrieuphu.Activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,6 +16,7 @@ import com.nvk.doanailatrieuphu.R;
 import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
 
 public class MangHinhChinhActivity extends AppCompatActivity {
+    private static final int KEY_REQUESTCODE = 123;
     private TextView tvTenDangNhap,tvCredit;
     private NguoiChoiController nguoiChoiController = new NguoiChoiController(this);;
     private String tenDangNhap = null;
@@ -29,6 +31,15 @@ public class MangHinhChinhActivity extends AppCompatActivity {
 
         Radiation();
         SetNameUser();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==KEY_REQUESTCODE && resultCode == RESULT_OK && data != null){
+            this.nguoiChoi = (NguoiChoi) data.getSerializableExtra(KEY_DANGNHAP);
+            tvCredit.setText(this.nguoiChoi.getCredit()+"");
+        }
     }
 
     private void SetNameUser() {
@@ -71,6 +82,6 @@ public class MangHinhChinhActivity extends AppCompatActivity {
     public void XuLiMuaCreadit(View view) {
         intent = new Intent(this,MuaCreaditActivity.class);
         intent.putExtra(KEY_DANGNHAP,this.nguoiChoi);
-        startActivity(intent);
+        startActivityForResult(intent,KEY_REQUESTCODE);
     }
 }

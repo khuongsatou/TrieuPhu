@@ -5,11 +5,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +19,8 @@ import android.widget.Toast;
 import com.nvk.doanailatrieuphu.Adapter.CauHoiAdapter;
 import com.nvk.doanailatrieuphu.Controller.CauHoiController;
 import com.nvk.doanailatrieuphu.Model.CauHoi;
+import com.nvk.doanailatrieuphu.Model.LinhVuc;
+import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.Utilities.ViewPagerCurrentItem;
 import com.nvk.doanailatrieuphu.R;
 
@@ -24,20 +28,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
 import static com.nvk.doanailatrieuphu.Activity.MangHinhTroChoiActivity.KEY_LINHVUC;
 
-public class HienThiCauHoiActivity extends AppCompatActivity implements ViewPagerCurrentItem {
-    private ViewPager vpgShowCauHoi;
+public class HienThiCauHoiActivity extends AppCompatActivity {
+    public ViewPager vpgShowCauHoi;
+    public TextView tvTen, tvTinDung,tvDiem;
     private CauHoiAdapter cauHoiAdapter;
-    private List<CauHoi> cauHoiList;
-    private CauHoiController cauHoiController;
-    public int demSoMang = 0;
-    private int linhVucID;
+    private List<CauHoi> cauHois;
+    private CauHoiController cauHoiController = new CauHoiController(this);
     private ImageView[] ivMang;
-    private TextView tvDiem;
-    private int diem = 0;
+    private NguoiChoi nguoiChoi;
+    private LinhVuc linhVuc;
+    private Intent intent;
 
-    private int cauHoiThu = 0;
+    public int tongDiem = 0;
+
+    public boolean[] ischeckedSP = {false, false, false, false};
 
 
     @Override
@@ -45,69 +52,34 @@ public class HienThiCauHoiActivity extends AppCompatActivity implements ViewPage
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hien_thi_cau_hoi);
 
-        Radiation();
-        CreateQuestion();
-        CreateAdapter();
+        radiation();
+        showUserAndCredit();
+        createAdapter();
     }
 
-
-
-    public void DoiCauHoi(){
-        cauHoiList.clear();
-        cauHoiList.addAll(cauHoiController.getAllCauHoiByLinhVucID(this.linhVucID));
-        Collections.shuffle(cauHoiList);
-        vpgShowCauHoi.getAdapter().notifyDataSetChanged();
-    }
-
-
-
-    private void CreateQuestion() {
-        cauHoiController = new CauHoiController(this);
-        cauHoiList = new ArrayList<>();
-        this.linhVucID = getIntent().getIntExtra(KEY_LINHVUC,1);
-        cauHoiList.addAll(cauHoiController.getAllCauHoiByLinhVucID(this.linhVucID));
-    }
-
-    public void ChuyenCauTiepTheo(){
-        if (this.cauHoiThu == cauHoiList.size() -1){
-            Toast.makeText(this,"Đã Hết Câu Hỏi Bạn Win Hết !",Toast.LENGTH_SHORT).show();
-        }else{
-            this.cauHoiThu++;
-            vpgShowCauHoi.setCurrentItem(this.cauHoiThu);
-        }
-    }
-
-
-
-
-    @Override
-    public void onBackPressed() {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setMessage("Bạn Có Muốn dừng lại").setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    finish();
-                }
-            }).setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
-            });
-            dialog.create().show();
-    }
-
-
-
-    private void CreateAdapter() {
-        cauHoiAdapter = new CauHoiAdapter(getSupportFragmentManager(),cauHoiList,this);
+    private void createAdapter() {
+        cauHois = new ArrayList<>();
+        cauHois.addAll(cauHoiController.getAllCauHoiByLinhVucID(this.linhVuc.getId()));
+        cauHoiAdapter = new CauHoiAdapter(getSupportFragmentManager(), cauHois, this,vpgShowCauHoi);
         vpgShowCauHoi.setAdapter(cauHoiAdapter);
-        vpgShowCauHoi.setOffscreenPageLimit(1);
     }
 
-    private void Radiation() {
-        vpgShowCauHoi = this.findViewById(R.id.vpgShowCauHoi);
+    private void showUserAndCredit() {
+        this.intent = getIntent();
+        this.nguoiChoi = (NguoiChoi) this.intent.getSerializableExtra(KEY_DANGNHAP);
+        this.linhVuc = (LinhVuc) this.intent.getSerializableExtra(KEY_LINHVUC);
+
+        tvTen.setText(this.nguoiChoi.getTenDangNhap());
+        tvTinDung.setText(this.nguoiChoi.getCredit()+"");
+    }
+
+    private void radiation() {
+        vpgShowCauHoi = findViewById(R.id.vpgShowCauHoi);
+        View vHeader = findViewById(R.id.vHeader);
+
+        tvTen = vHeader.findViewById(R.id.tvTen);
+        tvTinDung = vHeader.findViewById(R.id.tvTinDung);
+        tvDiem = vHeader.findViewById(R.id.tvDiem);
 
         ivMang = new ImageView[5];
         ivMang[0] = findViewById(R.id.ivMang1);
@@ -116,68 +88,23 @@ public class HienThiCauHoiActivity extends AppCompatActivity implements ViewPage
         ivMang[3] = findViewById(R.id.ivMang4);
         ivMang[4] = findViewById(R.id.ivMang5);
 
-        tvDiem = findViewById(R.id.tvDiem);
+
     }
 
-    public void SetDapAnDung(View v) {
-        this.diem+=50;
-        tvDiem.setText("Điểm: "+this.diem);
-        v.setBackgroundColor(Color.RED);
-    }
-
-    public void CheckHeart() {
-        ImageView[] ivMangItem = ivMang;
-        if (this.demSoMang == 5){
-            Toast.makeText(this,"Bạn Đã hết Mạng",Toast.LENGTH_SHORT).show();
-
-            if (!isFinishing()){
-                final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                View view = LayoutInflater.from(this).inflate(R.layout.custom_dialog_ket_thuc,null,false);
-                Button btnThemLuot = view.findViewById(R.id.btnThemLuot);
-                Button btnKetThuc = view.findViewById(R.id.btnKetThuc);
-                TextView tvDiemDialog = view.findViewById(R.id.tvDiem);
-                dialog.setView(view);
-                tvDiemDialog.setText(tvDiem.getText().toString());
-                final AlertDialog dialog1 = dialog.create();
-                btnThemLuot.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(),"Thêm lượt chưa được xây dựng",Toast.LENGTH_SHORT).show();
-                        dialog1.cancel();
-                    }
-                });
-
-                btnKetThuc.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog1.cancel();
-                        finish();
-                    }
-                });
-
-                dialog1.show();
+    public void anHaiDapAnSai(Button[] btnPhuongAn,CauHoi cauHoi) {
+        int dem =0;
+        for (int i = 0; i < btnPhuongAn.length ; i++) {
+            if (btnPhuongAn[i].getTag().equals(cauHoi.getDapAn())){
+                if (dem == 2){
+                    break;
+                }else{
+                    btnPhuongAn[i].setBackgroundColor(Color.RED);
+                    btnPhuongAn[i].setVisibility(View.INVISIBLE);
+                    dem++;
+                }
             }
-
-        }else{
-            ivMangItem[this.demSoMang].setImageResource(R.drawable.ic_action_heart_low);
-            this.demSoMang++;
         }
+        cauHoiAdapter.notifyDataSetChanged();
     }
 
-
-
-    @Override
-    public void current(View view) {
-        if (vpgShowCauHoi.getCurrentItem() >= 0){// page đầu tiên là page 0
-            vpgShowCauHoi.setCurrentItem(vpgShowCauHoi.getCurrentItem()+1);
-        }else if(vpgShowCauHoi.getCurrentItem() == cauHoiList.size()-1){
-            vpgShowCauHoi.setCurrentItem(vpgShowCauHoi.getCurrentItem());
-        }
-    }
-
-    @Override
-    public Boolean checkAnsert(String ansert, String cauhoi) {
-        String dapAn = cauHoiController.getDapAn(cauhoi,this.linhVucID);
-        return dapAn.equals(ansert);
-    }
 }

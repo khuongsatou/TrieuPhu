@@ -17,10 +17,12 @@ public class LichSuChoiController {
 
 
     private static final String TABLE_LUOCCHOI = "luotchoi";
+    private static final String COLUMN_ID= "id";
     private static final String COLUMN_NGUOI_CHOI_ID= "nguoi_choi_id";
     private static final String COLUMN_SO_CAU = "so_cau";
     private static final String COLUMN_DIEM = "diem";
     private static final String COLUMN_NGAY_GIO = "ngay_gio";
+    private static final String COLUMN_XOA= "xoa";
     private static final String SELECT_ALL = "SELECT * FROM "+TABLE_LUOCCHOI + " WHERE ";
 
     public LichSuChoiController(Context context) {
@@ -35,11 +37,18 @@ public class LichSuChoiController {
         if (cursor.getCount() > 0){
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
-                int nguoiChoi = cursor.getInt(cursor.getColumnIndex(COLUMN_NGUOI_CHOI_ID));
+                int id =cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+                int nguoiChoi_id = cursor.getInt(cursor.getColumnIndex(COLUMN_NGUOI_CHOI_ID));
                 int soCau = cursor.getInt(cursor.getColumnIndex(COLUMN_SO_CAU));
                 String diem = cursor.getString(cursor.getColumnIndex(COLUMN_DIEM));
                 String ngayGio = cursor.getString(cursor.getColumnIndex(COLUMN_NGAY_GIO));
-                LuotChoi luotChoi = new LuotChoi(nguoiChoi,soCau,diem,ngayGio);
+
+                LuotChoi luotChoi = new LuotChoi();
+                luotChoi.setId(id);
+                luotChoi.setNguoiChoiId(nguoiChoi_id);
+                luotChoi.setSoCau(soCau);
+                luotChoi.setDiem(diem);
+                luotChoi.setNgayGio(ngayGio);
                 luotChois.add(luotChoi);
                 cursor.moveToNext();
             }

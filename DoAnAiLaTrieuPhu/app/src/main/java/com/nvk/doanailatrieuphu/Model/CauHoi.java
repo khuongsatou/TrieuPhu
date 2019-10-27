@@ -1,7 +1,7 @@
 package com.nvk.doanailatrieuphu.Model;
 
 public class CauHoi {
-
+    private int id;
     private String noiDung;
     private int linhVucId;
     private String phuongAnA;
@@ -9,13 +9,15 @@ public class CauHoi {
     private String phuongAnC;
     private String phuongAnD;
     private String dapAn;
-    private Boolean Checked;
+    private Boolean xoa;
+
 
 
     public CauHoi() {
     }
 
-    public CauHoi(String noiDung, int linhVucId, String phuongAnA, String phuongAnB, String phuongAnC, String phuongAnD, String dapAn, Boolean checked) {
+    public CauHoi(int id, String noiDung, int linhVucId, String phuongAnA, String phuongAnB, String phuongAnC, String phuongAnD, String dapAn, Boolean xoa) {
+        this.id = id;
         this.noiDung = noiDung;
         this.linhVucId = linhVucId;
         this.phuongAnA = phuongAnA;
@@ -23,7 +25,15 @@ public class CauHoi {
         this.phuongAnC = phuongAnC;
         this.phuongAnD = phuongAnD;
         this.dapAn = dapAn;
-        Checked = checked;
+        this.xoa = xoa;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNoiDung() {
@@ -82,11 +92,11 @@ public class CauHoi {
         this.dapAn = dapAn;
     }
 
-    public Boolean getChecked() {
-        return Checked;
+    public Boolean getXoa() {
+        return xoa;
     }
 
-    public void setChecked(Boolean checked) {
-        Checked = checked;
+    public void setXoa(Boolean xoa) {
+        this.xoa = xoa;
     }
 }

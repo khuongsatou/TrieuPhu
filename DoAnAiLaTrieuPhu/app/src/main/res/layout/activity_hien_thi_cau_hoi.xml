@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
+    android:weightSum="3"
     android:layout_height="match_parent">
 
-    <include layout="@layout/header_hien_thi_cau_hoi"/>
+
+    <include
+        android:id="@+id/vHeader"
+        layout="@layout/header_hien_thi_cau_hoi"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8" />
 
     <com.nvk.doanailatrieuphu.Utilities.CustomViewPager
-        android:id="@+id/vpgShowCauHoi"
+        android:layout_weight="2.2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:id="@+id/vpgShowCauHoi"
+        />
+
+
 </LinearLayout>
