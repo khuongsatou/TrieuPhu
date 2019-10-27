@@ -17,45 +17,28 @@ public class NguoiChoiController {
     private SQLiteDatabase sqLiteDatabase;
 
     private static final String TABLE_NGUOICHOI = "NguoiChoi";
-
+    private static final String COLUMN_ID = "id";
     private static final String COLUMN_TEN_DANG_NHAP = "ten_dang_nhap";
     private static final String COLUMN_MAT_KHAU = "mat_khau";
     private static final String COLUMN_EMAIL = "email";
     private static final String COLUMN_CREDIT = "credit";
     private static final String COLUMN_HINH_DAI_DIEN = "hinh_dai_dien";
     private static final String COLUMN_DIEM_CAO_NHAT = "diem_cao_nhat";
-
-
+    private static final String COLUMN_XOA = "xoa";
+    private static final String SELECT_ALL = "SELECT * FROM " + TABLE_NGUOICHOI + " WHERE ";
+    private static final String SELECT_ALL_NO_XOA = "SELECT * FROM " + TABLE_NGUOICHOI + " WHERE " + COLUMN_XOA + " = 0 ";
 
 
     public NguoiChoiController(Context context) {
         db = new DBHelper(context);
     }
 
-    public Boolean CheckUser(String tenTaiKhoan,String matKhau){
+    //Check
+    public Boolean getTKTonTai(String tenTaiKhoan) {
         sqLiteDatabase = db.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+TABLE_NGUOICHOI + " WHERE "
-                        + COLUMN_TEN_DANG_NHAP + " =  '" + tenTaiKhoan + "' AND "
-                        + COLUMN_MAT_KHAU      + " =  '" + matKhau +"' "
-                ,null);
-        boolean result = false;
-        if (cursor.getCount() > 0){
-            result = true;
-        }
-        cursor.close();
-        db.close();
-        return result;
-    }
-
-    public Boolean CheckTKAndEmail(String tenTaiKhoan,String email){
-        sqLiteDatabase = db.getReadableDatabase();
-
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+TABLE_NGUOICHOI + " WHERE "
-                        + COLUMN_TEN_DANG_NHAP + " =  '" + tenTaiKhoan + "' AND "
-                        + COLUMN_EMAIL +" = '" + email +"' "
-                ,null);
+        Cursor cursor = sqLiteDatabase.rawQuery(SELECT_ALL + COLUMN_TEN_DANG_NHAP + " =  '" + tenTaiKhoan + "' " , null);
         Boolean result = false;
-        if (cursor.getCount() > 0){
+        if (cursor.getCount() > 0) {
             result = true;
         }
         cursor.close();
@@ -63,89 +46,42 @@ public class NguoiChoiController {
         return result;
     }
 
-
-    public Boolean UpdateGoiCredit(NguoiChoi nguoiChoi){
-        sqLiteDatabase = db.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_CREDIT,nguoiChoi.getCredit());
-        long result = sqLiteDatabase.update(TABLE_NGUOICHOI,contentValues,COLUMN_TEN_DANG_NHAP + " = ? ",new String[]{nguoiChoi.getTenDangNhap()+""});
-        db.close();
-        if (result > 0){
-            return true;
-        }
-        return  false;
-    }
-
-    //err
-    public List<NguoiChoi> getAllTK(String tenTaiKhoan){
+    public Boolean checkTKAndEmail(String tenTaiKhoan, String email) {
         sqLiteDatabase = db.getReadableDatabase();
-        List<NguoiChoi> nguoiChois = new ArrayList<NguoiChoi>();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+TABLE_NGUOICHOI + " WHERE "
-                        + COLUMN_TEN_DANG_NHAP + " =  '" + tenTaiKhoan+ " ' "
-                ,null);
-        if (cursor.getCount() > 0){
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()){
-                NguoiChoi nguoiChoi = new NguoiChoi();
-
-                String tenDangNhap = cursor.getString(cursor.getColumnIndex(COLUMN_TEN_DANG_NHAP));
-                String email = cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL));
-                String matKhau = cursor.getString(cursor.getColumnIndex(COLUMN_MAT_KHAU));
-
-                nguoiChoi.setTenDangNhap(tenDangNhap);
-                nguoiChoi.setEmail(email);
-                nguoiChoi.setMatKhau(matKhau);
-
-                nguoiChois.add(nguoiChoi);
-
-                cursor.moveToNext();
-            }
-        }
-
-        cursor.close();
-        db.close();
-        return nguoiChois;
-
-    }
-
-    public NguoiChoi getTK(String tenTaiKhoan){
-        sqLiteDatabase = db.getReadableDatabase();
-        NguoiChoi nguoiChoi = new NguoiChoi();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+TABLE_NGUOICHOI + " WHERE "
-                        + COLUMN_TEN_DANG_NHAP + " =  '" + tenTaiKhoan+ "' "
-                ,null);
-        if (cursor.getCount() > 0){
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()){
-
-
-                String tenDangNhap = cursor.getString(cursor.getColumnIndex(COLUMN_TEN_DANG_NHAP));
-                String email = cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL));
-                String matKhau = cursor.getString(cursor.getColumnIndex(COLUMN_MAT_KHAU));
-                int credit = cursor.getInt(cursor.getColumnIndex(COLUMN_CREDIT));
-
-                nguoiChoi.setTenDangNhap(tenDangNhap);
-                nguoiChoi.setEmail(email);
-                nguoiChoi.setMatKhau(matKhau);
-                nguoiChoi.setCredit(credit);
-
-                cursor.moveToNext();
-            }
+        Cursor cursor = sqLiteDatabase.rawQuery(SELECT_ALL + COLUMN_TEN_DANG_NHAP + " =  '" + tenTaiKhoan + "' AND " + COLUMN_EMAIL + " = '" + email + "' ", null);
+        Boolean result = false;
+        if (cursor.getCount() > 0) {
+            result = true;
         }
         cursor.close();
         db.close();
-        return nguoiChoi;
-
+        return result;
     }
 
-    public String GetMatKhau(String tenTaiKhoan,String email){
+    public Boolean checkUser(String tenTaiKhoan, String matKhau) {
         sqLiteDatabase = db.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+TABLE_NGUOICHOI + " WHERE "
+        Cursor cursor = sqLiteDatabase.rawQuery(SELECT_ALL_NO_XOA +" AND "
                         + COLUMN_TEN_DANG_NHAP + " =  '" + tenTaiKhoan + "' AND "
-                        + COLUMN_EMAIL + " = '" + email +"' "
-                ,null);
+                        + COLUMN_MAT_KHAU + " =  '" + matKhau + "' "
+                , null);
+        boolean result = false;
+        if (cursor.getCount() > 0) {
+            result = true;
+        }
+        cursor.close();
+        db.close();
+        return result;
+    }
+
+    //Select
+    public String getMatKhau(String tenTaiKhoan, String email) {
+        sqLiteDatabase = db.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(SELECT_ALL_NO_XOA + " AND "
+                        + COLUMN_TEN_DANG_NHAP + " =  '" + tenTaiKhoan + "' AND "
+                        + COLUMN_EMAIL + " = '" + email + "' "
+                , null);
         String matkhau = null;
-        if (cursor.getCount() > 0){
+        if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             matkhau = cursor.getString(cursor.getColumnIndex(COLUMN_MAT_KHAU));
         }
@@ -154,44 +90,109 @@ public class NguoiChoiController {
         return matkhau;
     }
 
-    public Boolean DangKiUser(NguoiChoi nguoiChoi){
-        sqLiteDatabase = db.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_TEN_DANG_NHAP,nguoiChoi.getTenDangNhap());
-        contentValues.put(COLUMN_MAT_KHAU,nguoiChoi.getMatKhau());
-        contentValues.put(COLUMN_EMAIL,nguoiChoi.getEmail());
-        long result = sqLiteDatabase.insert(TABLE_NGUOICHOI,null,contentValues);
-        db.close();
-
-        if (result > 0){
-            return true;
+    public NguoiChoi getTK(String tenTaiKhoan) {
+        sqLiteDatabase = db.getReadableDatabase();
+        NguoiChoi nguoiChoi = new NguoiChoi();
+        Cursor cursor = sqLiteDatabase.rawQuery(SELECT_ALL_NO_XOA + " AND "+ COLUMN_TEN_DANG_NHAP +" = '"+ tenTaiKhoan+"'", null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            //lấy từ csdl ra
+            int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+            String tenDangNhap = cursor.getString(cursor.getColumnIndex(COLUMN_TEN_DANG_NHAP));
+            String email = cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL));
+            String matKhau = cursor.getString(cursor.getColumnIndex(COLUMN_MAT_KHAU));
+            int credit = cursor.getInt(cursor.getColumnIndex(COLUMN_CREDIT));
+            String hinhDaiDien = cursor.getString(cursor.getColumnIndex(COLUMN_HINH_DAI_DIEN));
+            int diemCaoNhat = cursor.getInt(cursor.getColumnIndex(COLUMN_DIEM_CAO_NHAT));
+            boolean xoa = cursor.getInt(cursor.getColumnIndex(COLUMN_XOA)) > 0;
+            //set đối tượng người chơi
+            nguoiChoi.setId(id);
+            nguoiChoi.setTenDangNhap(tenDangNhap);
+            nguoiChoi.setEmail(email);
+            nguoiChoi.setMatKhau(matKhau);
+            nguoiChoi.setCredit(credit);
+            nguoiChoi.setHinhDaiDien(hinhDaiDien);
+            nguoiChoi.setDiemCaoNhat(diemCaoNhat);
+            nguoiChoi.setXoa(xoa);
         }
-        return  false;
+        cursor.close();
+        db.close();
+        return nguoiChoi;
     }
 
-    public Boolean UpdateUser(NguoiChoi nguoiChoi){
+    public NguoiChoi getTKByID(int id) {
+        sqLiteDatabase = db.getReadableDatabase();
+        NguoiChoi nguoiChoi = new NguoiChoi();
+        Cursor cursor = sqLiteDatabase.rawQuery(SELECT_ALL_NO_XOA + " AND "+ COLUMN_ID +" = "+ id, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            //lấy từ csdl ra
+            id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+            String tenDangNhap = cursor.getString(cursor.getColumnIndex(COLUMN_TEN_DANG_NHAP));
+            String email = cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL));
+            String matKhau = cursor.getString(cursor.getColumnIndex(COLUMN_MAT_KHAU));
+            int credit = cursor.getInt(cursor.getColumnIndex(COLUMN_CREDIT));
+            String hinhDaiDien = cursor.getString(cursor.getColumnIndex(COLUMN_HINH_DAI_DIEN));
+            int diemCaoNhat = cursor.getInt(cursor.getColumnIndex(COLUMN_DIEM_CAO_NHAT));
+            boolean xoa = cursor.getInt(cursor.getColumnIndex(COLUMN_XOA)) > 0;
+            //set đối tượng người chơi
+            nguoiChoi.setId(id);
+            nguoiChoi.setTenDangNhap(tenDangNhap);
+            nguoiChoi.setEmail(email);
+            nguoiChoi.setMatKhau(matKhau);
+            nguoiChoi.setCredit(credit);
+            nguoiChoi.setHinhDaiDien(hinhDaiDien);
+            nguoiChoi.setDiemCaoNhat(diemCaoNhat);
+            nguoiChoi.setXoa(xoa);
+        }
+        cursor.close();
+        db.close();
+        return nguoiChoi;
+    }
+    //Insert
+
+    public long insertNguoiChoi(NguoiChoi nguoiChoi) {
         sqLiteDatabase = db.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_TEN_DANG_NHAP,nguoiChoi.getTenDangNhap());
-        contentValues.put(COLUMN_MAT_KHAU,nguoiChoi.getMatKhau());
-        contentValues.put(COLUMN_EMAIL,nguoiChoi.getEmail());
-        long result = sqLiteDatabase.update(TABLE_NGUOICHOI,contentValues,COLUMN_TEN_DANG_NHAP + " = ? ",new String[]{nguoiChoi.getTenDangNhap()});
+        contentValues.put(COLUMN_TEN_DANG_NHAP, nguoiChoi.getTenDangNhap());
+        contentValues.put(COLUMN_MAT_KHAU, nguoiChoi.getMatKhau());
+        contentValues.put(COLUMN_EMAIL, nguoiChoi.getEmail());
+        long result = sqLiteDatabase.insert(TABLE_NGUOICHOI, null, contentValues);
         db.close();
-        if (result > 0){
-            return true;
-        }
-        return  false;
+        return result;
     }
 
-    public List<NguoiChoi> getBangXepHang(){
+
+
+    //update
+    public Boolean updateNguoiChoi(NguoiChoi nguoiChoi) {
+        sqLiteDatabase = db.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_TEN_DANG_NHAP, nguoiChoi.getTenDangNhap());
+        contentValues.put(COLUMN_MAT_KHAU, nguoiChoi.getMatKhau());
+        contentValues.put(COLUMN_EMAIL, nguoiChoi.getEmail());
+
+        //contentValues.put(COLUMN_HINH_DAI_DIEN,nguoiChoi.getHinhDaiDien());
+
+        long result = sqLiteDatabase.update(TABLE_NGUOICHOI, contentValues, COLUMN_ID + " = ? ", new String[]{nguoiChoi.getId()+""});
+        db.close();
+        if (result > 0) {
+            return true;
+        }
+        return false;
+    }
+
+
+    //chưa cần dùng đến
+    public List<NguoiChoi> getBangXepHang() {
         sqLiteDatabase = db.getReadableDatabase();
         List<NguoiChoi> nguoiChois = new ArrayList<>();
-        String sql ="SELECT * FROM "+ TABLE_NGUOICHOI +"" +
-                " ORDER BY "+ COLUMN_DIEM_CAO_NHAT + " DESC ";
-        Cursor cursor = sqLiteDatabase.rawQuery(sql,null);
-        if (cursor.getCount() > 0){
+        String sql = "SELECT * FROM " + TABLE_NGUOICHOI + "" +
+                " ORDER BY " + COLUMN_DIEM_CAO_NHAT + " DESC ";
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+        if (cursor.getCount() > 0) {
             cursor.moveToFirst();
-            while (!cursor.isAfterLast()){
+            while (!cursor.isAfterLast()) {
                 String tenDangNhap = cursor.getString(cursor.getColumnIndex(COLUMN_TEN_DANG_NHAP));
                 String hinhDaiDien = cursor.getString(cursor.getColumnIndex(COLUMN_HINH_DAI_DIEN));
                 int diemCaoNhat = cursor.getInt(cursor.getColumnIndex(COLUMN_DIEM_CAO_NHAT));
@@ -206,5 +207,19 @@ public class NguoiChoiController {
         cursor.close();
         sqLiteDatabase.close();
         return nguoiChois;
+    }
+
+
+    // credit update
+    public Boolean updateGoiCredit(NguoiChoi nguoiChoi) {
+        sqLiteDatabase = db.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_CREDIT, nguoiChoi.getCredit());
+        long result = sqLiteDatabase.update(TABLE_NGUOICHOI, contentValues, COLUMN_ID + " = ? ", new String[]{nguoiChoi.getId() + ""});
+        db.close();
+        if (result > 0) {
+            return true;
+        }
+        return false;
     }
 }

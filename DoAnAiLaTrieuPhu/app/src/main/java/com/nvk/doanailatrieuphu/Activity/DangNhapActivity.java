@@ -15,13 +15,13 @@ import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 public class DangNhapActivity extends AppCompatActivity {
-    public static final String KEY_DANGNHAP_TENDANGNHAP = "dn1" ;
+    public static final String KEY_DANGNHAP = "dn" ;
     private EditText edtTenDangNhap,edtMatKhau;
-
     private DBHelper db;
-    private NguoiChoiController nguoiChoiController;
+    private NguoiChoiController nguoiChoiController = new NguoiChoiController(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,17 +49,22 @@ public class DangNhapActivity extends AppCompatActivity {
 
 
     public void XuLiDangNhap(View v){
-        nguoiChoiController = new NguoiChoiController(this);
-        String tenDangNhap =edtTenDangNhap.getText().toString();
+        //Lấy text
+        String tenDangNhap = edtTenDangNhap.getText().toString();
         String matKhau = edtMatKhau.getText().toString();
-        Boolean result = nguoiChoiController.CheckUser(tenDangNhap,matKhau);
+        //Kiểm tra tài khoản có chưa
+        Boolean result = nguoiChoiController.checkUser(tenDangNhap,matKhau);
         if (result){
-            Intent intent = new Intent(this,MangHinhChinhActivity.class);
-            intent.putExtra(KEY_DANGNHAP_TENDANGNHAP,tenDangNhap);
-            //intent.putExtra(KEY_DANGNHAP_DIEM,)
-            startActivity(intent);
-
-
+            //select 1 người chơi ra
+            NguoiChoi nguoiChoi = nguoiChoiController.getTK(tenDangNhap);
+            //có người chơi
+            if (nguoiChoi.getId() > 0){
+                Intent intent = new Intent(this,MangHinhChinhActivity.class);
+                intent.putExtra(KEY_DANGNHAP, (Serializable) nguoiChoi);
+                startActivity(intent);
+            }else{
+                Toast.makeText(this,getString(R.string.tb_dang_nhap_xoa),Toast.LENGTH_LONG).show();
+            }
         }else{
             Toast.makeText(this,getString(R.string.tb_dang_nhap),Toast.LENGTH_LONG).show();
         }

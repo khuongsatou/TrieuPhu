@@ -22,46 +22,41 @@ import com.nvk.doanailatrieuphu.R;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP_TENDANGNHAP;
+import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
 
 public class QuanLiTaiKhoanActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_GALLERY = 123;
     private ImageView ivLogo;
     private EditText edtTenTaiKhoan,edtEmail,edtMatKhau,edtXacNhanMatKhau;
-
     private NguoiChoiController nguoiChoiController= new NguoiChoiController(this);;
-
+    private int id_nguoiChoi = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quan_li_tai_khoan);
 
-        Radiation();
-        SelectTK();
+        radiation();
+        selectTK();
     }
 
 
 
-    private void SelectTK() {
-        Intent intent = getIntent();
-        //nguoiChoiController = new NguoiChoiController(this);
-        NguoiChoi nguoiChoi = nguoiChoiController.getTK(intent.getStringExtra(KEY_DANGNHAP_TENDANGNHAP));
+    private void selectTK() {
+        NguoiChoi nguoiChoi = (NguoiChoi) getIntent().getSerializableExtra(KEY_DANGNHAP);
+        this.id_nguoiChoi = nguoiChoi.getId();
         edtTenTaiKhoan.setText(nguoiChoi.getTenDangNhap());
         edtEmail.setText(nguoiChoi.getEmail());
-        edtMatKhau.setText(nguoiChoi.getMatKhau());
-
     }
 
-    private void Radiation() {
+    private void radiation() {
         ivLogo = findViewById(R.id.ivLogo);
-
         edtTenTaiKhoan = findViewById(R.id.edtTenDangNhap);
         edtEmail = findViewById(R.id.edtEmail);
         edtMatKhau = findViewById(R.id.edtMatKhau);
         edtXacNhanMatKhau = findViewById(R.id.edtXacNhanMatKhau);
     }
 
-    public void XuLiDoiHinhDaiHien(View view) {
+    public void xuLiDoiHinhDaiHien(View view) {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_PICK);
         intent.setType("image/*");
@@ -87,23 +82,33 @@ public class QuanLiTaiKhoanActivity extends AppCompatActivity {
         }
     }
 
-    public void XuLiCapNhap(View view) {
-        //nguoiChoiController = new NguoiChoiController(this);
-
-        String tenTaiKhoan = edtTenTaiKhoan.getText().toString();
-        String email = edtEmail.getText().toString();
-        String matKhau = edtMatKhau.getText().toString();
-        NguoiChoi nguoiChoi = new NguoiChoi();
-        nguoiChoi.setTenDangNhap(tenTaiKhoan);
-        nguoiChoi.setEmail(email);
-        nguoiChoi.setMatKhau(matKhau);
-
-        Boolean result = nguoiChoiController.UpdateUser(nguoiChoi);
-        if (result){
-            Toast.makeText(this,getString(R.string.tb_update_user_tc),Toast.LENGTH_LONG).show();
+    public void xuLiCapNhap(View view) {
+        String tenTaiKhoan = edtTenTaiKhoan.getText().toString().trim();
+        String email = edtEmail.getText().toString().trim();
+        String matKhau = edtMatKhau.getText().toString().trim();
+        String xacNhanMatKhau = edtXacNhanMatKhau.getText().toString().trim();
+        if (email.equals("") || matKhau.equals("")){
+            Toast.makeText(getApplicationContext(),getString(R.string.tb_chua_nhap_du),Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(this,getString(R.string.tb_update_user_tb),Toast.LENGTH_LONG).show();
+            if (!matKhau.equals(xacNhanMatKhau)){
+                Toast.makeText(getApplicationContext(),getString(R.string.tb_mat_khau_khong_giong_nhau),Toast.LENGTH_SHORT).show();
+            }else{
+                NguoiChoi nguoiChoi = new NguoiChoi();
+                nguoiChoi.setId(this.id_nguoiChoi);
+                nguoiChoi.setTenDangNhap(tenTaiKhoan);
+                nguoiChoi.setEmail(email);
+                nguoiChoi.setMatKhau(matKhau);
+                //xử lí hinh sau
+                //chắc nên lưu đường dãn thôi , bằng cách copy vào drawer
+                //nguoiChoi.setHinhDaiDien();
+                Boolean result = nguoiChoiController.updateNguoiChoi(nguoiChoi);
+                if (result){
+                    Toast.makeText(this,getString(R.string.tb_update_user_tc),Toast.LENGTH_LONG).show();
+                    finish();
+                }else{
+                    Toast.makeText(this,getString(R.string.tb_update_user_tb),Toast.LENGTH_LONG).show();
+                }
+            }
         }
-
     }
 }

@@ -21,6 +21,7 @@ public class LichSuChoiController {
     private static final String COLUMN_SO_CAU = "so_cau";
     private static final String COLUMN_DIEM = "diem";
     private static final String COLUMN_NGAY_GIO = "ngay_gio";
+    private static final String SELECT_ALL = "SELECT * FROM "+TABLE_LUOCCHOI + " WHERE ";
 
     public LichSuChoiController(Context context) {
         this.dbHelper = new DBHelper(context);
@@ -29,8 +30,7 @@ public class LichSuChoiController {
     public List<LuotChoi> getAllLuotChoiID(int nguoiChoiID){
         sqLiteDatabase = dbHelper.getReadableDatabase();
         List<LuotChoi> luotChois = new ArrayList<>();
-        String sql ="SELECT * FROM "+TABLE_LUOCCHOI + " WHERE "
-                + COLUMN_NGUOI_CHOI_ID + " =  " + nguoiChoiID ;
+        String sql =SELECT_ALL  + COLUMN_NGUOI_CHOI_ID + " =  " + nguoiChoiID ;
         Cursor cursor = sqLiteDatabase.rawQuery(sql,null);
         if (cursor.getCount() > 0){
             cursor.moveToFirst();
@@ -39,7 +39,6 @@ public class LichSuChoiController {
                 int soCau = cursor.getInt(cursor.getColumnIndex(COLUMN_SO_CAU));
                 String diem = cursor.getString(cursor.getColumnIndex(COLUMN_DIEM));
                 String ngayGio = cursor.getString(cursor.getColumnIndex(COLUMN_NGAY_GIO));
-
                 LuotChoi luotChoi = new LuotChoi(nguoiChoi,soCau,diem,ngayGio);
                 luotChois.add(luotChoi);
                 cursor.moveToNext();

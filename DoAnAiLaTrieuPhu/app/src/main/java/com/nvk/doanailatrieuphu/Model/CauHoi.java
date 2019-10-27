@@ -1,6 +1,7 @@
 package com.nvk.doanailatrieuphu.Model;
 
 public class CauHoi {
+
     private String noiDung;
     private int linhVucId;
     private String phuongAnA;

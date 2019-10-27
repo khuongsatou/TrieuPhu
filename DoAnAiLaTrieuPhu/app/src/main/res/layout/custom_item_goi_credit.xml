@@ -1,42 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
-   android:weightSum="2"
-    android:layout_margin="30dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="150dp"
+    android:layout_margin="15dp"
     android:padding="10dp"
-    android:layout_height="wrap_content">
-
-    <LinearLayout
-        android:layout_weight="1"
-        android:background="#88FFD600"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:padding="10dp"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:gravity="center"
-            android:id="@+id/tvCredit"
+    android:weightSum="2"
+    android:layout_height="150dp">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvItem"
+        android:layout_weight="1.7"
+        app:cardBackgroundColor="@color/cardview_shadow_start_color"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="5.0000"
-            />
+            android:weightSum="2"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_weight="0.5"
+                android:textSize="20sp"
+                android:id="@+id/tvCredit"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="5000" />
 
-        <ImageView
-            android:id="@+id/ivIcon"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_launcher_background"
-            />
+            <ImageView
+                android:layout_weight="1.5"
+                android:id="@+id/ivIcon"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@drawable/diamon" />
+        </LinearLayout>
 
-    </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
     <TextView
+        android:textSize="17sp"
         android:gravity="center"
-        android:layout_weight="1"
+        android:layout_weight="0.3"
         android:id="@+id/tvTien"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="$450"
         />
 

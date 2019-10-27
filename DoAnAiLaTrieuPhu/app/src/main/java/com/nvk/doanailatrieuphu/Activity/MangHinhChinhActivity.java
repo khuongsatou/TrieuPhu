@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,14 +12,15 @@ import com.nvk.doanailatrieuphu.Controller.NguoiChoiController;
 import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
 
-import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP_TENDANGNHAP;
+import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
 
 public class MangHinhChinhActivity extends AppCompatActivity {
     private TextView tvTenDangNhap,tvCredit;
-
-    private NguoiChoiController nguoiChoiController;
+    private NguoiChoiController nguoiChoiController = new NguoiChoiController(this);;
     private String tenDangNhap = null;
     private int credit = 0;
+    private NguoiChoi nguoiChoi;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,17 +29,12 @@ public class MangHinhChinhActivity extends AppCompatActivity {
 
         Radiation();
         SetNameUser();
-
-
     }
 
     private void SetNameUser() {
-        Intent intent = getIntent();
-        this.tenDangNhap = intent.getStringExtra(KEY_DANGNHAP_TENDANGNHAP);
-        nguoiChoiController = new NguoiChoiController(this);
-        NguoiChoi nguoiChoi = nguoiChoiController.getTK(this.tenDangNhap);
-        tvCredit.setText(nguoiChoi.getCredit()+"");
+        this.nguoiChoi = (NguoiChoi) getIntent().getSerializableExtra(KEY_DANGNHAP);
         tvTenDangNhap.setText(nguoiChoi.getTenDangNhap());
+        tvCredit.setText(nguoiChoi.getCredit()+"");
     }
 
 
@@ -45,30 +42,35 @@ public class MangHinhChinhActivity extends AppCompatActivity {
     private void Radiation() {
         tvTenDangNhap = findViewById(R.id.tvTenDangNhap);
         tvCredit = findViewById(R.id.tvCredit);
-
     }
 
     public void XuLiQuanLiTaiKhoan(View view) {
-        Intent intent = new Intent(this,QuanLiTaiKhoanActivity.class);
-        intent.putExtra(KEY_DANGNHAP_TENDANGNHAP,this.tenDangNhap);
+        intent = new Intent(this,QuanLiTaiKhoanActivity.class);
+        intent.putExtra(KEY_DANGNHAP,this.nguoiChoi);
         startActivity(intent);
     }
 
     public void XuLiTroChoiMoi(View view) {
-        startActivity(new Intent(this,MangHinhTroChoiActivity.class));
+        intent = new Intent(this,MangHinhTroChoiActivity.class);
+        intent.putExtra(KEY_DANGNHAP,this.nguoiChoi);
+        startActivity(intent);
     }
 
     public void XuLiLichSuChoi(View view) {
-        startActivity(new Intent(this,LichSuCauHoiActivity.class));
+        intent =new Intent(this,LichSuCauHoiActivity.class);
+        intent.putExtra(KEY_DANGNHAP,this.nguoiChoi);
+        startActivity(intent);
     }
 
     public void XuLiBangXepHang(View view) {
-        startActivity(new Intent(this,BangXepHangActivity.class));
+        Intent intent = new Intent(this,BangXepHangActivity.class);
+        intent.putExtra(KEY_DANGNHAP,this.nguoiChoi);
+        startActivity(intent);
     }
 
     public void XuLiMuaCreadit(View view) {
-        Intent i = new Intent(this,MuaCreaditActivity.class);
-        i.putExtra("Ten_dang_nhap",this.tenDangNhap);
-        startActivity(i);
+        intent = new Intent(this,MuaCreaditActivity.class);
+        intent.putExtra(KEY_DANGNHAP,this.nguoiChoi);
+        startActivity(intent);
     }
 }

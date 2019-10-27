@@ -32,9 +32,9 @@ public class LichSuChoiAdapter extends RecyclerView.Adapter<LichSuChoiAdapter.Li
 
     @Override
     public void onBindViewHolder(@NonNull LichSuChoiAdapter.LichSuHolder holder, int position) {
-        holder.tvDate.setText(luotChois.get(position).getNgayGio()+"");
-        holder.tvSoCau.setText(luotChois.get(position).getSoCau()+"");
-        holder.tvDiem.setText(luotChois.get(position).getDiem()+"");
+        holder.tvDate.setText(luotChois.get(position).getNgayGio()+" PM");
+        holder.tvSoCau.setText("Số Câu: "+luotChois.get(position).getSoCau()+"");
+        holder.tvDiem.setText(luotChois.get(position).getDiem()+" Điểm");
     }
 
     @Override
