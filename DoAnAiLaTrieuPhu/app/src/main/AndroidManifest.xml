@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".Activity.BangXepHangActivity"/>
         <activity android:name=".Activity.MuaCreaditActivity" />
         <activity android:name=".Activity.QuenMatKhauActivity" />
@@ -23,14 +24,26 @@
         <activity android:name=".Activity.MangHinhChinhActivity" >
 
         </activity>
+=======
+        <activity android:name=".Activity.TroGiupKhanGia"></activity>
+        <activity android:name=".Activity.BangXepHangActivity" />
+        <activity android:name=".Activity.MuaCreaditActivity" />
+        <activity android:name=".Activity.QuenMatKhauActivity" />
+        <activity android:name=".Activity.QuanLiTaiKhoanActivity" />
+        <activity android:name=".Activity.MangHinhTroChoiActivity"></activity>
+        <activity android:name=".Activity.MangHinhChinhActivity"></activity>
+>>>>>>> b1493d114384b7082ed8a426d5653dc8cbeb40ea
         <activity android:name=".Activity.LichSuCauHoiActivity" />
-        <activity android:name=".Activity.HienThiCauHoiActivity" >
-
-        </activity>
+        <activity android:name=".Activity.HienThiCauHoiActivity"></activity>
         <activity android:name=".Activity.DangKiTaiKhoanActivity" />
         <activity android:name=".Activity.DangNhapActivity">
 
+<<<<<<< HEAD
 
+=======
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+>>>>>>> b1493d114384b7082ed8a426d5653dc8cbeb40ea
         </activity>
     </application>
 
