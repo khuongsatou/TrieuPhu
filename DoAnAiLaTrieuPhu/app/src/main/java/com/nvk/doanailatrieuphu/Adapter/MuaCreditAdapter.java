@@ -22,19 +22,18 @@ import com.nvk.doanailatrieuphu.R;
 
 import java.util.List;
 
-import static android.app.Activity.RESULT_OK;
-import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
-
 public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaCreditHolder> {
 
     private List<GoiCredit> goiCredits;
     private Context context;
     private NguoiChoiController nguoiChoiController;
+    private NguoiChoi nguoiChoi;
 
-    public MuaCreditAdapter(List<GoiCredit> goiCredits, Context context, NguoiChoiController nguoiChoiController) {
+    public MuaCreditAdapter(List<GoiCredit> goiCredits, Context context, NguoiChoiController nguoiChoiController,NguoiChoi nguoiChoi) {
         this.goiCredits = goiCredits;
         this.context = context;
         this.nguoiChoiController = nguoiChoiController;
+        this.nguoiChoi = nguoiChoi;
     }
 
     @NonNull
@@ -78,19 +77,19 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
             builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    //ép kiểu
                     int credit = Integer.parseInt(tvCredit.getText().toString());
                     MuaCreaditActivity muaCreaditActivity = (MuaCreaditActivity) context;
-                    NguoiChoi nguoiChoi = nguoiChoiController.getTKByID(muaCreaditActivity.id_nguoiChoi);
-                    credit+=nguoiChoi.getCredit();
-                    nguoiChoi.setCredit(credit);
-                    Boolean result = nguoiChoiController.updateGoiCredit(nguoiChoi);
+                    //lấy thằng người chơi
+                    adapter.nguoiChoi = nguoiChoiController.getTKByID(muaCreaditActivity.id_nguoiChoi);
+                    //lấy credit hiện tại + cái mua
+                    credit+=adapter.nguoiChoi.getCredit();
+                    adapter.nguoiChoi.setCredit(credit);
+                    Boolean result = nguoiChoiController.updateGoiCredit(adapter.nguoiChoi);
                     if (result){
                         Toast.makeText(context,"OK",Toast.LENGTH_SHORT).show();
                         muaCreaditActivity.tvTinDung.setText(nguoiChoi.getCredit()+"");
-                        Intent intent = new Intent();
-                        intent.putExtra(KEY_DANGNHAP,nguoiChoi);
-                        muaCreaditActivity.setResult(RESULT_OK,intent);
-                        muaCreaditActivity.finish();
+                        dialogInterface.dismiss();
                     }else{
                         Toast.makeText(context,"Fail",Toast.LENGTH_SHORT).show();
                     }

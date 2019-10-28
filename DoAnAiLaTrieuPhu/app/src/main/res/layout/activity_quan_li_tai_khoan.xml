@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/ivLogo"
         android:layout_width="match_parent"
         android:layout_height="203dp"
         app:srcCompat="@drawable/logo_user" />
@@ -20,7 +20,7 @@
         android:layout_marginBottom="20dp"
         android:background="@null"
         android:gravity="center"
-        android:onClick="XuLiDoiHinhDaiHien"
+        android:onClick="xuLiDoiHinhDaiHien"
         android:text="Đổi hình đại diện"
         android:textColor="#2196F3" />
 

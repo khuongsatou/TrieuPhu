@@ -6,12 +6,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,11 +17,9 @@ import com.nvk.doanailatrieuphu.Controller.CauHoiController;
 import com.nvk.doanailatrieuphu.Model.CauHoi;
 import com.nvk.doanailatrieuphu.Model.LinhVuc;
 import com.nvk.doanailatrieuphu.Model.NguoiChoi;
-import com.nvk.doanailatrieuphu.Utilities.ViewPagerCurrentItem;
 import com.nvk.doanailatrieuphu.R;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
@@ -37,14 +31,14 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
     private CauHoiAdapter cauHoiAdapter;
     private List<CauHoi> cauHois;
     private CauHoiController cauHoiController = new CauHoiController(this);
-    private ImageView[] ivMang;
+    public ImageView[] ivMang = new ImageView[5];
     private NguoiChoi nguoiChoi;
     private LinhVuc linhVuc;
     private Intent intent;
+    private int diemSoMang = 0;
 
     public int tongDiem = 0;
-
-    public boolean[] ischeckedSP = {false, false, false, false};
+    public boolean[] ischeckedSP = {false, false,false, false};
 
 
     @Override
@@ -60,7 +54,7 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
     private void createAdapter() {
         cauHois = new ArrayList<>();
         cauHois.addAll(cauHoiController.getAllCauHoiByLinhVucID(this.linhVuc.getId()));
-        cauHoiAdapter = new CauHoiAdapter(getSupportFragmentManager(), cauHois, this,vpgShowCauHoi);
+        cauHoiAdapter = new CauHoiAdapter(getSupportFragmentManager(), cauHois, this,vpgShowCauHoi,nguoiChoi);
         vpgShowCauHoi.setAdapter(cauHoiAdapter);
     }
 
@@ -81,30 +75,49 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
         tvTinDung = vHeader.findViewById(R.id.tvTinDung);
         tvDiem = vHeader.findViewById(R.id.tvDiem);
 
-        ivMang = new ImageView[5];
-        ivMang[0] = findViewById(R.id.ivMang1);
-        ivMang[1] = findViewById(R.id.ivMang2);
-        ivMang[2] = findViewById(R.id.ivMang3);
-        ivMang[3] = findViewById(R.id.ivMang4);
-        ivMang[4] = findViewById(R.id.ivMang5);
-
-
+        this.ivMang[0] = findViewById(R.id.ivMang1);
+        this.ivMang[1] = findViewById(R.id.ivMang2);
+        this.ivMang[2] = findViewById(R.id.ivMang3);
+        this.ivMang[3] = findViewById(R.id.ivMang4);
+        this.ivMang[4] = findViewById(R.id.ivMang5);
     }
 
-    public void anHaiDapAnSai(Button[] btnPhuongAn,CauHoi cauHoi) {
-        int dem =0;
-        for (int i = 0; i < btnPhuongAn.length ; i++) {
-            if (btnPhuongAn[i].getTag().equals(cauHoi.getDapAn())){
-                if (dem == 2){
-                    break;
-                }else{
-                    btnPhuongAn[i].setBackgroundColor(Color.RED);
-                    btnPhuongAn[i].setVisibility(View.INVISIBLE);
-                    dem++;
-                }
-            }
+    public void giamMangNguoiChoi() {
+        if (this.diemSoMang == 5){
+            Toast.makeText(this,"Hết",Toast.LENGTH_SHORT).show();
+        }else{
+            ivMang[this.diemSoMang].setImageResource(R.drawable.ic_action_heart_low);
+            this.diemSoMang++;
         }
-        cauHoiAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onBackPressed() {
+        if (vpgShowCauHoi.getCurrentItem() > 0){
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Thông báo");
+            alert.setMessage("Bạn có muốn dừng.");
+            alert.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent();
+                    intent.putExtra(KEY_DANGNHAP,nguoiChoi);
+                    setResult(RESULT_OK,intent);
+                    finish();
+                    dialog.dismiss();
+                }
+            });
+            alert.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            alert.show();
+        }else{
+            super.onBackPressed();
+        }
+    }
+
 
 }

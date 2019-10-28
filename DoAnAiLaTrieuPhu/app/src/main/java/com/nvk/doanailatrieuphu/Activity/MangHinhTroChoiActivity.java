@@ -1,5 +1,6 @@
 package com.nvk.doanailatrieuphu.Activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
+import static com.nvk.doanailatrieuphu.Activity.MangHinhChinhActivity.KEY_REQUESTCODE;
 
 public class MangHinhTroChoiActivity extends AppCompatActivity {
 
@@ -72,4 +74,20 @@ public class MangHinhTroChoiActivity extends AppCompatActivity {
         rcvLinhVuc = findViewById(R.id.rcvLinhVuc);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == KEY_REQUESTCODE && resultCode == RESULT_OK && data!=null){
+            this.nguoiChoi = (NguoiChoi) data.getSerializableExtra(KEY_DANGNHAP);
+            tvTinDung.setText(this.nguoiChoi.getCredit()+"");
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra(KEY_DANGNHAP,nguoiChoi);
+        setResult(RESULT_OK,intent);
+        finish();
+    }
 }

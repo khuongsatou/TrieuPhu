@@ -16,11 +16,9 @@ import com.nvk.doanailatrieuphu.R;
 import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
 
 public class MangHinhChinhActivity extends AppCompatActivity {
-    private static final int KEY_REQUESTCODE = 123;
+    public static final int KEY_REQUESTCODE = 123;
     private TextView tvTenDangNhap,tvCredit;
     private NguoiChoiController nguoiChoiController = new NguoiChoiController(this);;
-    private String tenDangNhap = null;
-    private int credit = 0;
     private NguoiChoi nguoiChoi;
     private Intent intent;
 
@@ -36,7 +34,7 @@ public class MangHinhChinhActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==KEY_REQUESTCODE && resultCode == RESULT_OK && data != null){
+        if (requestCode ==KEY_REQUESTCODE && resultCode == RESULT_OK && data != null){
             this.nguoiChoi = (NguoiChoi) data.getSerializableExtra(KEY_DANGNHAP);
             tvCredit.setText(this.nguoiChoi.getCredit()+"");
         }
@@ -64,7 +62,7 @@ public class MangHinhChinhActivity extends AppCompatActivity {
     public void XuLiTroChoiMoi(View view) {
         intent = new Intent(this,MangHinhTroChoiActivity.class);
         intent.putExtra(KEY_DANGNHAP,this.nguoiChoi);
-        startActivity(intent);
+        startActivityForResult(intent,KEY_REQUESTCODE);
     }
 
     public void XuLiLichSuChoi(View view) {

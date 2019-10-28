@@ -31,10 +31,10 @@ public class MuaCreaditActivity extends AppCompatActivity {
     private MuaCreditAdapter muaCreditAdapter;
     private List<GoiCredit> goiCreditList;
     private RecyclerView.LayoutManager layoutManager;
+    private NguoiChoi nguoiChoi;
 
     private MuaCreditController muaCreditController = new MuaCreditController(this);
     private NguoiChoiController nguoiChoiController = new NguoiChoiController(this);
-    private String tenDangNhap;
 
     public TextView tvTen,tvTinDung;
     public int id_nguoiChoi = 0;
@@ -50,7 +50,7 @@ public class MuaCreaditActivity extends AppCompatActivity {
     }
 
     private void showUserAndCredit() {
-        NguoiChoi nguoiChoi = (NguoiChoi) getIntent().getSerializableExtra(KEY_DANGNHAP);
+        this.nguoiChoi = (NguoiChoi) getIntent().getSerializableExtra(KEY_DANGNHAP);
         this.id_nguoiChoi = nguoiChoi.getId();
         tvTen.setText(nguoiChoi.getTenDangNhap());
         tvTinDung.setText(nguoiChoi.getCredit()+"");
@@ -64,7 +64,7 @@ public class MuaCreaditActivity extends AppCompatActivity {
         goiCreditList = new ArrayList<>();
 
         goiCreditList.addAll(muaCreditController.getAllGoiCredit());
-        muaCreditAdapter = new MuaCreditAdapter(goiCreditList,this,nguoiChoiController);
+        muaCreditAdapter = new MuaCreditAdapter(goiCreditList,this,nguoiChoiController,this.nguoiChoi);
 
         layoutManager = new GridLayoutManager(this,2);
         rcvShowCredit.setLayoutManager(layoutManager);
@@ -76,5 +76,14 @@ public class MuaCreaditActivity extends AppCompatActivity {
         View vHeaderNormal = findViewById(R.id.vHeaderNormal);
         tvTen = vHeaderNormal.findViewById(R.id.tvTen);
         tvTinDung = vHeaderNormal.findViewById(R.id.tvTinDung);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        this.nguoiChoi.setCredit(Integer.parseInt(tvTinDung.getText().toString()));
+        intent.putExtra(KEY_DANGNHAP,this.nguoiChoi);
+        setResult(RESULT_OK,intent);
+        finish();
     }
 }

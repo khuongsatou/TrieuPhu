@@ -2,26 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    >
     <TextView
-        android:gravity="center"
         android:id="@+id/tvTroGiup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30sp"
         android:text="Trợ Giúp Của Kháng Giả" />
-
-    <ImageView
-        android:id="@+id/ivHinhAnh"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_background" />
-
+        android:layout_height="400dp">
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bcBieuDoCot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.github.mikephil.charting.charts.BarChart>
+    </LinearLayout>
     <Button
         android:id="@+id/btnXinCamOn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Xin Cám Ơn"
-
         />
+
 </LinearLayout>

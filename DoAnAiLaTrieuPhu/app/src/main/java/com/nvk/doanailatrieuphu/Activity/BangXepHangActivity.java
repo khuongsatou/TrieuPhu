@@ -60,4 +60,6 @@ public class BangXepHangActivity extends AppCompatActivity {
         rcvBangXepHang = findViewById(R.id.rcvBangXepHang);
 
     }
+
+
 }

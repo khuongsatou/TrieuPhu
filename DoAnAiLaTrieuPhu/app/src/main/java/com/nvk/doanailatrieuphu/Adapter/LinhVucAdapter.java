@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nvk.doanailatrieuphu.Activity.HienThiCauHoiActivity;
+import com.nvk.doanailatrieuphu.Activity.MangHinhTroChoiActivity;
 import com.nvk.doanailatrieuphu.Model.LinhVuc;
 import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
@@ -18,17 +19,20 @@ import com.nvk.doanailatrieuphu.R;
 import java.util.List;
 
 import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
+import static com.nvk.doanailatrieuphu.Activity.MangHinhChinhActivity.KEY_REQUESTCODE;
 import static com.nvk.doanailatrieuphu.Activity.MangHinhTroChoiActivity.KEY_LINHVUC;
 
 public class LinhVucAdapter extends RecyclerView.Adapter<LinhVucAdapter.LinhVucHolder> {
     private Context context;
     private List<LinhVuc> linhVucs;
     private NguoiChoi nguoiChoi;
+    private MangHinhTroChoiActivity mangHinhTroChoiActivity;
 
     public LinhVucAdapter(Context context, List<LinhVuc> linhVucs,NguoiChoi nguoiChoi) {
         this.context = context;
         this.linhVucs = linhVucs;
         this.nguoiChoi = nguoiChoi;
+        this.mangHinhTroChoiActivity = (MangHinhTroChoiActivity) context;
     }
 
     @NonNull
@@ -63,10 +67,10 @@ public class LinhVucAdapter extends RecyclerView.Adapter<LinhVucAdapter.LinhVucH
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(context, HienThiCauHoiActivity.class);
-            LinhVuc linhVuc =getItem(getLayoutPosition());
+            LinhVuc linhVuc = getItem(getLayoutPosition());
             intent.putExtra(KEY_LINHVUC,linhVuc);
             intent.putExtra(KEY_DANGNHAP,nguoiChoi);
-            context.startActivity(intent);
+            mangHinhTroChoiActivity.startActivityForResult(intent,KEY_REQUESTCODE);
         }
     }
 }
