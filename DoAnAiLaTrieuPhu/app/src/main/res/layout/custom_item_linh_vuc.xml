@@ -5,7 +5,9 @@
     android:layout_height="wrap_content">
     <Button
         android:id="@+id/btnItemLinhVuc"
-        android:text="Khoa Học"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="#00B0FF"
+        android:text="Khoa Học"
+        android:textColor="#FCFFFFFF" />
 </LinearLayout>

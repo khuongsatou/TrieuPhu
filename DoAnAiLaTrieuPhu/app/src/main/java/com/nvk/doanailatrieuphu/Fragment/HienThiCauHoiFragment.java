@@ -189,7 +189,9 @@ public class HienThiCauHoiFragment extends Fragment {
             Toast.makeText(context, "HẾT CÂU", Toast.LENGTH_SHORT).show();
         } else {
             //dừng timer đó lại rồi chuyển
-            countDownTimer.cancel();
+            if(countDownTimer != null){
+                countDownTimer.cancel();
+            }
             hienThiCauHoiActivity.vpgShowCauHoi.setCurrentItem(position + 1);
         }
 
