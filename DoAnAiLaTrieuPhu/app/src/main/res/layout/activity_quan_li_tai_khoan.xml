@@ -65,4 +65,11 @@
         android:text="Cập Nhật"
         android:textColor="#F5F7EDED" />
 
+    <Button
+        android:id="@+id/btnAnh"
+        android:onClick="xuLiAnhDaiDien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test Ảnh" />
+
 </LinearLayout>

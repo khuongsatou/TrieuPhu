@@ -4,11 +4,7 @@ package com.nvk.doanailatrieuphu.Fragment;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-<<<<<<< HEAD
 import android.content.DialogInterface;
-=======
-import android.content.Intent;
->>>>>>> b1493d114384b7082ed8a426d5653dc8cbeb40ea
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -31,13 +27,9 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.nvk.doanailatrieuphu.Activity.HienThiCauHoiActivity;
-<<<<<<< HEAD
 import com.nvk.doanailatrieuphu.Adapter.CauHoiAdapter;
 import com.nvk.doanailatrieuphu.Controller.CauHoiController;
 import com.nvk.doanailatrieuphu.Controller.NguoiChoiController;
-=======
-import com.nvk.doanailatrieuphu.Activity.TroGiupKhanGia;
->>>>>>> b1493d114384b7082ed8a426d5653dc8cbeb40ea
 import com.nvk.doanailatrieuphu.Model.CauHoi;
 import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
@@ -197,7 +189,9 @@ public class HienThiCauHoiFragment extends Fragment {
             Toast.makeText(context, "HẾT CÂU", Toast.LENGTH_SHORT).show();
         } else {
             //dừng timer đó lại rồi chuyển
-            countDownTimer.cancel();
+            if(countDownTimer != null){
+                countDownTimer.cancel();
+            }
             hienThiCauHoiActivity.vpgShowCauHoi.setCurrentItem(position + 1);
         }
 
@@ -401,7 +395,6 @@ public class HienThiCauHoiFragment extends Fragment {
         });
     }
 
-<<<<<<< HEAD
     private void checkDapAn(View v) {
         //nếu chưa chọn thì chọn , nếu đã chọn thì không cho nhấn nữa
         if (!isChecked) {
@@ -413,25 +406,6 @@ public class HienThiCauHoiFragment extends Fragment {
                 v.setBackgroundColor(Color.GREEN);
                 hienThiCauHoiActivity.giamMangNguoiChoi();
             }
-=======
-    private void ShowDiaLogTroGiupKhangGia(CauHoi cauHoi) {
-//        final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-//        View view = LayoutInflater.from(context).inflate(R.layout.activity_tro_giup_khan_gia,null,false);
-//        dialog.setView(view);
-//        final AlertDialog dialog2 = dialog.create();
-//        Button btnXinCamOn = view.findViewById(R.id.btnXinCamOn);
-//        btnXinCamOn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog2.dismiss();
-//            }
-//        });
-//        dialog2.show();
-
-        Intent i =new Intent(context, TroGiupKhanGia.class);
-        context.startActivity(i);
-    }
->>>>>>> b1493d114384b7082ed8a426d5653dc8cbeb40ea
 
             //Kiểm tra xem khi đã ấn vào câu sai thì hiện câu đúng lên
             for (int i = 0; i < btnPhuongAn.length; i++) {

@@ -18,17 +18,11 @@ android {
         }
     }
 }
-<<<<<<< HEAD
 
 repositories {
     maven { url 'https://jitpack.io' }
 }
 
-=======
-repositories {
-    maven { url 'https://jitpack.io' }
-}
->>>>>>> b1493d114384b7082ed8a426d5653dc8cbeb40ea
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -39,9 +33,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-<<<<<<< HEAD
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
-=======
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
->>>>>>> b1493d114384b7082ed8a426d5653dc8cbeb40ea
 }

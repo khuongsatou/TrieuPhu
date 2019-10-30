@@ -7,29 +7,41 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lượt chơi đã kết thúc" />
+        android:text="Lượt chơi đã kết thúc"
+        android:layout_margin="10sp"
+        android:textColor="#651FFF"/>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:shadowColor="#F00E2F"
         android:text="Xin Chúc mừng bạn đã đạt được" />
 
     <TextView
         android:id="@+id/tvDiem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="2.790 điểm" />
+        android:layout_margin="10sp"
+        android:text="2.790 điểm"
+        android:textColor="#F50057" />
 
     <Button
         android:id="@+id/btnThemLuot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thêm 1 lượt chơi 300" />
+        android:background="#54A314"
+        android:text="Thêm 1 lượt chơi 300"
+        android:layout_margin="5sp"
+        android:textColor="#FFEA00" />
 
     <Button
         android:id="@+id/btnKetThuc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Kết thúc" />
+        android:background="#F50057"
+        android:text="Kết thúc"
+        android:layout_margin="5sp"
+        android:textColor="#FFEA00" />
 </LinearLayout>
