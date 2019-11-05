@@ -5,6 +5,7 @@
 - Chạy Laravel bằng lệnh: php artisan serve
 - Máy phải được cài đặt composer mới chạy lện trên được
 - Bật XAMPP để chạy host local
+-"Lỗi không mở được laravel khi chạy lện php artisan" thì chạy lệnh này: composer update --no-scripts
 2. Chạy Trên nền web
 - http://khuongsatou.club
 3. Thông tin về chức năng
@@ -24,5 +25,6 @@
           # Chi tiết bảng
       + bảng phụ
       +đổ json
+      
      
 	  
