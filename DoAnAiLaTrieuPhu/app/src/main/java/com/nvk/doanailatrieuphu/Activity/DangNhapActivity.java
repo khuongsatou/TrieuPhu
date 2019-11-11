@@ -79,33 +79,39 @@ public class DangNhapActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
                     try {
-                        JSONObject objLogin = new JSONObject(response);
-                        boolean result = objLogin.getBoolean("success");
-                        if (result){
-                            JSONObject objNguoiChoi = objLogin.getJSONObject("nguoi_choi");
-                            int id = objNguoiChoi.getInt("id");
-                            String tenDangNhap = objNguoiChoi.getString("ten_dang_nhap");
-                            String matKhau = objNguoiChoi.getString("mat_khau");
-                            String email = objNguoiChoi.getString("email");
-                            String hinhDaiDien = objNguoiChoi.getString("hinh_dai_dien");
-                            int diemCaoNhat = objNguoiChoi.getInt("diem_cao_nhat");
-                            int credit = objNguoiChoi.getInt("credit");
-                            NguoiChoi nguoiChoi = new NguoiChoi();
-                            nguoiChoi.setId(id);
-                            nguoiChoi.setTenDangNhap(tenDangNhap);
-                            nguoiChoi.setMatKhau(matKhau);
-                            nguoiChoi.setEmail(email);
-                            nguoiChoi.setHinhDaiDien(hinhDaiDien);
-                            nguoiChoi.setCredit(credit);
-                            nguoiChoi.setDiemCaoNhat(diemCaoNhat);
+                        if(!NetWorkUtilitis.checkConnect(getApplicationContext())){
+                            NetWorkUtilitis.showDialogNetWork("Đừng Tắt InterNet Chứ",DangNhapActivity.this).show();
 
-                            Intent intent = new Intent(getApplicationContext(),MangHinhChinhActivity.class);
-                            intent.putExtra(KEY_DANGNHAP, (Serializable) nguoiChoi);
-                            startActivity(intent);
-                        }else{
-                            Toast.makeText(getApplicationContext(),getString(R.string.tb_dang_nhap),Toast.LENGTH_LONG).show();
+                        }else {
+
+
+                            JSONObject objLogin = new JSONObject(response);
+                            boolean result = objLogin.getBoolean("success");
+                            if (result) {
+                                JSONObject objNguoiChoi = objLogin.getJSONObject("nguoi_choi");
+                                int id = objNguoiChoi.getInt("id");
+                                String tenDangNhap = objNguoiChoi.getString("ten_dang_nhap");
+                                String matKhau = objNguoiChoi.getString("mat_khau");
+                                String email = objNguoiChoi.getString("email");
+                                String hinhDaiDien = objNguoiChoi.getString("hinh_dai_dien");
+                                int diemCaoNhat = objNguoiChoi.getInt("diem_cao_nhat");
+                                int credit = objNguoiChoi.getInt("credit");
+                                NguoiChoi nguoiChoi = new NguoiChoi();
+                                nguoiChoi.setId(id);
+                                nguoiChoi.setTenDangNhap(tenDangNhap);
+                                nguoiChoi.setMatKhau(matKhau);
+                                nguoiChoi.setEmail(email);
+                                nguoiChoi.setHinhDaiDien(hinhDaiDien);
+                                nguoiChoi.setCredit(credit);
+                                nguoiChoi.setDiemCaoNhat(diemCaoNhat);
+
+                                Intent intent = new Intent(getApplicationContext(), MangHinhChinhActivity.class);
+                                intent.putExtra(KEY_DANGNHAP, (Serializable) nguoiChoi);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(getApplicationContext(), getString(R.string.tb_dang_nhap), Toast.LENGTH_LONG).show();
+                            }
                         }
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -113,7 +119,7 @@ public class DangNhapActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.d("AAAAA",error.getMessage());
+                    Toast.makeText(getApplicationContext(),"Server Offline",Toast.LENGTH_SHORT).show();
                 }
             }){
                 @Override
