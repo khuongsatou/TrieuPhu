@@ -21,21 +21,38 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.nvk.doanailatrieuphu.Controller.NguoiChoiController;
 import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
+import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_EMAIL;
+import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_ID;
+import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_MAT_KHAU;
+import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_TEN_DANG_NHAP;
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
 
 public class QuanLiTaiKhoanActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_GALLERY = 123;
+    private static final String URI_NGUOI_CHOI_CAP_NHAT ="nguoi_choi/cap_nhat" ;
     private ImageView ivLogo;
-    private EditText edtTenTaiKhoan,edtEmail,edtMatKhau,edtXacNhanMatKhau;
-    private NguoiChoiController nguoiChoiController= new NguoiChoiController(this);;
+    private EditText edtTenDangNhap,edtEmail,edtMatKhau,edtXacNhanMatKhau;
     private int id_nguoiChoi = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +83,13 @@ public class QuanLiTaiKhoanActivity extends AppCompatActivity {
     private void selectTK() {
         NguoiChoi nguoiChoi = (NguoiChoi) getIntent().getSerializableExtra(KEY_DANGNHAP);
         this.id_nguoiChoi = nguoiChoi.getId();
-        edtTenTaiKhoan.setText(nguoiChoi.getTenDangNhap());
+        edtTenDangNhap.setText(nguoiChoi.getTenDangNhap());
         edtEmail.setText(nguoiChoi.getEmail());
     }
 
     private void radiation() {
         ivLogo = findViewById(R.id.ivLogo);
-        edtTenTaiKhoan = findViewById(R.id.edtTenDangNhap);
+        edtTenDangNhap = findViewById(R.id.edtTenDangNhap);
         edtEmail = findViewById(R.id.edtEmail);
         edtMatKhau = findViewById(R.id.edtMatKhau);
         edtXacNhanMatKhau = findViewById(R.id.edtXacNhanMatKhau);
@@ -109,32 +126,79 @@ public class QuanLiTaiKhoanActivity extends AppCompatActivity {
     }
 
     public void xuLiCapNhap(View view) {
-        String tenTaiKhoan = edtTenTaiKhoan.getText().toString().trim();
-        String email = edtEmail.getText().toString().trim();
-        String matKhau = edtMatKhau.getText().toString().trim();
+        final int id = this.id_nguoiChoi;
+        final String tenDangNhap = edtTenDangNhap.getText().toString().trim();
+        final String email = edtEmail.getText().toString().trim();
+        final String matKhau = edtMatKhau.getText().toString().trim();
         String xacNhanMatKhau = edtXacNhanMatKhau.getText().toString().trim();
-        if (email.equals("") || matKhau.equals("")){
-            Toast.makeText(getApplicationContext(),getString(R.string.tb_chua_nhap_du),Toast.LENGTH_SHORT).show();
-        }else{
+
+        if (email.equals("") || matKhau.equals("")) {
+            Toast.makeText(getApplicationContext(), getString(R.string.tb_chua_nhap_du),Toast.LENGTH_SHORT).show();
+            return;
+        } else {
             if (!matKhau.equals(xacNhanMatKhau)){
                 Toast.makeText(getApplicationContext(),getString(R.string.tb_mat_khau_khong_giong_nhau),Toast.LENGTH_SHORT).show();
             }else{
-                NguoiChoi nguoiChoi = new NguoiChoi();
-                nguoiChoi.setId(this.id_nguoiChoi);
-                nguoiChoi.setTenDangNhap(tenTaiKhoan);
-                nguoiChoi.setEmail(email);
-                nguoiChoi.setMatKhau(matKhau);
-                //xử lí hinh sau
-                //chắc nên lưu đường dãn thôi , bằng cách copy vào drawer
-                //nguoiChoi.setHinhDaiDien();
-                Boolean result = nguoiChoiController.updateNguoiChoi(nguoiChoi);
-                if (result){
-                    Toast.makeText(this,getString(R.string.tb_update_user_tc),Toast.LENGTH_LONG).show();
-                    finish();
-                }else{
-                    Toast.makeText(this,getString(R.string.tb_update_user_tb),Toast.LENGTH_LONG).show();
-                }
+                StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_NGUOI_CHOI_CAP_NHAT, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject objLogin = new JSONObject(response);
+                            boolean result = objLogin.getBoolean("success");
+                            if (result) {
+                                Toast.makeText(getApplicationContext(),tenDangNhap+" Cập Nhật Thành Công", Toast.LENGTH_LONG).show();
+                                finish();
+                            } else {
+                                Toast.makeText(getApplicationContext(),getString(R.string.tb_update_user_tb) + " Hoặc User Tồn Tại", Toast.LENGTH_LONG).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("AAAAA", error.getMessage());
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> map = new HashMap<>();
+                        map.put(COLUMN_ID,String.valueOf(id));
+                        map.put(COLUMN_TEN_DANG_NHAP, tenDangNhap);
+                        map.put(COLUMN_EMAIL, email);
+                        map.put(COLUMN_MAT_KHAU, matKhau);
+                        return map;
+                    }
+                };
+                RequestQueue queue = Volley.newRequestQueue(this);
+                queue.add(request);
             }
         }
+
+//        if (email.equals("") || matKhau.equals("")){
+//            Toast.makeText(getApplicationContext(),getString(R.string.tb_chua_nhap_du),Toast.LENGTH_SHORT).show();
+//        }else{
+//            if (!matKhau.equals(xacNhanMatKhau)){
+//                Toast.makeText(getApplicationContext(),getString(R.string.tb_mat_khau_khong_giong_nhau),Toast.LENGTH_SHORT).show();
+//            }else{
+//                NguoiChoi nguoiChoi = new NguoiChoi();
+//                nguoiChoi.setId(this.id_nguoiChoi);
+//                nguoiChoi.setTenDangNhap(tenTaiKhoan);
+//                nguoiChoi.setEmail(email);
+//                nguoiChoi.setMatKhau(matKhau);
+//                //xử lí hinh sau
+//                //chắc nên lưu đường dãn thôi , bằng cách copy vào drawer
+//                //nguoiChoi.setHinhDaiDien();
+//                Boolean result = nguoiChoiController.updateNguoiChoi(nguoiChoi);
+//                if (result){
+//                    Toast.makeText(this,getString(R.string.tb_update_user_tc),Toast.LENGTH_LONG).show();
+//                    finish();
+//                }else{
+//                    Toast.makeText(this,getString(R.string.tb_update_user_tb),Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        }
     }
 }

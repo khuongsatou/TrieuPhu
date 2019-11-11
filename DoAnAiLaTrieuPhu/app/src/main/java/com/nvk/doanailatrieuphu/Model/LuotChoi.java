@@ -4,14 +4,14 @@ public class LuotChoi {
     private int id;
     private int nguoiChoiId;
     private int soCau;
-    private String diem;
+    private int diem;
     private String ngayGio;
     private Boolean xoa;
 
     public LuotChoi() {
     }
 
-    public LuotChoi(int id, int nguoiChoiId, int soCau, String diem, String ngayGio, Boolean xoa) {
+    public LuotChoi(int id, int nguoiChoiId, int soCau, int diem, String ngayGio, Boolean xoa) {
         this.id = id;
         this.nguoiChoiId = nguoiChoiId;
         this.soCau = soCau;
@@ -44,11 +44,11 @@ public class LuotChoi {
         this.soCau = soCau;
     }
 
-    public String getDiem() {
+    public int getDiem() {
         return diem;
     }
 
-    public void setDiem(String diem) {
+    public void setDiem(int diem) {
         this.diem = diem;
     }
 

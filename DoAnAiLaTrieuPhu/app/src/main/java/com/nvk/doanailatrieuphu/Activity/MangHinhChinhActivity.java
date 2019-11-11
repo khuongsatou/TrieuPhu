@@ -18,7 +18,6 @@ import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
 public class MangHinhChinhActivity extends AppCompatActivity {
     public static final int KEY_REQUESTCODE = 123;
     private TextView tvTenDangNhap,tvCredit;
-    private NguoiChoiController nguoiChoiController = new NguoiChoiController(this);;
     private NguoiChoi nguoiChoi;
     private Intent intent;
 

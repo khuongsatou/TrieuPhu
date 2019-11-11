@@ -18,7 +18,7 @@ public class LichSuChoiController {
 
     private static final String TABLE_LUOCCHOI = "luotchoi";
     private static final String COLUMN_ID= "id";
-    private static final String COLUMN_NGUOI_CHOI_ID= "nguoi_choi_id";
+    public static final String COLUMN_NGUOI_CHOI_ID= "nguoi_choi_id";
     private static final String COLUMN_SO_CAU = "so_cau";
     private static final String COLUMN_DIEM = "diem";
     private static final String COLUMN_NGAY_GIO = "ngay_gio";
@@ -40,7 +40,7 @@ public class LichSuChoiController {
                 int id =cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
                 int nguoiChoi_id = cursor.getInt(cursor.getColumnIndex(COLUMN_NGUOI_CHOI_ID));
                 int soCau = cursor.getInt(cursor.getColumnIndex(COLUMN_SO_CAU));
-                String diem = cursor.getString(cursor.getColumnIndex(COLUMN_DIEM));
+                int diem = cursor.getInt(cursor.getColumnIndex(COLUMN_DIEM));
                 String ngayGio = cursor.getString(cursor.getColumnIndex(COLUMN_NGAY_GIO));
 
                 LuotChoi luotChoi = new LuotChoi();

@@ -56,12 +56,12 @@ public class MangHinhTroChoiActivity extends AppCompatActivity {
     private void showNameAndCredit() {
 
         //Muốn chạy thì bật chỗ này nhé
-        //this.nguoiChoi = (NguoiChoi) getIntent().getSerializableExtra(KEY_DANGNHAP);
+        this.nguoiChoi = (NguoiChoi) getIntent().getSerializableExtra(KEY_DANGNHAP);
 
         //xóa dòng này đi
         // begin
-        NguoiChoiController nguoiChoiController = new NguoiChoiController(this);
-        this.nguoiChoi=nguoiChoiController.getTKByID(1);
+//        NguoiChoiController nguoiChoiController = new NguoiChoiController(this);
+//        this.nguoiChoi=nguoiChoiController.getTKByID(1);
         //end
         tvTen.setText(this.nguoiChoi.getTenDangNhap());
         tvTinDung.setText(this.nguoiChoi.getCredit()+"");

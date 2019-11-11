@@ -16,15 +16,15 @@ public class NguoiChoiController {
     private DBHelper db;
     private SQLiteDatabase sqLiteDatabase;
 
-    private static final String TABLE_NGUOICHOI = "NguoiChoi";
-    private static final String COLUMN_ID = "id";
-    private static final String COLUMN_TEN_DANG_NHAP = "ten_dang_nhap";
-    private static final String COLUMN_MAT_KHAU = "mat_khau";
-    private static final String COLUMN_EMAIL = "email";
-    private static final String COLUMN_CREDIT = "credit";
-    private static final String COLUMN_HINH_DAI_DIEN = "hinh_dai_dien";
-    private static final String COLUMN_DIEM_CAO_NHAT = "diem_cao_nhat";
-    private static final String COLUMN_XOA = "xoa";
+    public static final String TABLE_NGUOICHOI = "NguoiChoi";
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_TEN_DANG_NHAP = "ten_dang_nhap";
+    public static final String COLUMN_MAT_KHAU = "mat_khau";
+    public static final String COLUMN_EMAIL = "email";
+    public static final String COLUMN_CREDIT = "credit";
+    public static final String COLUMN_HINH_DAI_DIEN = "hinh_dai_dien";
+    public static final String COLUMN_DIEM_CAO_NHAT = "diem_cao_nhat";
+    public static final String COLUMN_XOA = "xoa";
     private static final String SELECT_ALL = "SELECT * FROM " + TABLE_NGUOICHOI + " WHERE ";
     private static final String SELECT_ALL_NO_XOA = "SELECT * FROM " + TABLE_NGUOICHOI + " WHERE " + COLUMN_XOA + " = 0 ";
 

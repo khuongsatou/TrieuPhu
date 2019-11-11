@@ -14,9 +14,12 @@ import com.nvk.doanailatrieuphu.R;
 
 import java.util.List;
 
-public class LichSuChoiAdapter extends RecyclerView.Adapter<LichSuChoiAdapter.LichSuHolder> {
+public class LichSuChoiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final int TYPE_LOADING = 0;
+    private static final int TYPE_LICH_SU_CHOI =1 ;
     private Context context;
     private List<LuotChoi> luotChois;
+
 
     public LichSuChoiAdapter(Context context, List<LuotChoi> luotChois) {
         this.context = context;
@@ -25,21 +28,38 @@ public class LichSuChoiAdapter extends RecyclerView.Adapter<LichSuChoiAdapter.Li
 
     @NonNull
     @Override
-    public LichSuChoiAdapter.LichSuHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.custom_item_lich_su_choi,parent,false);
-        return new LichSuChoiAdapter.LichSuHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == TYPE_LICH_SU_CHOI){
+            View view = LayoutInflater.from(context).inflate(R.layout.custom_item_lich_su_choi,parent,false);
+            return new LichSuChoiAdapter.LichSuHolder(view);
+        }else if(viewType == TYPE_LOADING){
+            View view = LayoutInflater.from(context).inflate(R.layout.custom_item_loading,parent,false);
+            return new LoadingHolder(view);
+        }
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LichSuChoiAdapter.LichSuHolder holder, int position) {
-        holder.tvDate.setText(luotChois.get(position).getNgayGio()+" PM");
-        holder.tvSoCau.setText("Số Câu: "+luotChois.get(position).getSoCau()+"");
-        holder.tvDiem.setText(luotChois.get(position).getDiem()+" Điểm");
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        LuotChoi luotChoi = luotChois.get(position);
+        if (holder instanceof LichSuHolder){
+            LichSuHolder lichSuHolder = (LichSuHolder) holder;
+            lichSuHolder.tvDate.setText(luotChois.get(position).getNgayGio()+" PM");
+            lichSuHolder.tvSoCau.setText("Số Câu: "+luotChois.get(position).getSoCau()+"");
+            //lichSuHolder.tvDiem.setText(luotChois.get(position).getDiem()+" Điểm");
+            lichSuHolder.tvDiem.setText(luotChois.get(position).getId()+" Điểm");
+        }
+
     }
 
     @Override
     public int getItemCount() {
         return luotChois.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return luotChois.get(position) == null ? TYPE_LOADING : TYPE_LICH_SU_CHOI;
     }
 
     public class LichSuHolder extends RecyclerView.ViewHolder {
@@ -50,6 +70,13 @@ public class LichSuChoiAdapter extends RecyclerView.Adapter<LichSuChoiAdapter.Li
             tvDate = itemView.findViewById(R.id.tvDate);
             tvSoCau = itemView.findViewById(R.id.tvSoCau);
             tvDiem = itemView.findViewById(R.id.tvDiem);
+        }
+    }
+
+    public class LoadingHolder extends RecyclerView.ViewHolder{
+
+        public LoadingHolder(@NonNull View itemView) {
+            super(itemView);
         }
     }
 }
