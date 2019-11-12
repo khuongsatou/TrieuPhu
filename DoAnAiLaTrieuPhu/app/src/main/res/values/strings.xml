@@ -21,6 +21,7 @@
     <string name="tb_mat_khau_khong_giong_nhau">Mật khẩu xác nhận không giống nhau</string>
     <string name="tb_chua_nhap_du">Bạn Chưa nhập đủ thông tin</string>
     <string name="tb_ton_tai">Tên tài khoản đã tồn tại</string>
+    <string name="tb_connect_internet">Không Có kết nối Internet</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

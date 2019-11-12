@@ -44,10 +44,9 @@ public class LichSuChoiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         LuotChoi luotChoi = luotChois.get(position);
         if (holder instanceof LichSuHolder){
             LichSuHolder lichSuHolder = (LichSuHolder) holder;
-            lichSuHolder.tvDate.setText(luotChois.get(position).getNgayGio()+" PM");
-            lichSuHolder.tvSoCau.setText("Số Câu: "+luotChois.get(position).getSoCau()+"");
-            //lichSuHolder.tvDiem.setText(luotChois.get(position).getDiem()+" Điểm");
-            lichSuHolder.tvDiem.setText(luotChois.get(position).getId()+" Điểm");
+            lichSuHolder.tvDate.setText(luotChoi.getNgayGio()+" PM");
+            lichSuHolder.tvSoCau.setText("Số Câu: "+luotChoi.getSoCau()+"");
+            lichSuHolder.tvDiem.setText(luotChoi.getId()+" Điểm");
         }
 
     }

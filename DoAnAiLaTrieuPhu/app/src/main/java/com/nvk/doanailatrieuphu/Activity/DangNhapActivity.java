@@ -39,6 +39,7 @@ import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
 public class DangNhapActivity extends AppCompatActivity {
     public static final String KEY_DANGNHAP = "dn" ;
     public static final String KEY_SUCCESS  = "success";
+    public static final String KEY_URI_DANG_NHAP  = "nguoi_choi/dang_nhap";
     private EditText edtTenDangNhap,edtMatKhau;
 
 
@@ -74,8 +75,8 @@ public class DangNhapActivity extends AppCompatActivity {
             Toast.makeText(this,"Không Được Để Trống",Toast.LENGTH_LONG).show();
             return;
         }else{
-            String uri = "nguoi_choi/dang_nhap";
-            StringRequest request = new StringRequest(Request.Method.POST, BASE + uri, new Response.Listener<String>() {
+
+            StringRequest request = new StringRequest(Request.Method.POST, BASE + KEY_URI_DANG_NHAP, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {

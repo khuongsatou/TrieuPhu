@@ -83,7 +83,7 @@ public class DangKiTaiKhoanActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("AAAAA", error.getMessage());
+                        Toast.makeText(getApplicationContext(),"Server Offline",Toast.LENGTH_SHORT).show();
                     }
                 }) {
                     @Override

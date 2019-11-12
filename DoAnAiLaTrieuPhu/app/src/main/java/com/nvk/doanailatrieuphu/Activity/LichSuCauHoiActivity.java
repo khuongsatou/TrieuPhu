@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,13 +35,15 @@ import java.util.List;
 import java.util.Map;
 
 import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
+import static com.nvk.doanailatrieuphu.Activity.MangHinhChinhActivity.KEY_LIMIT;
+import static com.nvk.doanailatrieuphu.Activity.MangHinhChinhActivity.KEY_PAGE;
 import static com.nvk.doanailatrieuphu.Controller.LichSuChoiController.COLUMN_NGUOI_CHOI_ID;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_LUOT_CHOI;
 
 public class LichSuCauHoiActivity extends AppCompatActivity {
-    private static final String KEY_PAGE = "page";
-    private static final String KEY_LIMIT = "limit";
-    private static final String URI_LUOT_CHOI = "luot_choi/tim";
+
+
     private LichSuChoiAdapter lichSuChoiAdapter;
     private List<LuotChoi> luotChois = new ArrayList<>();;
     private RecyclerView rcvLichSuChoi;
@@ -154,7 +157,7 @@ public class LichSuCauHoiActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(getApplicationContext(),"Server Offline",Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

@@ -26,13 +26,11 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
 
     private List<GoiCredit> goiCredits;
     private Context context;
-    private NguoiChoiController nguoiChoiController;
     private NguoiChoi nguoiChoi;
 
-    public MuaCreditAdapter(List<GoiCredit> goiCredits, Context context, NguoiChoiController nguoiChoiController,NguoiChoi nguoiChoi) {
+    public MuaCreditAdapter(List<GoiCredit> goiCredits, Context context,NguoiChoi nguoiChoi) {
         this.goiCredits = goiCredits;
         this.context = context;
-        this.nguoiChoiController = nguoiChoiController;
         this.nguoiChoi = nguoiChoi;
     }
 
@@ -40,7 +38,7 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
     @Override
     public MuaCreditHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.custom_item_goi_credit,parent,false);
-        return new MuaCreditHolder(view,this);
+        return new MuaCreditHolder(view,this,nguoiChoi);
     }
 
     @Override
@@ -58,10 +56,12 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
     public class MuaCreditHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView tvCredit,tvTien;
         private CardView cvItem;
-        private MuaCreditAdapter adapter;
-        public MuaCreditHolder(@NonNull View itemView, MuaCreditAdapter adapter) {
+        private MuaCreditAdapter muaCreditAdapter;
+        private NguoiChoi nguoiChoi;
+        public MuaCreditHolder(@NonNull View itemView, MuaCreditAdapter adapter,NguoiChoi nguoiChoi) {
             super(itemView);
-            this.adapter = adapter;
+            this.muaCreditAdapter = adapter;
+            this.nguoiChoi = nguoiChoi;
             tvCredit = itemView.findViewById(R.id.tvCredit);
             tvTien = itemView.findViewById(R.id.tvTien);
             cvItem = itemView.findViewById(R.id.cvItem);
@@ -77,22 +77,19 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
             builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    //ép kiểu
                     int credit = Integer.parseInt(tvCredit.getText().toString());
-                    MuaCreaditActivity muaCreaditActivity = (MuaCreaditActivity) context;
-                    //lấy thằng người chơi
-                    adapter.nguoiChoi = nguoiChoiController.getTKByID(muaCreaditActivity.id_nguoiChoi);
-                    //lấy credit hiện tại + cái mua
-                    credit+=adapter.nguoiChoi.getCredit();
-                    adapter.nguoiChoi.setCredit(credit);
-                    Boolean result = nguoiChoiController.updateGoiCredit(adapter.nguoiChoi);
-                    if (result){
-                        Toast.makeText(context,"OK",Toast.LENGTH_SHORT).show();
-                        muaCreaditActivity.tvTinDung.setText(nguoiChoi.getCredit()+"");
-                        dialogInterface.dismiss();
-                    }else{
-                        Toast.makeText(context,"Fail",Toast.LENGTH_SHORT).show();
-                    }
+                    credit+= nguoiChoi.getCredit();
+                    nguoiChoi.setCredit(credit);
+
+
+//                    Boolean result = nguoiChoiController.updateGoiCredit(nguoiChoi);
+//                    if (result){
+//                        Toast.makeText(context,"OK",Toast.LENGTH_SHORT).show();
+//                        muaCreaditActivity.tvTinDung.setText(nguoiChoi.getCredit()+"");
+//                        dialogInterface.dismiss();
+//                    }else{
+//                        Toast.makeText(context,"Fail",Toast.LENGTH_SHORT).show();
+//                    }
                 }
             });
             builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {

@@ -16,6 +16,10 @@ import com.nvk.doanailatrieuphu.R;
 import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
 
 public class MangHinhChinhActivity extends AppCompatActivity {
+    public static final String KEY_PAGE = "page";
+    public static final String KEY_LIMIT = "limit";
+
+
     public static final int KEY_REQUESTCODE = 123;
     private TextView tvTenDangNhap,tvCredit;
     private NguoiChoi nguoiChoi;

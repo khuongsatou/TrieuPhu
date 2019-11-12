@@ -28,6 +28,10 @@ public class NetWorkUtilitis{
     //public static final String BASE = "http://192.168.43.137:8000/public/api/";
     public static final String BASE = "http://192.168.1.14:8000/public/api/";
 
+    public static final String URI_LUOT_CHOI = "luot_choi/tim";
+    public static final String URI_BANG_XEP_HANG = "nguoi_choi/danh_sach";
+    public static final String URI_CREDIT_DANH_SACH = "goi_credit/danh_sach";
+    public static final int PAGE_SIZE = 1;
 
 
     public static boolean getStringParams(String uri, final Map<String,String> map,Context context){
