@@ -35,7 +35,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
+
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_DANGNHAP;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_CREDIT_DANH_SACH;
 

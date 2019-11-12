@@ -24,10 +24,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.nvk.doanailatrieuphu.Controller.NguoiChoiController;
-import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
-import com.nvk.doanailatrieuphu.Utilities.Validation;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,12 +35,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_EMAIL;
-import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_MAT_KHAU;
 import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_TEN_DANG_NHAP;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_MAT_KHAU;
 
 public class QuenMatKhauActivity extends AppCompatActivity {
-    private static final String URI_MAT_KHAU ="nguoi_choi/mat_khau";
     private EditText edtTenDangNhap, edtEmail;
     private Button btnClose;
     private TextView tvHienThiPass;

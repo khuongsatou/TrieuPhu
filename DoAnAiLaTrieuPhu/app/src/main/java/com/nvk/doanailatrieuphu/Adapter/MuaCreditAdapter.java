@@ -14,16 +14,32 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.nvk.doanailatrieuphu.Activity.MuaCreaditActivity;
 import com.nvk.doanailatrieuphu.Controller.NguoiChoiController;
 import com.nvk.doanailatrieuphu.Model.GoiCredit;
 import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_CREDIT;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_ID;
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_NGUOI_CHOI_UPDATE_CREDIT;
 
 public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaCreditHolder> {
-
     private List<GoiCredit> goiCredits;
     private Context context;
     private NguoiChoi nguoiChoi;
@@ -38,7 +54,7 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
     @Override
     public MuaCreditHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.custom_item_goi_credit,parent,false);
-        return new MuaCreditHolder(view,this,nguoiChoi);
+        return new MuaCreditHolder(view);
     }
 
     @Override
@@ -56,12 +72,8 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
     public class MuaCreditHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView tvCredit,tvTien;
         private CardView cvItem;
-        private MuaCreditAdapter muaCreditAdapter;
-        private NguoiChoi nguoiChoi;
-        public MuaCreditHolder(@NonNull View itemView, MuaCreditAdapter adapter,NguoiChoi nguoiChoi) {
+        public MuaCreditHolder(@NonNull View itemView) {
             super(itemView);
-            this.muaCreditAdapter = adapter;
-            this.nguoiChoi = nguoiChoi;
             tvCredit = itemView.findViewById(R.id.tvCredit);
             tvTien = itemView.findViewById(R.id.tvTien);
             cvItem = itemView.findViewById(R.id.cvItem);
@@ -73,23 +85,50 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Mua Credit");
             builder.setMessage("Bạn Có Muốn Mua Gem Không?");
-            builder.setCancelable(false);
             builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     int credit = Integer.parseInt(tvCredit.getText().toString());
                     credit+= nguoiChoi.getCredit();
                     nguoiChoi.setCredit(credit);
+                    final Map<String,Integer> startMap = new HashMap<>();
+                    startMap.put(KEY_ID,nguoiChoi.getId());
+                    startMap.put(KEY_CREDIT,nguoiChoi.getCredit());
+                    StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_NGUOI_CHOI_UPDATE_CREDIT, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject objCredit = new JSONObject(response);
+                                boolean result = objCredit.getBoolean("success");
+                                if (result){
+                                    MuaCreaditActivity muaCreaditActivity = (MuaCreaditActivity) context;
+                                    muaCreaditActivity.tvTinDung.setText(nguoiChoi.getCredit() + "");
+                                    Toast.makeText(context, "Đã Mua", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(context,"Không thể Mua",Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
-
-//                    Boolean result = nguoiChoiController.updateGoiCredit(nguoiChoi);
-//                    if (result){
-//                        Toast.makeText(context,"OK",Toast.LENGTH_SHORT).show();
-//                        muaCreaditActivity.tvTinDung.setText(nguoiChoi.getCredit()+"");
-//                        dialogInterface.dismiss();
-//                    }else{
-//                        Toast.makeText(context,"Fail",Toast.LENGTH_SHORT).show();
-//                    }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(context,"Server Offline",Toast.LENGTH_SHORT).show();
+                        }
+                    }){
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String,String> map = new HashMap<>();
+                            map.put(KEY_ID,String.valueOf(startMap.get(KEY_ID)));
+                            map.put(KEY_CREDIT,String.valueOf(startMap.get(KEY_CREDIT)));
+                            return map;
+                        }
+                    };
+                    RequestQueue  queue = Volley.newRequestQueue(context);
+                    queue.add(request);
+                    dialogInterface.dismiss();
                 }
             });
             builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {

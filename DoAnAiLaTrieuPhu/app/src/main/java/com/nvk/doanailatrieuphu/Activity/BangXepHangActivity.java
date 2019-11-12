@@ -32,11 +32,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
 import static com.nvk.doanailatrieuphu.Activity.MangHinhChinhActivity.KEY_LIMIT;
 import static com.nvk.doanailatrieuphu.Activity.MangHinhChinhActivity.KEY_PAGE;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_DANGNHAP;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.PAGE_SIZE;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
-import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.PAGE_SIZE;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_BANG_XEP_HANG;
 
 public class BangXepHangActivity extends AppCompatActivity {
@@ -105,9 +105,9 @@ public class BangXepHangActivity extends AppCompatActivity {
     }
 
     private void startVolley(Bundle data) {
-        final Map<String,Integer> startMap = new HashMap<>();
-        startMap.put(KEY_PAGE,(data == null ? 1 : data.getInt(KEY_PAGE)));
-        startMap.put(KEY_LIMIT,(data == null ? 3 : data.getInt(KEY_LIMIT)));
+        final Map<String,String> startMap = new HashMap<>();
+        startMap.put(KEY_PAGE,String.valueOf(data == null ? 1 : data.getInt(KEY_PAGE)));
+        startMap.put(KEY_LIMIT,String.valueOf(data == null ? 3 : data.getInt(KEY_LIMIT)));
 
         StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_BANG_XEP_HANG, new Response.Listener<String>() {
             @Override
@@ -157,11 +157,7 @@ public class BangXepHangActivity extends AppCompatActivity {
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map = new HashMap<>();
-                map.put(KEY_PAGE,String.valueOf(startMap.get(KEY_PAGE)));
-                map.put(KEY_LIMIT,String.valueOf(startMap.get(KEY_LIMIT)));
-
-                return map;
+                return startMap;
             }
         };
 

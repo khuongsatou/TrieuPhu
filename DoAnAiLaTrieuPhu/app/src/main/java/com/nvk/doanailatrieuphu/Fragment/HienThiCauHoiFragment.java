@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -37,7 +45,11 @@ import com.nvk.doanailatrieuphu.R;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_NGUOI_CHOI_UPDATE_CREDIT;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,8 +64,6 @@ public class HienThiCauHoiFragment extends Fragment {
     private CauHoiAdapter adapter;
     private TextView tvCauHoiSo, tvCauHoi;
     private Button[] btnPhuongAn;
-    private CauHoiController cauHoiController;
-    private NguoiChoiController nguoiChoiController;
     private HienThiCauHoiActivity hienThiCauHoiActivity;
     private boolean isChecked = false;
     private ImageButton[] ivbtnSP;
@@ -80,8 +90,6 @@ public class HienThiCauHoiFragment extends Fragment {
         this.context = context;
         this.adapter = adapter;
         this.hienThiCauHoiActivity = (HienThiCauHoiActivity) context;
-        this.cauHoiController = new CauHoiController(context);
-        this.nguoiChoiController = new NguoiChoiController(context);
         this.nguoiChoi = nguoiChoi;
     }
 
@@ -242,15 +250,35 @@ public class HienThiCauHoiFragment extends Fragment {
                 giaCredit = credit - giaDapAn;
                 nguoiChoi.setId(nguoiChoi.getId());
                 nguoiChoi.setCredit(giaCredit);
-                Boolean result = nguoiChoiController.updateGoiCredit(nguoiChoi);
-                if (result) {
-                    showDapAn();
-                    Toast.makeText(context, "Xong", Toast.LENGTH_SHORT).show();
-                    hienThiCauHoiActivity.tvTinDung.setText(nguoiChoi.getCredit() + "");
-                } else {
-                    Toast.makeText(context, "Fail", Toast.LENGTH_SHORT).show();
-                }
-                dialog.dismiss();
+
+                StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_NGUOI_CHOI_UPDATE_CREDIT, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("AAAA",response);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context,"Server Offline",Toast.LENGTH_SHORT).show();
+                    }
+                }){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        return super.getParams();
+                    }
+                };
+                RequestQueue queue = Volley.newRequestQueue(context);
+                queue.add(request);
+
+//                Boolean result = nguoiChoiController.updateGoiCredit(nguoiChoi);
+//                if (result) {
+//                    showDapAn();
+//                    Toast.makeText(context, "Xong", Toast.LENGTH_SHORT).show();
+//                    hienThiCauHoiActivity.tvTinDung.setText(nguoiChoi.getCredit() + "");
+//                } else {
+//                    Toast.makeText(context, "Fail", Toast.LENGTH_SHORT).show();
+//                }
+//                dialog.dismiss();
             }
         });
         alert.setNegativeButton("Không", new DialogInterface.OnClickListener() {

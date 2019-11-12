@@ -14,9 +14,11 @@ import com.nvk.doanailatrieuphu.R;
 
 import java.util.List;
 
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.TYPE_ITEM;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.TYPE_LOADING;
+
+
 public class LichSuChoiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final int TYPE_LOADING = 0;
-    private static final int TYPE_LICH_SU_CHOI =1 ;
     private Context context;
     private List<LuotChoi> luotChois;
 
@@ -29,7 +31,7 @@ public class LichSuChoiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == TYPE_LICH_SU_CHOI){
+        if (viewType == TYPE_ITEM){
             View view = LayoutInflater.from(context).inflate(R.layout.custom_item_lich_su_choi,parent,false);
             return new LichSuChoiAdapter.LichSuHolder(view);
         }else if(viewType == TYPE_LOADING){
@@ -58,14 +60,13 @@ public class LichSuChoiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemViewType(int position) {
-        return luotChois.get(position) == null ? TYPE_LOADING : TYPE_LICH_SU_CHOI;
+        return luotChois.get(position) == null ? TYPE_LOADING : TYPE_ITEM;
     }
 
     public class LichSuHolder extends RecyclerView.ViewHolder {
         public TextView tvDate,tvSoCau,tvDiem;
         public LichSuHolder(@NonNull View itemView) {
             super(itemView);
-
             tvDate = itemView.findViewById(R.id.tvDate);
             tvSoCau = itemView.findViewById(R.id.tvSoCau);
             tvDiem = itemView.findViewById(R.id.tvDiem);
@@ -73,7 +74,6 @@ public class LichSuChoiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public class LoadingHolder extends RecyclerView.ViewHolder{
-
         public LoadingHolder(@NonNull View itemView) {
             super(itemView);
         }

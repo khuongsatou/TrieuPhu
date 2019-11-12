@@ -12,25 +12,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.StringRequest;
 import com.nvk.doanailatrieuphu.Adapter.CauHoiAdapter;
-import com.nvk.doanailatrieuphu.Controller.CauHoiController;
 import com.nvk.doanailatrieuphu.Model.CauHoi;
 import com.nvk.doanailatrieuphu.Model.LinhVuc;
 import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
+import com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
-import static com.nvk.doanailatrieuphu.Activity.MangHinhTroChoiActivity.KEY_LINHVUC;
+
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_DANGNHAP;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_LINHVUC;
 
 public class HienThiCauHoiActivity extends AppCompatActivity {
     public ViewPager vpgShowCauHoi;
     public TextView tvTen, tvTinDung,tvDiem;
     private CauHoiAdapter cauHoiAdapter;
-    private List<CauHoi> cauHois;
-    private CauHoiController cauHoiController = new CauHoiController(this);
+    private List<CauHoi> cauHois  = new ArrayList<>();;
     public ImageView[] ivMang = new ImageView[5];
     private NguoiChoi nguoiChoi;
     private LinhVuc linhVuc;
@@ -49,12 +50,24 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
         radiation();
         showUserAndCredit();
         createAdapter();
+        loadData();
+    }
+
+    private void loadData() {
+        if (NetWorkUtilitis.checkConnect(this)){
+            startVolley();
+        }else{
+            NetWorkUtilitis.showDialogNetWork(getString(R.string.tb_connect_internet),this);
+        }
+    }
+
+    private void startVolley() {
+
+
     }
 
     private void createAdapter() {
-        cauHois = new ArrayList<>();
-        cauHois.addAll(cauHoiController.getAllCauHoiByLinhVucID(this.linhVuc.getId()));
-        cauHoiAdapter = new CauHoiAdapter(getSupportFragmentManager(), cauHois, this,vpgShowCauHoi,nguoiChoi);
+        cauHoiAdapter = new CauHoiAdapter(getSupportFragmentManager(), cauHois, this,nguoiChoi);
         vpgShowCauHoi.setAdapter(cauHoiAdapter);
     }
 

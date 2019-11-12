@@ -18,9 +18,11 @@ import com.nvk.doanailatrieuphu.R;
 
 import java.util.List;
 
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.TYPE_ITEM;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.TYPE_LOADING;
+
+
 public class BangXepHangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final int TYPE_BANG_XEP_HANG = 1;
-    private static final int TYPE_LOADING = 0;
     private Context context;
     private List<NguoiChoi> nguoiChois;
 
@@ -32,7 +34,7 @@ public class BangXepHangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == TYPE_BANG_XEP_HANG){
+        if (viewType == TYPE_ITEM){
             View view = LayoutInflater.from(context).inflate(R.layout.custom_item_bang_xep_hang,parent,false);
             return new BangXepHangHolder(view);
         }else if(viewType == TYPE_LOADING){
@@ -61,7 +63,7 @@ public class BangXepHangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemViewType(int position) {
-        return nguoiChois.get(position) == null ? TYPE_LOADING : TYPE_BANG_XEP_HANG;
+        return nguoiChois.get(position) == null ? TYPE_LOADING : TYPE_ITEM;
     }
 
     public class BangXepHangHolder extends RecyclerView.ViewHolder {

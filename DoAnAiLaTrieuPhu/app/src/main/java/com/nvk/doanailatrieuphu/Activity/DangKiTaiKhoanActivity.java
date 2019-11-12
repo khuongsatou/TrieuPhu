@@ -30,9 +30,10 @@ import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_EMA
 import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_MAT_KHAU;
 import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_TEN_DANG_NHAP;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_NGUOI_CHOI_THEM;
 
 public class DangKiTaiKhoanActivity extends AppCompatActivity {
-    private static final String URI_NGUOI_CHOI_THEM ="nguoi_choi/them" ;
+
     private EditText edtTenDangNhap,edtEmail,edtMatKhau,edtXacNhanMatKhau;
 
     @Override

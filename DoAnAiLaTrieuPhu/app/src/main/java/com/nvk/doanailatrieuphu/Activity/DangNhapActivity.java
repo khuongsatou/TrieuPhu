@@ -34,20 +34,17 @@ import java.util.Map;
 
 import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_MAT_KHAU;
 import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_TEN_DANG_NHAP;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_DANGNHAP;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_DANG_NHAP;
 
 public class DangNhapActivity extends AppCompatActivity {
-    public static final String KEY_DANGNHAP = "dn" ;
-    public static final String KEY_SUCCESS  = "success";
-    public static final String KEY_URI_DANG_NHAP  = "nguoi_choi/dang_nhap";
     private EditText edtTenDangNhap,edtMatKhau;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_nhap);
-
 
         Radiation();
         CheckConnectAPI();
@@ -76,16 +73,13 @@ public class DangNhapActivity extends AppCompatActivity {
             return;
         }else{
 
-            StringRequest request = new StringRequest(Request.Method.POST, BASE + KEY_URI_DANG_NHAP, new Response.Listener<String>() {
+            StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_DANG_NHAP, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
                         if(!NetWorkUtilitis.checkConnect(getApplicationContext())){
                             NetWorkUtilitis.showDialogNetWork("Đừng Tắt InterNet Chứ",DangNhapActivity.this).show();
-
                         }else {
-
-
                             JSONObject objLogin = new JSONObject(response);
                             boolean result = objLogin.getBoolean("success");
                             if (result) {

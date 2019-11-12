@@ -10,10 +10,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -28,29 +26,27 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.nvk.doanailatrieuphu.Controller.NguoiChoiController;
 import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
 import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_EMAIL;
 import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_ID;
 import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_MAT_KHAU;
 import static com.nvk.doanailatrieuphu.Controller.NguoiChoiController.COLUMN_TEN_DANG_NHAP;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_DANGNHAP;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.REQUEST_CODE_GALLERY;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_NGUOI_CHOI_CAP_NHAT;
 
 public class QuanLiTaiKhoanActivity extends AppCompatActivity {
-    private static final int REQUEST_CODE_GALLERY = 123;
-    private static final String URI_NGUOI_CHOI_CAP_NHAT ="nguoi_choi/cap_nhat" ;
     private ImageView ivLogo;
     private EditText edtTenDangNhap,edtEmail,edtMatKhau,edtXacNhanMatKhau;
     private int id_nguoiChoi = 0;
@@ -176,29 +172,5 @@ public class QuanLiTaiKhoanActivity extends AppCompatActivity {
                 queue.add(request);
             }
         }
-
-//        if (email.equals("") || matKhau.equals("")){
-//            Toast.makeText(getApplicationContext(),getString(R.string.tb_chua_nhap_du),Toast.LENGTH_SHORT).show();
-//        }else{
-//            if (!matKhau.equals(xacNhanMatKhau)){
-//                Toast.makeText(getApplicationContext(),getString(R.string.tb_mat_khau_khong_giong_nhau),Toast.LENGTH_SHORT).show();
-//            }else{
-//                NguoiChoi nguoiChoi = new NguoiChoi();
-//                nguoiChoi.setId(this.id_nguoiChoi);
-//                nguoiChoi.setTenDangNhap(tenTaiKhoan);
-//                nguoiChoi.setEmail(email);
-//                nguoiChoi.setMatKhau(matKhau);
-//                //xử lí hinh sau
-//                //chắc nên lưu đường dãn thôi , bằng cách copy vào drawer
-//                //nguoiChoi.setHinhDaiDien();
-//                Boolean result = nguoiChoiController.updateNguoiChoi(nguoiChoi);
-//                if (result){
-//                    Toast.makeText(this,getString(R.string.tb_update_user_tc),Toast.LENGTH_LONG).show();
-//                    finish();
-//                }else{
-//                    Toast.makeText(this,getString(R.string.tb_update_user_tb),Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        }
     }
 }

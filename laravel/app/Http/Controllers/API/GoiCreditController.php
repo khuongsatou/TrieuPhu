@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\GoiCredit;
 class GoiCreditController extends Controller
 {
-    public function getAllGoiCredit(){
+    public function getGoiCredit(){
         $goiCredit = GoiCredit::all();
         $result = [
             'success' => true,
@@ -17,16 +17,4 @@ class GoiCreditController extends Controller
         return response() -> json($result);
     }
 
-    public function getGoiCreditByID($id)
-    {
-        $goiCredit = GoiCredit::find($id);
-        if($goiCredit == null){
-            return response()->json(['success'=>false]);
-        }    
-        $result = [
-            'success' => true,
-            'goi_credit' => $goiCredit
-        ];
-        return response() -> json($result);
-    }
 }

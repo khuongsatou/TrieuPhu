@@ -18,16 +18,14 @@ import java.util.List;
 public class CauHoiAdapter extends FragmentStatePagerAdapter {
     private List<CauHoi> cauHoiList;
     private Context context;
-    private ViewPager vpgShowCauHoi;
     private NguoiChoi nguoiChoi;
 
 
 
-    public CauHoiAdapter(FragmentManager fm, List<CauHoi> cauHoiList,Context context,ViewPager vpgShowCauHoi,NguoiChoi nguoiChoi) {
+    public CauHoiAdapter(FragmentManager fm, List<CauHoi> cauHoiList,Context context,NguoiChoi nguoiChoi) {
         super(fm);
         this.cauHoiList = cauHoiList;
         this.context = context;
-        this.vpgShowCauHoi = vpgShowCauHoi;
         this.nguoiChoi = nguoiChoi;
 
     }

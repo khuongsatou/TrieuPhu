@@ -50,7 +50,6 @@ class NguoiChoiController extends Controller
         if($nguoiChoi == null){
             return response()->json(['success'=>false]);
          }
-        //$nguoiChoi =NguoiChoi::find($request->id);
         $nguoiChoi->ten_dang_nhap = $request->ten_dang_nhap;
         $nguoiChoi->mat_khau = $request->mat_khau;
         $nguoiChoi->email = $request->email;
@@ -58,30 +57,28 @@ class NguoiChoiController extends Controller
         $nguoiChoi->save();
         return response()->json(['success'=>true]);
     }
-
-
-    public function getAllNguoiChoi(){
-        $nguoiChoi = NguoiChoi::all();
-        $result = [
-            'success' => true,
-            'linh_vuc' => $nguoiChoi
-        ];
     
-        return response() -> json($result);
+    public function updateCredit(Request $request){
+        $nguoiChoi = NguoiChoi::where('id',$request->id)->first();
+        if($nguoiChoi == null){
+            return response()->json(['success'=>false]);
+        }
+        $nguoiChoi->credit = $request->credit;
+        $nguoiChoi->save();
+        return response()->json(['success'=>true]);
     }
 
 
-    public function getNguoiChoiById($id)
+    public function getNguoiChoi(Request $request)
     {
-        $nguoiChoi = NguoiChoi::find($id);
-        if ($nguoiChoi == null) {
-            return response()->json(['success' => false]);
-        }
-        $result =[
-            'success'=>true,
-            'nguoi_choi'=> $nguoiChoi
+        $page = $request->page;
+        $limit = $request->limit;
+        $nguoiChoi = NguoiChoi::orderBy('diem_cao_nhat',"DESC")->skip(($page-1)*$limit)->take($limit)->get();
+        $result = [
+            'success' => true,
+            'total' => NguoiChoi::count(),
+            'nguoi_choi' => $nguoiChoi
         ];
         return response()->json($result);
-
     }
 }

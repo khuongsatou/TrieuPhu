@@ -34,16 +34,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.nvk.doanailatrieuphu.Activity.DangNhapActivity.KEY_DANGNHAP;
+
 import static com.nvk.doanailatrieuphu.Activity.MangHinhChinhActivity.KEY_LIMIT;
 import static com.nvk.doanailatrieuphu.Activity.MangHinhChinhActivity.KEY_PAGE;
 import static com.nvk.doanailatrieuphu.Controller.LichSuChoiController.COLUMN_NGUOI_CHOI_ID;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_DANGNHAP;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.PAGE_SIZE;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_LUOT_CHOI;
 
 public class LichSuCauHoiActivity extends AppCompatActivity {
-
-
     private LichSuChoiAdapter lichSuChoiAdapter;
     private List<LuotChoi> luotChois = new ArrayList<>();;
     private RecyclerView rcvLichSuChoi;
@@ -53,7 +53,6 @@ public class LichSuCauHoiActivity extends AppCompatActivity {
     private boolean checkLoading = false;
     private boolean checkLastPage = false;
     private int currentPage = 1;
-    private static final int PAGE_SIZE = 3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,11 +107,11 @@ public class LichSuCauHoiActivity extends AppCompatActivity {
     }
 
     private void startVolley(Bundle data) {
-        final Map<String,Integer> startMap = new HashMap<>();
-        startMap.put(COLUMN_NGUOI_CHOI_ID,this.id_nguoiChoi);
-        startMap.put(KEY_PAGE,(data == null ? 1 : data.getInt(KEY_PAGE)));
-        startMap.put(KEY_LIMIT,(data == null ? 3 : data.getInt(KEY_LIMIT)));
-        StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_LUOT_CHOI, new Response.Listener<String>() {
+        final Map<String,String> startMap = new HashMap<>();
+        startMap.put(COLUMN_NGUOI_CHOI_ID,String.valueOf(this.id_nguoiChoi));
+        startMap.put(KEY_PAGE,String.valueOf(data == null ? 1 : data.getInt(KEY_PAGE)));
+        startMap.put(KEY_LIMIT,String.valueOf(data == null ? 3 : data.getInt(KEY_LIMIT)));
+        StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_LUOT_CHOI , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -162,11 +161,7 @@ public class LichSuCauHoiActivity extends AppCompatActivity {
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map = new HashMap<>();
-                map.put(COLUMN_NGUOI_CHOI_ID,String.valueOf(startMap.get(COLUMN_NGUOI_CHOI_ID)));
-                map.put(KEY_PAGE,String.valueOf(startMap.get(KEY_PAGE)));
-                map.put(KEY_LIMIT,String.valueOf(startMap.get(KEY_LIMIT)));
-                return map;
+                return startMap;
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);

@@ -49,13 +49,12 @@ class LuotChoiController extends Controller
 
     public function getLuotChoiByID(Request $request)
     {
-        $luotChoi = LuotChoi::find($request->nguoi_choi_id);
         $page = $request->page;
         $limit = $request->limit;
-        $luotChoi = LuotChoi::orderBy('id',"DESC")->skip(($page-1)*$limit)->take($limit)->get();
+        $luotChoi = LuotChoi::where('nguoi_choi_id',$request->nguoi_choi_id)->orderBy('id',"DESC")->skip(($page-1)*$limit)->take($limit)->get();
         $result = [
             'success' => true,
-            'total' => LuotChoi::find($request->nguoi_choi_id)->count(),
+            'total' => LuotChoi::where('nguoi_choi_id',$request->nguoi_choi_id)->count(),
             'luot_choi' => $luotChoi
         ];
         return response()->json($result);

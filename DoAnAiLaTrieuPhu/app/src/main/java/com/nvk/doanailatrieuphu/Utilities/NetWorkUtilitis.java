@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -24,37 +25,26 @@ import java.util.Map;
 
 
 public class NetWorkUtilitis{
-    //public static final String BASE = "http://localhost:8000/api/";
-    //public static final String BASE = "http://192.168.43.137:8000/public/api/";
+    //public static final String BASE = "http://localhost:8000/api/";//gốc
+    //public static final String BASE = "http://192.168.43.137:8000/public/api/";//máy thật
+
+    //url
     public static final String BASE = "http://192.168.1.14:8000/public/api/";
 
-    public static final String URI_LUOT_CHOI = "luot_choi/tim";
+    //URI Người chơi
+    public static final String URI_DANG_NHAP  = "nguoi_choi/dang_nhap";
+    public static final String URI_NGUOI_CHOI_THEM ="nguoi_choi/them" ;
+    public static final String URI_MAT_KHAU ="nguoi_choi/mat_khau";
+    public static final String URI_NGUOI_CHOI_CAP_NHAT ="nguoi_choi/cap_nhat" ;
     public static final String URI_BANG_XEP_HANG = "nguoi_choi/danh_sach";
+    public static final String URI_NGUOI_CHOI_UPDATE_CREDIT = "nguoi_choi/cap_nhat_credit";
+
+    //URI Lượt Chơi
+    public static final String URI_LUOT_CHOI = "luot_choi/tim";
+    //URI Credit
     public static final String URI_CREDIT_DANH_SACH = "goi_credit/danh_sach";
-    public static final int PAGE_SIZE = 1;
-
-
-    public static boolean getStringParams(String uri, final Map<String,String> map,Context context){
-        StringRequest request = new StringRequest(Request.Method.POST,BASE+uri, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("AAAAAA",response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("AAAAAA",error.getMessage());
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                return map;
-            }
-        };
-        RequestQueue requestQueue =Volley.newRequestQueue(context);
-        requestQueue.add(request);
-        return true;
-    }
+    //URI Linh Vuc
+    public static final String URI_LINH_VUC = "linh_vuc/danh_sach";
 
     public static boolean checkConnect(Context context){
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
