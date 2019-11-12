@@ -16,6 +16,9 @@
   3.1.2. Update Version 2.0
     - Hoàn thành các chức năng cơ bản của 1 app
   3.1.3. Update Version 3.0
+    - GET API
+  3.1.4
+    - Thêm Chức năng còn lại
     
 3.2. Laravel
   3.2.1 Update version 2.5
@@ -24,7 +27,9 @@
       + bảng
           # Chi tiết bảng
       + bảng phụ
-      +đổ json
+      + đổ json
+  3.2.2 Update version 2.5
+      + API về app
       
      
 	  
