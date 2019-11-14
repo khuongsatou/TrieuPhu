@@ -90,7 +90,6 @@ public class BangXepHangActivity extends AppCompatActivity {
                             }
                         });
 
-
                         Bundle data = new Bundle();
                         data.putInt(KEY_PAGE,currentPage);
                         data.putInt(KEY_LIMIT,PAGE_SIZE);

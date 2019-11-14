@@ -51,7 +51,6 @@ public class MangHinhTroChoiActivity extends AppCompatActivity {
     private LinhVucAdapter adapter;
     private List<LinhVuc> linhVucs = new ArrayList<>();
     private NguoiChoi nguoiChoi;
-
     private boolean checkLoading = false;
     private boolean checkLastPage = false;
     private int currentPage = 1;
@@ -184,7 +183,17 @@ public class MangHinhTroChoiActivity extends AppCompatActivity {
     private void showNameAndCredit() {
         //Muốn chạy thì bật chỗ này nhé
         this.nguoiChoi = (NguoiChoi) getIntent().getSerializableExtra(KEY_DANGNHAP);
-
+        //Temp
+//        NguoiChoi nguoiChoiTemp = new NguoiChoi();
+//        nguoiChoiTemp.setId(2);
+//        nguoiChoiTemp.setTenDangNhap("user");
+//        nguoiChoiTemp.setCredit(1000);
+//        nguoiChoiTemp.setHinhDaiDien("1.jpg");
+//        nguoiChoiTemp.setEmail("2");
+//        nguoiChoiTemp.setMatKhau("3");
+//        nguoiChoiTemp.setDiemCaoNhat(30);
+//        this.nguoiChoi = nguoiChoiTemp;
+        //end temp
         tvTen.setText(this.nguoiChoi.getTenDangNhap());
         tvTinDung.setText(this.nguoiChoi.getCredit()+"");
     }

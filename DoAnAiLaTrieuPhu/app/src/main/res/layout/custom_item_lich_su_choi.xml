@@ -5,8 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
     <androidx.cardview.widget.CardView
-        android:layout_margin="5dp"
+        android:layout_marginTop="2dp"
         android:id="@+id/cvItem"
+        app:cardMaxElevation="6dp"
+        app:cardBackgroundColor="#1E00E5FF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -22,6 +24,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:textSize="20sp"
                     android:id="@+id/tvDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -29,6 +32,7 @@
                     android:textColor="#0C0000" />
 
                 <TextView
+                    android:textSize="15sp"
                     android:id="@+id/tvSoCau"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

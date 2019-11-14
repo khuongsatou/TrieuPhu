@@ -89,8 +89,8 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
                         checkLoading = true;
                         currentPage++;
 
-                        cauHois.add(null);
-                        cauHoiAdapter.notifyDataSetChanged();
+                        //cauHois.add(null);
+                        //cauHoiAdapter.notifyDataSetChanged();
 
                         Bundle data = new Bundle();
                         data.putInt(KEY_PAGE, currentPage);
@@ -118,8 +118,6 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
             NetWorkUtilitis.showDialogNetWork(getString(R.string.tb_connect_internet),this);
         }
     }
-
-
 
     private void startVolley(Bundle data) {
         final Map<String,String> map = new HashMap<>();

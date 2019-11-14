@@ -56,12 +56,10 @@ public class DangNhapActivity extends AppCompatActivity {
         }
     }
 
-
     private void Radiation() {
         edtTenDangNhap = findViewById(R.id.edtTenDangNhap);
         edtMatKhau = findViewById(R.id.edtMatKhau);
     }
-
 
     public void XuLiDangNhap(View v){
         //Lấy text
