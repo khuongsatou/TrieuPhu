@@ -85,7 +85,13 @@ public class LichSuCauHoiActivity extends AppCompatActivity {
                         checkLoading = true;
                         currentPage++;
                         luotChois.add(null);
-                        lichSuChoiAdapter.notifyItemInserted(luotChois.size()-1);
+                        rcvLichSuChoi.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                lichSuChoiAdapter.notifyItemInserted(luotChois.size()-1);
+                            }
+                        });
+
                         Bundle data = new Bundle();
                         data.putInt(KEY_PAGE,currentPage);
                         data.putInt(KEY_LIMIT,PAGE_SIZE);

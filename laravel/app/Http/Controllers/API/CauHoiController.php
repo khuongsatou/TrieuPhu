@@ -7,26 +7,17 @@ use App\Http\Controllers\Controller;
 use App\CauHoi;
 class CauHoiController extends Controller
 {
-    public function getAllCauHoi(){
-        $cauHoi = CauHoi::all();
-        $result = [
-            'success' => true,
-            'cau_hoi' => $cauHoi
-        ];
-    
-        return response() -> json($result);
-    }
 
-    public function getCauHoiByID($id)
+    public function getCauHoiById(Request $request)
     {
-        $cauHoi = CauHoi::find($id);
-        if($cauHoi == null){
-            return response()->json(['success'=>false]);
-        }    
+        $page = $request->page;
+        $limit = $request->limit;
+        $cauHoi = CauHoi::where('linh_vuc_id',$request->linh_vuc_id)->orderBy('id',"ASC")->skip(($page-1)*$limit)->take($limit)->get();
         $result = [
             'success' => true,
+            'total' => CauHoi::count(),
             'cau_hoi' => $cauHoi
         ];
-        return response() -> json($result);
+        return response()->json($result);
     }
 }

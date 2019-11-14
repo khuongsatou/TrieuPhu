@@ -83,7 +83,13 @@ public class BangXepHangActivity extends AppCompatActivity {
                         currentPage++;
 
                         nguoiChois.add(null);
-                        bangXepHangAdapter.notifyItemInserted(nguoiChois.size()-1);
+                        rcvBangXepHang.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                bangXepHangAdapter.notifyItemInserted(nguoiChois.size()-1);
+                            }
+                        });
+
 
                         Bundle data = new Bundle();
                         data.putInt(KEY_PAGE,currentPage);

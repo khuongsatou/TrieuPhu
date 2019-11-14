@@ -35,6 +35,9 @@ Route::prefix('linh_vuc')->group(function(){
     Route::post('danh_sach','API\LinhVucController@getLinhVuc');
 });
 
+Route::prefix('cau_hoi')->group(function(){
+    Route::post('tim','API\CauHoiController@getCauHoiById');
+});
 //endTest
 
 

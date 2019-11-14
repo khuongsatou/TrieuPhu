@@ -84,6 +84,7 @@ public class HienThiCauHoiFragment extends Fragment {
     public HienThiCauHoiFragment() {
     }
 
+
     public HienThiCauHoiFragment(List<CauHoi> cauHois, int position, Context context, CauHoiAdapter adapter, NguoiChoi nguoiChoi) {
         this.cauHois = cauHois;
         this.position = position;

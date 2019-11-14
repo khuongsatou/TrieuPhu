@@ -7,12 +7,20 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.nvk.doanailatrieuphu.Adapter.CauHoiAdapter;
 import com.nvk.doanailatrieuphu.Model.CauHoi;
 import com.nvk.doanailatrieuphu.Model.LinhVuc;
@@ -20,12 +28,26 @@ import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
 import com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
+import static com.nvk.doanailatrieuphu.Controller.CauHoiController.COLUMN_LINH_VUC_ID;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_DANGNHAP;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_LIMIT;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_LINHVUC;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_PAGE;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.LIMIT_KHOI_TAO;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.PAGE_KHOI_TAO;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.PAGE_SIZE;
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_CAU_HOI;
 
 public class HienThiCauHoiActivity extends AppCompatActivity {
     public ViewPager vpgShowCauHoi;
@@ -41,6 +63,10 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
     public int tongDiem = 0;
     public boolean[] ischeckedSP = {false, false,false, false};
 
+    private boolean checkLoading = false;
+    private boolean checkLastPage = false;
+    private int currentPage = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,20 +76,123 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
         radiation();
         showUserAndCredit();
         createAdapter();
-        loadData();
+        loadData(null);
+        checkSurf();
     }
 
-    private void loadData() {
+    private void checkSurf() {
+        vpgShowCauHoi.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (position == (cauHois.size()-1)){
+                    if(!checkLoading && !checkLastPage){
+                        checkLoading = true;
+                        currentPage++;
+
+                        cauHois.add(null);
+                        cauHoiAdapter.notifyDataSetChanged();
+
+                        Bundle data = new Bundle();
+                        data.putInt(KEY_PAGE, currentPage);
+                        data.putInt(KEY_LIMIT,PAGE_SIZE);
+                        loadData(data);
+                    }
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+    }
+
+    private void loadData(Bundle data) {
         if (NetWorkUtilitis.checkConnect(this)){
-            startVolley();
+            startVolley(data);
         }else{
             NetWorkUtilitis.showDialogNetWork(getString(R.string.tb_connect_internet),this);
         }
     }
 
-    private void startVolley() {
 
 
+    private void startVolley(Bundle data) {
+        final Map<String,String> map = new HashMap<>();
+        map.put(KEY_PAGE,String.valueOf(data == null ? PAGE_KHOI_TAO : data.getInt(KEY_PAGE)));
+        map.put(KEY_LIMIT,String.valueOf(data == null ? LIMIT_KHOI_TAO : data.getInt(KEY_LIMIT)));
+        map.put(COLUMN_LINH_VUC_ID,String.valueOf(this.linhVuc.getId()));
+
+        StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_CAU_HOI, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject objCauHoi = new JSONObject(response);
+                    int total = objCauHoi.getInt("total");
+                    int totalPage = total / PAGE_SIZE;
+                    if (totalPage % PAGE_SIZE !=0){
+                        totalPage++;
+                    }
+                    //Nghiên cứu thêm , khi câu hỏi chưa loading thì hiên DialogProgress
+                    if (cauHois.size() >0){
+                        cauHois.remove(cauHois.size()-1);
+                        cauHoiAdapter.notifyDataSetChanged();
+                    }
+                    JSONArray arrCauHoi = objCauHoi.getJSONArray("cau_hoi");
+                    //GET JSON
+                    for (int i = 0; i < arrCauHoi.length(); i++) {
+                        JSONObject objItem = arrCauHoi.getJSONObject(i);
+                        int id = objItem.getInt("id");
+                        String noiDung = objItem.getString("noi_dung");
+                        int linhVucID = objItem.getInt("linh_vuc_id");
+                        String phuongAnA = objItem.getString("phuong_an_a");
+                        String phuongAnB = objItem.getString("phuong_an_b");
+                        String phuongAnC = objItem.getString("phuong_an_c");
+                        String phuongAnD = objItem.getString("phuong_an_d");
+                        String dapAn = objItem.getString("dap_an");
+
+                        CauHoi cauHoi= new CauHoi();
+                        cauHoi.setId(id);
+                        cauHoi.setLinhVucId(linhVucID);
+                        cauHoi.setNoiDung(noiDung);
+                        cauHoi.setPhuongAnA(phuongAnA);
+                        cauHoi.setPhuongAnB(phuongAnB);
+                        cauHoi.setPhuongAnC(phuongAnC);
+                        cauHoi.setPhuongAnD(phuongAnD);
+                        cauHoi.setDapAn(dapAn);
+                        cauHois.add(cauHoi);
+
+                    }
+                    checkFinishLoading(totalPage);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                cauHoiAdapter.notifyDataSetChanged();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),"Server Offline",Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return map;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
+    }
+
+    private void checkFinishLoading(int totalPage) {
+        checkLoading=false;
+        checkLastPage = (currentPage == totalPage);
     }
 
     private void createAdapter() {

@@ -27,9 +27,11 @@ import java.util.Map;
 public class NetWorkUtilitis{
     //public static final String BASE = "http://localhost:8000/api/";//gốc
     //public static final String BASE = "http://192.168.43.137:8000/public/api/";//máy thật
+    public static final String BASE = "http://10.0.3.2:8000/api/";//Genny
 
     //url
-    public static final String BASE = "http://192.168.1.14:8000/public/api/";
+    //public static final String BASE = "http://192.168.1.14:8000/public/api/"; //asus
+    //public static final String BASE = "http://192.168.43.137:8000/public/api/"; //lenovo
 
     //URI Người chơi
     public static final String URI_DANG_NHAP  = "nguoi_choi/dang_nhap";
@@ -45,7 +47,11 @@ public class NetWorkUtilitis{
     public static final String URI_CREDIT_DANH_SACH = "goi_credit/danh_sach";
     //URI Linh Vuc
     public static final String URI_LINH_VUC = "linh_vuc/danh_sach";
+    //URI Câu hỏi
+    public static final String URI_CAU_HOI = "cau_hoi/tim";
 
+
+    //fuction check connect
     public static boolean checkConnect(Context context){
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo= null;

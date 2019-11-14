@@ -35,10 +35,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.nvk.doanailatrieuphu.Activity.MangHinhChinhActivity.KEY_LIMIT;
-import static com.nvk.doanailatrieuphu.Activity.MangHinhChinhActivity.KEY_PAGE;
 import static com.nvk.doanailatrieuphu.Activity.MangHinhChinhActivity.KEY_REQUESTCODE;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_DANGNHAP;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_LIMIT;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_PAGE;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.LIMIT_KHOI_TAO;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.PAGE_KHOI_TAO;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.PAGE_SIZE;
@@ -89,7 +89,13 @@ public class MangHinhTroChoiActivity extends AppCompatActivity {
                         currentPage++;
 
                         linhVucs.add(null);
-                        adapter.notifyItemInserted(linhVucs.size()-1);
+                        rcvLinhVuc.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.notifyItemInserted(linhVucs.size()-1);
+
+                            }
+                        });
 
                         Bundle data = new Bundle();
                         data.putInt(KEY_PAGE,currentPage);
@@ -178,6 +184,7 @@ public class MangHinhTroChoiActivity extends AppCompatActivity {
     private void showNameAndCredit() {
         //Muốn chạy thì bật chỗ này nhé
         this.nguoiChoi = (NguoiChoi) getIntent().getSerializableExtra(KEY_DANGNHAP);
+
         tvTen.setText(this.nguoiChoi.getTenDangNhap());
         tvTinDung.setText(this.nguoiChoi.getCredit()+"");
     }

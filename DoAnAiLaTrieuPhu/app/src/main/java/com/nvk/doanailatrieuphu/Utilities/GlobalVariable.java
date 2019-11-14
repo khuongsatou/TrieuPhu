@@ -6,6 +6,8 @@ public class GlobalVariable {
     //param
     public static final String KEY_ID = "id";
     public static final String KEY_CREDIT = "credit";
+    public static final String KEY_PAGE = "page";
+    public static final String KEY_LIMIT = "limit";
 
     //key check đăng nhập để intent
     public static final String KEY_DANGNHAP = "dn" ;

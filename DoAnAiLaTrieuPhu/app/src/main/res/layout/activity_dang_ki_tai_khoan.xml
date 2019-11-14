@@ -1,61 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:gravity="center"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@id/guideline13"
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toTopOf="@+id/guideline12">
 
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="93dp"
-        app:srcCompat="@drawable/logo_user" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/logo_user" />
 
-    <EditText
+        <EditText
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:id="@+id/edtTenDangNhap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ten_dang_nhap"
+            android:inputType="textPersonName" />
 
-        android:inputType="textPersonName"
-        android:id="@+id/edtTenDangNhap"
-        android:layout_width="match_parent"
+        <EditText
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:text="yoshi1@gmail.com" />
+
+        <EditText
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:id="@+id/edtMatKhau"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/mat_khau"
+            android:inputType="textPassword"
+            android:text="123" />
+
+        <EditText
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:id="@+id/edtXacNhanMatKhau"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/xac_nhan_mat_khau"
+            android:inputType="textPassword"
+            android:text="123" />
+
+        <Button
+            android:id="@+id/btnDangKi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2196F3"
+            android:onClick="DangKy"
+            android:text="@string/dang_ky"
+            android:textColor="#EDF1EAEA" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/ten_dang_nhap"
-        />
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
 
-    <EditText
-        android:text="yoshi1@gmail.com"
-        android:inputType="textEmailAddress"
-        android:id="@+id/edtEmail"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/email"
-        />
-    <EditText
-        android:text="123"
-        android:inputType="textPassword"
-        android:id="@+id/edtMatKhau"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/mat_khau"
-        />
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
 
-    <EditText
-        android:text="123"
-        android:inputType="textPassword"
-        android:id="@+id/edtXacNhanMatKhau"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/xac_nhan_mat_khau"
-        />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="16dp" />
 
-    <Button
-        android:id="@+id/btnDangKi"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#2196F3"
-        android:onClick="DangKy"
-        android:text="@string/dang_ky"
-        android:textColor="#EDF1EAEA" />
-
-</LinearLayout>
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="16dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

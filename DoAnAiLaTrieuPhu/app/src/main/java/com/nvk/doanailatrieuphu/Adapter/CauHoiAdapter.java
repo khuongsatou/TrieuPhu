@@ -10,12 +10,13 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.nvk.doanailatrieuphu.Fragment.HienThiCauHoiFragment;
+import com.nvk.doanailatrieuphu.Fragment.LoadingCauHoiFragment;
 import com.nvk.doanailatrieuphu.Model.CauHoi;
 import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 
 import java.util.List;
 
-public class CauHoiAdapter extends FragmentStatePagerAdapter {
+public class CauHoiAdapter extends FragmentStatePagerAdapter{
     private List<CauHoi> cauHoiList;
     private Context context;
     private NguoiChoi nguoiChoi;
@@ -30,6 +31,7 @@ public class CauHoiAdapter extends FragmentStatePagerAdapter {
 
     }
 
+
     @Override
     public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;
@@ -37,11 +39,17 @@ public class CauHoiAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return new HienThiCauHoiFragment(cauHoiList,position,context,this,nguoiChoi);
+        if (cauHoiList.get(position) != null){
+            return new HienThiCauHoiFragment(cauHoiList,position,context,this,nguoiChoi);
+        }
+        return new  LoadingCauHoiFragment(context);
     }
+
 
     @Override
     public int getCount() {
         return cauHoiList.size();
     }
+
+
 }

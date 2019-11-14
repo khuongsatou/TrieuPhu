@@ -9,48 +9,61 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:weightSum="3"
         app:layout_constraintBottom_toTopOf="@+id/guideline16"
         app:layout_constraintEnd_toEndOf="@id/guideline17"
         app:layout_constraintStart_toStartOf="@+id/guideline14"
         app:layout_constraintTop_toTopOf="@+id/guideline15">
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="match_parent"
-            android:layout_height="108dp"
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/logo_user" />
+        </LinearLayout>
 
-            app:srcCompat="@drawable/logo_user" />
-
-        <EditText
-            android:padding="15dp"
-            android:layout_marginTop="15dp"
-            android:id="@+id/edtTenDangNhap"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/ten_dang_nhap"
-            android:text="admin" />
+            android:layout_weight="2"
+            android:orientation="vertical">
 
-        <EditText
 
-            android:layout_marginTop="15dp"
-            android:id="@+id/edtEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:text="yoshi240499@gmail.com" />
+            <EditText
+                android:id="@+id/edtTenDangNhap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="@string/ten_dang_nhap"
+                android:padding="15dp"
+                android:text="admin" />
 
-        <Button
-            android:layout_marginTop="15dp"
-            android:id="@+id/btnLayLaiMatKhau"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#2196F3"
-            android:onClick="QuenMatKhau"
-            android:text="@string/lay_lai_mat_khau"
-            android:textColor="#FCECE7E7" />
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:padding="15dp"
+                android:text="yoshi240499@gmail.com" />
+
+            <Button
+                android:id="@+id/btnLayLaiMatKhau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="#2196F3"
+                android:onClick="QuenMatKhau"
+                android:text="@string/lay_lai_mat_khau"
+                android:textColor="#FCECE7E7" />
+        </LinearLayout>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline

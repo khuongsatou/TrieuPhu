@@ -1,45 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/guideline33"
-        app:layout_constraintEnd_toStartOf="@+id/guideline31"
-        app:layout_constraintStart_toStartOf="@+id/guideline30"
-        app:layout_constraintTop_toTopOf="@+id/guideline32">
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintBottom_toBottomOf="@id/guideline13"
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toTopOf="@+id/guideline12">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/ivLogo"
+                android:id="@+id/imageView2"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="match_parent"
                 app:srcCompat="@drawable/logo_user" />
-
-            <Button
-                android:id="@+id/btnDoiHinhDaiDien"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:gravity="center"
-                android:onClick="xuLiDoiHinhDaiHien"
-                android:text="Đổi hình đại diện"
-                android:textColor="#2196F3" />
         </LinearLayout>
 
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_weight="2"
             android:orientation="vertical">
 
             <EditText
@@ -47,74 +40,77 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:enabled="false"
-                android:hint="Tên Đăng Nhập"
-                android:inputType="textPersonName" />
+                android:hint="@string/ten_dang_nhap"
+                android:inputType="textPersonName"
+                android:padding="16dp" />
 
             <EditText
                 android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Email"
-                android:inputType="textEmailAddress" />
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:padding="16dp"
+                android:text="yoshi1@gmail.com" />
 
             <EditText
                 android:id="@+id/edtMatKhau"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Đổi Mật Khẩu"
-                android:inputType="textPassword" />
+                android:hint="@string/mat_khau"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                android:text="123" />
 
             <EditText
                 android:id="@+id/edtXacNhanMatKhau"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Xác Nhận Mật Khẩu"
-                android:inputType="textPassword" />
+                android:hint="@string/xac_nhan_mat_khau"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                android:text="123" />
 
             <Button
+                android:layout_marginTop="16dp"
                 android:id="@+id/btnDangKi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:background="#2196F3"
-                android:onClick="xuLiCapNhap"
-                android:text="Cập Nhật"
-                android:textColor="#F5F7EDED" />
+                android:onClick="DangKy"
+                android:text="@string/dang_ky"
+                android:textColor="#EDF1EAEA" />
+
         </LinearLayout>
-
-
     </LinearLayout>
-
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline30"
+        android:id="@+id/guideline8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="16dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline31"
+        android:id="@+id/guideline11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline32"
+        android:id="@+id/guideline12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="16dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline33"
+        android:id="@+id/guideline13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_end="16dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
