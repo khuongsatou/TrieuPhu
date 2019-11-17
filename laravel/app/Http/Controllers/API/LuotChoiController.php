@@ -8,41 +8,15 @@ use App\LuotChoi;
 class LuotChoiController extends Controller
 {
 
-
-
-
-
     public function store(Request $request){
-        $checkUser = LuotChoi::where('ten_dang_nhap',$request->ten_dang_nhap)->orWhere('email',$request->email)->first();
-        if($checkUser != null){
-            return response()->json(['success'=>false]);
-         }
-        $nguoiChoi = new NguoiChoi();
-        $nguoiChoi->ten_dang_nhap = $request->ten_dang_nhap;
-        $nguoiChoi->mat_khau = $request->mat_khau;
-        $nguoiChoi->email = $request->email;
-        $nguoiChoi->hinh_dai_dien = "";
-        $nguoiChoi->diem_cao_nhat = 0;
-        $nguoiChoi->credit = 0;
-        $nguoiChoi->save();
+        $luotChoi = new LuotChoi();
+        $luotChoi->nguoi_choi_id = $request->nguoi_choi_id;
+        $luotChoi->so_cau = $request->so_cau;
+        $luotChoi->diem = $request->diem;
+        $luotChoi->ngay_gio = $request->ngay_gio;
+        $luotChoi->save();
         return response()->json(['success'=>true]);
     }
-
-    public function update(Request $request){
-        $nguoiChoi = NguoiChoi::where('id',$request->id)->first();
-        if($nguoiChoi == null){
-            return response()->json(['success'=>false]);
-         }
-        //$nguoiChoi =NguoiChoi::find($request->id);
-        $nguoiChoi->ten_dang_nhap = $request->ten_dang_nhap;
-        $nguoiChoi->mat_khau = $request->mat_khau;
-        $nguoiChoi->email = $request->email;
-        $nguoiChoi->hinh_dai_dien = "";
-        $nguoiChoi->save();
-        return response()->json(['success'=>true]);
-    }
-
-
 
 
 

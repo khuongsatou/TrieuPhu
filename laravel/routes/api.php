@@ -24,7 +24,6 @@ Route::prefix('nguoi_choi')->group(function(){
 Route::prefix('luot_choi')->group(function(){
     Route::post('tim','API\LuotChoiController@getLuotChoiById');
     Route::post('them','API\LuotChoiController@store');
-    Route::post('cap_nhat','API\LuotChoiController@update');
 });
 
 Route::prefix('goi_credit')->group(function(){
