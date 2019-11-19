@@ -39,6 +39,8 @@ import static com.nvk.doanailatrieuphu.Activity.MangHinhChinhActivity.KEY_LIMIT;
 import static com.nvk.doanailatrieuphu.Activity.MangHinhChinhActivity.KEY_PAGE;
 import static com.nvk.doanailatrieuphu.Controller.LichSuChoiController.COLUMN_NGUOI_CHOI_ID;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_DANGNHAP;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.LIMIT_KHOI_TAO;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.PAGE_KHOI_TAO;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.PAGE_SIZE;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_LUOT_CHOI;
@@ -115,8 +117,8 @@ public class LichSuCauHoiActivity extends AppCompatActivity {
     private void startVolley(Bundle data) {
         final Map<String,String> startMap = new HashMap<>();
         startMap.put(COLUMN_NGUOI_CHOI_ID,String.valueOf(this.id_nguoiChoi));
-        startMap.put(KEY_PAGE,String.valueOf(data == null ? 1 : data.getInt(KEY_PAGE)));
-        startMap.put(KEY_LIMIT,String.valueOf(data == null ? 3 : data.getInt(KEY_LIMIT)));
+        startMap.put(KEY_PAGE,String.valueOf(data == null ? PAGE_KHOI_TAO : data.getInt(KEY_PAGE)));
+        startMap.put(KEY_LIMIT,String.valueOf(data == null ? LIMIT_KHOI_TAO : data.getInt(KEY_LIMIT)));
         StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_LUOT_CHOI , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
