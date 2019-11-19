@@ -17,9 +17,12 @@ public class GlobalVariable {
     //Key dùng cho việc loadmore adapter
     public static final int TYPE_LOADING = 0;
     public static final int TYPE_ITEM =1 ;
-    public static final int PAGE_SIZE = 3;
+    //public static final int PAGE_SIZE = 25;
+    public static final int PAGE_SIZE = 10;
     public static final int PAGE_KHOI_TAO = 1;
-    public static final int LIMIT_KHOI_TAO = 3;
+    //public static final int LIMIT_KHOI_TAO = 25;
+    public static final int LIMIT_KHOI_TAO = 10;
+
 
     //key dùng thời gian cho 1 câu hỏi
     public static final int TOTAL_TIME_TIMER = 10000;
@@ -28,6 +31,7 @@ public class GlobalVariable {
 
     //key dùng credit cho 1 câu hỏi
     public static final int GIA_DAP_AN = 100;
+    public static final int GIA_LUOT_CHOI = 100;
     public static final int GIA_DIEM = 50;
 
 }

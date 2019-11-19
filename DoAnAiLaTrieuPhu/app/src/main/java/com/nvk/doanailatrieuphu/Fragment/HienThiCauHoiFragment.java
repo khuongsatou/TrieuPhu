@@ -1,6 +1,5 @@
 package com.nvk.doanailatrieuphu.Fragment;
 
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -76,8 +75,8 @@ public class HienThiCauHoiFragment extends Fragment {
     private HienThiCauHoiActivity hienThiCauHoiActivity;
     private boolean isChecked = false;
     private ImageButton[] ivbtnSP;
-    private TextView tvTimer;
-    private CountDownTimer countDownTimer;
+    public TextView tvTimer;
+
     private NguoiChoi nguoiChoi;
     private int giaCredit = 0;
 
@@ -105,10 +104,11 @@ public class HienThiCauHoiFragment extends Fragment {
     }
 
     private void radiation(View v) {
-
         tvCauHoiSo = v.findViewById(R.id.tvCauHoiSo);
         tvCauHoi = v.findViewById(R.id.tvCauHoi);
         tvTimer = v.findViewById(R.id.tvtimer);
+
+
         btnPhuongAn = new Button[4];
         btnPhuongAn[0] = v.findViewById(R.id.btnPhuongAnA);
         btnPhuongAn[1] = v.findViewById(R.id.btnPhuongAnB);
@@ -129,32 +129,28 @@ public class HienThiCauHoiFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         setDataText();
         chonCauHoi();
         loaiBatSuKienSupport();
-        chayTimerStart();
+        createCountDownTime();
+        startFirstCountDownTime();
     }
 
-    private void chayTimerStart() {
-        //lần đầu start
-        if (position == 0) {
-            chayTimer();
-        }
+    private void startFirstCountDownTime() {
+        hienThiCauHoiActivity.countDownTimer.get(0).start();
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        //set hiển thị cho các page ẩn
-        //page 2 -> n
-        if (isVisibleToUser && isResumed()) {
-            chayTimer();
+        //start 2-> n
+        if (isVisibleToUser && isResumed() && isVisible()){
+            hienThiCauHoiActivity.countDownTimer.get(position).start();
         }
     }
 
-    private void chayTimer() {
-        countDownTimer = new CountDownTimer(TOTAL_TIME_TIMER, COUNT_TIME) {
+    private void createCountDownTime() {
+        hienThiCauHoiActivity.countDownTimer.set(position,new CountDownTimer(TOTAL_TIME_TIMER, COUNT_TIME) {
             @Override
             public void onTick(long millisUntilFinished) {
                 String countTime = String.format("%02d:%02d",
@@ -164,19 +160,18 @@ public class HienThiCauHoiFragment extends Fragment {
                                 TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
                 tvTimer.setText(countTime + "s");
             }
-
             @Override
             public void onFinish() {
-                tvTimer.setText("0s");
-                hienThiCauHoiActivity.giamMangNguoiChoi();
-                chuyenPage();
+                hienThiCauHoiActivity.vpgShowCauHoi.setCurrentItem(hienThiCauHoiActivity.vpgShowCauHoi.getCurrentItem()+1);
             }
-        };
-        countDownTimer.start();
+        });
     }
 
+
+
+
     private void chuyenCauSauHaiGiay() {
-        CountDownTimer timer = new CountDownTimer(TIME_CHUYEN_CAU_HOI, COUNT_TIME) {
+        new CountDownTimer(TIME_CHUYEN_CAU_HOI, COUNT_TIME) {
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -186,37 +181,24 @@ public class HienThiCauHoiFragment extends Fragment {
             public void onFinish() {
                 chuyenPage();
             }
-        };
-        timer.start();
+        }.start();
+
     }
 
     public void chuyenPage() {
         if (hienThiCauHoiActivity.vpgShowCauHoi.getCurrentItem() == cauHois.size() - 1) {
-            ShowDialogKetThucLuotChoi();
-
+            //showDialogKetThucLuotChoi();
             Toast.makeText(hienThiCauHoiActivity, "HẾT CÂU", Toast.LENGTH_SHORT).show();
         } else {
-            //dừng timer đó lại rồi chuyển
-            if (countDownTimer != null) {
-                countDownTimer.cancel();
-            }
-            hienThiCauHoiActivity.vpgShowCauHoi.setCurrentItem(position + 1);
+            //tắt timer
+            hienThiCauHoiActivity.countDownTimer.get(position).cancel();
+            //bật chuyển 2s
+            hienThiCauHoiActivity.vpgShowCauHoi.setCurrentItem(hienThiCauHoiActivity.vpgShowCauHoi.getCurrentItem()+1);
         }
 
     }
 
-    private void ShowDialogKetThucLuotChoi() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(hienThiCauHoiActivity);
-        View view = LayoutInflater.from(hienThiCauHoiActivity).inflate(R.layout.custom_dialog_ket_thuc,null,false);
-        TextView tvDiem = view.findViewById(R.id.tvDiem);
-        Button btnThemLuot = view.findViewById(R.id.btnThemLuot);
-        Button btnKetThuc = view.findViewById(R.id.btnKetThuc);
-        tvDiem.setText(nguoiChoi.getDiemCaoNhat());
 
-        builder.setView(view);
-
-
-    }
 
     private void loaiBatSuKienSupport() {
         ivbtnSP[0].setOnClickListener(new View.OnClickListener() {
@@ -452,7 +434,7 @@ public class HienThiCauHoiFragment extends Fragment {
                 tangDiemLen();
             } else {
                 v.setBackgroundColor(Color.GREEN);
-                hienThiCauHoiActivity.giamMangNguoiChoi();
+                hienThiCauHoiActivity.giamMangNguoiChoi(position);
             }
 
             //Kiểm tra xem khi đã ấn vào câu sai thì hiện câu đúng lên

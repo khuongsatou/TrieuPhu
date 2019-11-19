@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -25,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.nvk.doanailatrieuphu.R;
+import com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis;
 
 
 import org.json.JSONException;
@@ -64,13 +66,18 @@ public class QuenMatKhauActivity extends AppCompatActivity {
         //kiểm tra tồn tại
         //Kiểm tra tài khoản có chưa
         if (tenDangNhap.isEmpty() || email.isEmpty()) {
-            Toast.makeText(this, "Không Được Để Trống", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.tb_chua_nhap_du), Toast.LENGTH_LONG).show();
             return;
         } else {
+
+            final ProgressDialog pgWait = NetWorkUtilitis.showProress(this);
+            pgWait.show();
             StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_MAT_KHAU, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
+                    pgWait.dismiss();
                     try {
+                        pgWait.dismiss();
                         JSONObject objLogin = new JSONObject(response);
                         boolean result = objLogin.getBoolean("success");
                         if (result) {
@@ -88,7 +95,8 @@ public class QuenMatKhauActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.d("AAAAA", error.getMessage());
+                    Toast.makeText(getApplicationContext(),getString(R.string.tb_server_offline),Toast.LENGTH_SHORT).show();
+                    pgWait.dismiss();
                 }
             }) {
                 @Override

@@ -185,6 +185,7 @@ public class BangXepHangActivity extends AppCompatActivity {
         rcvBangXepHang.setLayoutManager(new LinearLayoutManager(this));
         bangXepHangAdapter = new BangXepHangAdapter(this,nguoiChois);
         rcvBangXepHang.setAdapter(bangXepHangAdapter);
+
     }
 
     private void Radiation() {

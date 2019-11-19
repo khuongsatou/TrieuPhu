@@ -22,6 +22,9 @@
     <string name="tb_chua_nhap_du">Bạn Chưa nhập đủ thông tin</string>
     <string name="tb_ton_tai">Tên tài khoản đã tồn tại</string>
     <string name="tb_connect_internet">Không Có kết nối Internet</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tb_dung_tat_internet">Đừng tắt Internet chứ</string>
+    <string name="tb_xin_cho">Xin Chờ</string>
+    <string name="tb_doi">Đợi tí nhé ...</string>
+    <string name="tb_server_offline">Server Offline</string>
+
 </resources>

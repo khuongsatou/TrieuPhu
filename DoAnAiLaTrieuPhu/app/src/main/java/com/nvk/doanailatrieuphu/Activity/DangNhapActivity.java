@@ -2,6 +2,8 @@ package com.nvk.doanailatrieuphu.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -52,7 +54,7 @@ public class DangNhapActivity extends AppCompatActivity {
 
     private void CheckConnectAPI() {
         if (!NetWorkUtilitis.checkConnect(this)){
-            NetWorkUtilitis.showDialogNetWork("Không có kết nối internet",this).show();
+            NetWorkUtilitis.showDialogNetWork(getString(R.string.tb_connect_internet),this).show();
         }
     }
 
@@ -67,16 +69,18 @@ public class DangNhapActivity extends AppCompatActivity {
         final String matKhau = edtMatKhau.getText().toString();
         //Kiểm tra tài khoản có chưa
         if (tenDangNhap.isEmpty() || matKhau.isEmpty()){
-            Toast.makeText(this,"Không Được Để Trống",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,getString(R.string.tb_chua_nhap_du),Toast.LENGTH_LONG).show();
             return;
         }else{
-
+            final ProgressDialog pgwait = NetWorkUtilitis.showProress(this);
+            pgwait.show();
             StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_DANG_NHAP, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
+                        pgwait.dismiss();
                         if(!NetWorkUtilitis.checkConnect(getApplicationContext())){
-                            NetWorkUtilitis.showDialogNetWork("Đừng Tắt InterNet Chứ",DangNhapActivity.this).show();
+                            NetWorkUtilitis.showDialogNetWork(getString(R.string.tb_dung_tat_internet),DangNhapActivity.this).show();
                         }else {
                             JSONObject objLogin = new JSONObject(response);
                             boolean result = objLogin.getBoolean("success");
@@ -102,7 +106,7 @@ public class DangNhapActivity extends AppCompatActivity {
                                 intent.putExtra(KEY_DANGNHAP, (Serializable) nguoiChoi);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(getApplicationContext(), getString(R.string.tb_dang_nhap), Toast.LENGTH_LONG).show();
+                                NetWorkUtilitis.showToast(getString(R.string.tb_dang_nhap),getApplicationContext()).show();
                             }
                         }
                     } catch (JSONException e) {
@@ -112,7 +116,7 @@ public class DangNhapActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(),"Server Offline",Toast.LENGTH_SHORT).show();
+                    NetWorkUtilitis.showToast(getString(R.string.tb_server_offline),getApplicationContext()).show();
                 }
             }){
                 @Override

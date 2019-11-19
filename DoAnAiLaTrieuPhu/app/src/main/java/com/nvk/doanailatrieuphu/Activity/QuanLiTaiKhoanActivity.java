@@ -3,6 +3,7 @@ package com.nvk.doanailatrieuphu.Activity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
+import com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -135,10 +137,13 @@ public class QuanLiTaiKhoanActivity extends AppCompatActivity {
             if (!matKhau.equals(xacNhanMatKhau)){
                 Toast.makeText(getApplicationContext(),getString(R.string.tb_mat_khau_khong_giong_nhau),Toast.LENGTH_SHORT).show();
             }else{
+                final ProgressDialog pgwait = NetWorkUtilitis.showProress(this);
+                pgwait.show();
                 StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_NGUOI_CHOI_CAP_NHAT, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            pgwait.dismiss();
                             JSONObject objLogin = new JSONObject(response);
                             boolean result = objLogin.getBoolean("success");
                             if (result) {
@@ -156,6 +161,7 @@ public class QuanLiTaiKhoanActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("AAAAA", error.getMessage());
+                        pgwait.dismiss();
                     }
                 }) {
                     @Override

@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
+import android.os.CountDownTimer;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.Button;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,13 +36,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
 import static com.nvk.doanailatrieuphu.Controller.CauHoiController.COLUMN_LINH_VUC_ID;
+import static com.nvk.doanailatrieuphu.Controller.LuotChoiController.COLUMN_LUOT_CHOI_DIEM;
+import static com.nvk.doanailatrieuphu.Controller.LuotChoiController.COLUMN_LUOT_CHOI_NGAY_GIO;
+import static com.nvk.doanailatrieuphu.Controller.LuotChoiController.COLUMN_LUOT_CHOI_SO_CAU;
+import static com.nvk.doanailatrieuphu.Controller.LuotChoiController.COLUMN_NGUOI_CHOI_ID;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.GIA_LUOT_CHOI;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_DANGNHAP;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_LIMIT;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_LINHVUC;
@@ -48,6 +60,7 @@ import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.PAGE_KHOI_TAO;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.PAGE_SIZE;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_CAU_HOI;
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_LUOT_CHOI_THEM;
 
 public class HienThiCauHoiActivity extends AppCompatActivity {
     public ViewPager vpgShowCauHoi;
@@ -58,14 +71,13 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
     private NguoiChoi nguoiChoi;
     private LinhVuc linhVuc;
     private Intent intent;
-    private int diemSoMang = 0;
-
+    public int diemSoMang = 0;
     public int tongDiem = 0;
     public boolean[] ischeckedSP = {false, false,false, false};
 
-    private boolean checkLoading = false;
     private boolean checkLastPage = false;
     private int currentPage = 1;
+    public ArrayList<CountDownTimer> countDownTimer = new ArrayList<>();
 
 
     @Override
@@ -85,13 +97,8 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (position == (cauHois.size()-1)){
-                    if(!checkLoading && !checkLastPage){
-                        checkLoading = true;
+                    if(!checkLastPage){
                         currentPage++;
-
-                        //cauHois.add(null);
-                        //cauHoiAdapter.notifyDataSetChanged();
-
                         Bundle data = new Bundle();
                         data.putInt(KEY_PAGE, currentPage);
                         data.putInt(KEY_LIMIT,PAGE_SIZE);
@@ -120,25 +127,22 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
     }
 
     private void startVolley(Bundle data) {
+        final ProgressDialog pgwait = NetWorkUtilitis.showProress(this);
+        pgwait.show();
         final Map<String,String> map = new HashMap<>();
         map.put(KEY_PAGE,String.valueOf(data == null ? PAGE_KHOI_TAO : data.getInt(KEY_PAGE)));
         map.put(KEY_LIMIT,String.valueOf(data == null ? LIMIT_KHOI_TAO : data.getInt(KEY_LIMIT)));
         map.put(COLUMN_LINH_VUC_ID,String.valueOf(this.linhVuc.getId()));
-
         StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_CAU_HOI, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
+                    pgwait.dismiss();
                     JSONObject objCauHoi = new JSONObject(response);
                     int total = objCauHoi.getInt("total");
                     int totalPage = total / PAGE_SIZE;
                     if (totalPage % PAGE_SIZE !=0){
                         totalPage++;
-                    }
-                    //Nghiên cứu thêm , khi câu hỏi chưa loading thì hiên DialogProgress
-                    if (cauHois.size() >0){
-                        cauHois.remove(cauHois.size()-1);
-                        cauHoiAdapter.notifyDataSetChanged();
                     }
                     JSONArray arrCauHoi = objCauHoi.getJSONArray("cau_hoi");
                     //GET JSON
@@ -163,9 +167,9 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
                         cauHoi.setPhuongAnD(phuongAnD);
                         cauHoi.setDapAn(dapAn);
                         cauHois.add(cauHoi);
-
+                        countDownTimer.add(null);
                     }
-                    checkFinishLoading(totalPage);
+                    checkFinishLastPage(totalPage);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -176,6 +180,7 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(),"Server Offline",Toast.LENGTH_SHORT).show();
+                pgwait.dismiss();
             }
         }){
             @Override
@@ -188,8 +193,7 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-    private void checkFinishLoading(int totalPage) {
-        checkLoading=false;
+    private void checkFinishLastPage(int totalPage) {
         checkLastPage = (currentPage == totalPage);
     }
 
@@ -222,13 +226,100 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
         this.ivMang[4] = findViewById(R.id.ivMang5);
     }
 
-    public void giamMangNguoiChoi() {
+    public void giamMangNguoiChoi(int position) {
         if (this.diemSoMang == 5){
-            Toast.makeText(this,"Hết",Toast.LENGTH_SHORT).show();
+            showDialogKetThucLuotChoi(position);
+            vpgShowCauHoi.setEnabled(false);
         }else{
             ivMang[this.diemSoMang].setImageResource(R.drawable.ic_action_heart_low);
             this.diemSoMang++;
         }
+    }
+
+    private void showDialogKetThucLuotChoi(final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.custom_dialog_ket_thuc,null,false);
+        final TextView tvDiem = view.findViewById(R.id.tvDiem);
+        Button btnThemLuot = view.findViewById(R.id.btnThemLuot);
+        Button btnKetThuc = view.findViewById(R.id.btnKetThuc);
+        builder.setView(view);
+
+        tvDiem.setText("Điểm: "+this.tongDiem);
+
+        final AlertDialog dialog = builder.create();
+        btnThemLuot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int giaLuotChoi = nguoiChoi.getCredit() - GIA_LUOT_CHOI;
+                nguoiChoi.setCredit(giaLuotChoi);
+                dialog.dismiss();
+            }
+        });
+
+
+
+        btnKetThuc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Map<String,String> map = new HashMap<>();
+                map.put(COLUMN_NGUOI_CHOI_ID,String.valueOf(nguoiChoi.getId()));
+                map.put(COLUMN_LUOT_CHOI_SO_CAU,String.valueOf(position + 1));
+                map.put(COLUMN_LUOT_CHOI_DIEM,String.valueOf(tongDiem));
+
+
+                //format theo dạng cho trước
+                SimpleDateFormat sdf = new SimpleDateFormat("ss:mm:hh dd/MM/yyyy");
+                //lấy ngày giờ hiện tại
+                String dateFormat = sdf.format(Calendar.getInstance().getTime());
+                map.put(COLUMN_LUOT_CHOI_NGAY_GIO,dateFormat);
+
+                //Viết hàm insert Lượt Chơi
+                StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_LUOT_CHOI_THEM, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject objResult = new JSONObject(response);
+                            if (objResult.getBoolean("success")){
+                                Toast.makeText(HienThiCauHoiActivity.this,"Bạn Đã Kết Thúc Lượt Chơi",Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(HienThiCauHoiActivity.this,"Có lỗi Xảy ra",Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(HienThiCauHoiActivity.this,getString(R.string.tb_connect_internet),Toast.LENGTH_SHORT).show();
+                    }
+                }){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        return map;
+                    }
+                };
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                queue.add(request);
+                dialog.dismiss();
+                finish();
+
+            }
+        });
+        //nếu như chưa destroy activity thì hiện lên , nếu ko destroy rồi mà hiên lên nó sẽ lỗi
+        if (!isFinishing()){
+            dialog.show();
+        }else if(dialog.isShowing()){
+            dialog.dismiss();
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+
+        super.onPause();
     }
 
     @Override

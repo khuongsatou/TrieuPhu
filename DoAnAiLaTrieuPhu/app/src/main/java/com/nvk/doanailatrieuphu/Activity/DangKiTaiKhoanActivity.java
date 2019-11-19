@@ -2,6 +2,7 @@ package com.nvk.doanailatrieuphu.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.nvk.doanailatrieuphu.Controller.NguoiChoiController;
 import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
+import com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,13 +64,17 @@ public class DangKiTaiKhoanActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), getString(R.string.tb_chua_nhap_du),Toast.LENGTH_SHORT).show();
             return;
         } else {
+
             if (!matKhau.equals(xacNhanMatKhau)){
                 Toast.makeText(getApplicationContext(), getString(R.string.tb_mat_khau_khong_giong_nhau),Toast.LENGTH_SHORT).show();
             }else{
+                final ProgressDialog pgwait = NetWorkUtilitis.showProress(this);
+                pgwait.show();
                 StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_NGUOI_CHOI_THEM, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            pgwait.dismiss();
                             JSONObject objLogin = new JSONObject(response);
                             boolean result = objLogin.getBoolean("success");
                             if (result) {
@@ -85,6 +91,7 @@ public class DangKiTaiKhoanActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(),"Server Offline",Toast.LENGTH_SHORT).show();
+                        pgwait.dismiss();
                     }
                 }) {
                     @Override
