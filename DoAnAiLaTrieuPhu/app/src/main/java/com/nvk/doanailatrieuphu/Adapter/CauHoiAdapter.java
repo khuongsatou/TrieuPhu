@@ -1,24 +1,23 @@
 package com.nvk.doanailatrieuphu.Adapter;
 
 import android.content.Context;
-import android.os.CountDownTimer;
-import android.widget.ImageButton;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
-import com.nvk.doanailatrieuphu.Activity.HienThiCauHoiActivity;
 import com.nvk.doanailatrieuphu.Fragment.HienThiCauHoiFragment;
-import com.nvk.doanailatrieuphu.Fragment.LoadingCauHoiFragment;
 import com.nvk.doanailatrieuphu.Model.CauHoi;
 import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 
 import java.util.List;
 
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_CH_POSITION;
+
 public class CauHoiAdapter extends FragmentStatePagerAdapter{
+
     private List<CauHoi> cauHoiList;
     private Context context;
     private NguoiChoi nguoiChoi;
@@ -40,7 +39,11 @@ public class CauHoiAdapter extends FragmentStatePagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        return new HienThiCauHoiFragment(cauHoiList,position,context,this,nguoiChoi);
+        HienThiCauHoiFragment hienThiCauHoiFragment = new HienThiCauHoiFragment(cauHoiList,context,this,nguoiChoi);
+        Bundle saveStatus = new Bundle();
+        saveStatus.putInt(KEY_CH_POSITION,position);
+        hienThiCauHoiFragment.setArguments(saveStatus);
+        return hienThiCauHoiFragment;
     }
 
 

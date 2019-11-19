@@ -43,6 +43,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 
 import static com.nvk.doanailatrieuphu.Controller.CauHoiController.COLUMN_LINH_VUC_ID;
@@ -50,7 +51,9 @@ import static com.nvk.doanailatrieuphu.Controller.LuotChoiController.COLUMN_LUOT
 import static com.nvk.doanailatrieuphu.Controller.LuotChoiController.COLUMN_LUOT_CHOI_NGAY_GIO;
 import static com.nvk.doanailatrieuphu.Controller.LuotChoiController.COLUMN_LUOT_CHOI_SO_CAU;
 import static com.nvk.doanailatrieuphu.Controller.LuotChoiController.COLUMN_NGUOI_CHOI_ID;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.COUNT_TIME;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.GIA_LUOT_CHOI;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_CH_POSITION;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_DANGNHAP;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_LIMIT;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_LINHVUC;
@@ -58,6 +61,7 @@ import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_PAGE;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.LIMIT_KHOI_TAO;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.PAGE_KHOI_TAO;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.PAGE_SIZE;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.TOTAL_TIME_TIMER;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_CAU_HOI;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.URI_LUOT_CHOI_THEM;
@@ -74,10 +78,11 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
     public int diemSoMang = 0;
     public int tongDiem = 0;
     public boolean[] ischeckedSP = {false, false,false, false};
-
+    public boolean checkCountTimerLoading =false;
     private boolean checkLastPage = false;
     private int currentPage = 1;
     public ArrayList<CountDownTimer> countDownTimer = new ArrayList<>();
+
 
 
     @Override
@@ -91,6 +96,7 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
         loadData(null);
         checkSurf();
     }
+
 
     private void checkSurf() {
         vpgShowCauHoi.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -127,6 +133,7 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
     }
 
     private void startVolley(Bundle data) {
+
         final ProgressDialog pgwait = NetWorkUtilitis.showProress(this);
         pgwait.show();
         final Map<String,String> map = new HashMap<>();
@@ -137,6 +144,7 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
+                    checkLoadingCount();
                     pgwait.dismiss();
                     JSONObject objCauHoi = new JSONObject(response);
                     int total = objCauHoi.getInt("total");
@@ -193,8 +201,13 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
         queue.add(request);
     }
 
+    private void checkLoadingCount() {
+        checkCountTimerLoading = true;
+    }
+
     private void checkFinishLastPage(int totalPage) {
         checkLastPage = (currentPage == totalPage);
+
     }
 
     private void createAdapter() {

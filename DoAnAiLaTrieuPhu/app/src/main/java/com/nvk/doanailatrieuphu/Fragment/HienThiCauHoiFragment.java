@@ -47,14 +47,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PropertyPermission;
 import java.util.concurrent.TimeUnit;
 
 
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.COUNT_TIME;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.GIA_DAP_AN;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.GIA_DIEM;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_CH_POSITION;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_CREDIT;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_ID;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_LIMIT;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.LIMIT_KHOI_TAO;
+import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.PAGE_SIZE;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.TIME_CHUYEN_CAU_HOI;
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.TOTAL_TIME_TIMER;
 import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
@@ -68,7 +73,6 @@ public class HienThiCauHoiFragment extends Fragment {
     //nó sẽ bị reset khi cập nhật adapter
     private List<CauHoi> cauHois;
     private CauHoi cauHoi;
-    private int position;
     private CauHoiAdapter adapter;
     private TextView tvCauHoiSo, tvCauHoi;
     private Button[] btnPhuongAn;
@@ -77,15 +81,17 @@ public class HienThiCauHoiFragment extends Fragment {
     private ImageButton[] ivbtnSP;
     public TextView tvTimer;
 
+    //refresh lại sao mỗi lần chuyển
+    private String saveTime = null;
+
     private NguoiChoi nguoiChoi;
     private int giaCredit = 0;
 
     public HienThiCauHoiFragment() {
     }
 
-    public HienThiCauHoiFragment(List<CauHoi> cauHois, int position, Context context, CauHoiAdapter adapter, NguoiChoi nguoiChoi) {
+    public HienThiCauHoiFragment(List<CauHoi> cauHois, Context context, CauHoiAdapter adapter, NguoiChoi nguoiChoi) {
         this.cauHois = cauHois;
-        this.position = position;
         this.adapter = adapter;
         this.hienThiCauHoiActivity = (HienThiCauHoiActivity) context;
         this.nguoiChoi = nguoiChoi;
@@ -106,6 +112,7 @@ public class HienThiCauHoiFragment extends Fragment {
     private void radiation(View v) {
         tvCauHoiSo = v.findViewById(R.id.tvCauHoiSo);
         tvCauHoi = v.findViewById(R.id.tvCauHoi);
+
         tvTimer = v.findViewById(R.id.tvtimer);
 
 
@@ -129,28 +136,56 @@ public class HienThiCauHoiFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        createCountDownTime();
+        startFirstCountDownTime();
         setDataText();
         chonCauHoi();
         loaiBatSuKienSupport();
-        createCountDownTime();
-        startFirstCountDownTime();
+
+
     }
 
     private void startFirstCountDownTime() {
-        hienThiCauHoiActivity.countDownTimer.get(0).start();
+        //Kiểm tra lần đầu start count lên
+        //nếu là vị trí đầu tiên thì start thằng 0 lên , Lần 0 OK
+        if (getArguments().getInt(KEY_CH_POSITION) == 0){
+            hienThiCauHoiActivity.countDownTimer.get(0).start();
+            //xử lí lần đầu
+            hienThiCauHoiActivity.checkCountTimerLoading = false;
+        }
+
+        //set lại đã xong lần đầu
+
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        //start 2-> n
+        //start 2-> n ,
+        // isVisibleToUser : false , false , true (Khi xong)
+        // isResumed: true (Đã Hoạt động)
+        // isVisible: đã hiển thị
+        // checkCountTimerLoading : chưa được notification update
+        // Thì chạy
         if (isVisibleToUser && isResumed() && isVisible()){
-            hienThiCauHoiActivity.countDownTimer.get(position).start();
+            //lần 2 ->n kiểm tra đã loading hay chưa nếu chưa thì start counttimer lên
+            //Limit Khởi tạo 4 fragemnt , bắt đầu từ 0
+            //1 OK , 2 OK , 3 OK , 4 OK , Loadmore lần 5 ko vào đây
+            if (!hienThiCauHoiActivity.checkCountTimerLoading){
+                //trước khi load sẽ ko vô
+                if (getArguments().getInt(KEY_CH_POSITION) != cauHois.size() -1){
+                    hienThiCauHoiActivity.countDownTimer.get(getArguments().getInt(KEY_CH_POSITION)).start();
+                }else{
+                    //không được chạy
+                }
+            }
+
         }
     }
 
     private void createCountDownTime() {
-        hienThiCauHoiActivity.countDownTimer.set(position,new CountDownTimer(TOTAL_TIME_TIMER, COUNT_TIME) {
+        //tạo được arr 0 , 1
+        hienThiCauHoiActivity.countDownTimer.set(getArguments().getInt(KEY_CH_POSITION),new CountDownTimer(TOTAL_TIME_TIMER, COUNT_TIME) {
             @Override
             public void onTick(long millisUntilFinished) {
                 String countTime = String.format("%02d:%02d",
@@ -158,17 +193,24 @@ public class HienThiCauHoiFragment extends Fragment {
                         TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
                                 TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
-                tvTimer.setText(countTime + "s");
+                setTextTimer(countTime);
             }
             @Override
             public void onFinish() {
+                //tvTimer.setText(saveTime);
                 hienThiCauHoiActivity.vpgShowCauHoi.setCurrentItem(hienThiCauHoiActivity.vpgShowCauHoi.getCurrentItem()+1);
             }
         });
     }
 
-
-
+    private void setTextTimer(String countTime) {
+        //chỉ gán 1 lần để biết nó đã count
+//        if (this.saveTime == null){
+//            this.saveTime = countTime;
+//        }
+        //nếu nó đã loading
+        this.tvTimer.setText(countTime + "s");
+    }
 
     private void chuyenCauSauHaiGiay() {
         new CountDownTimer(TIME_CHUYEN_CAU_HOI, COUNT_TIME) {
@@ -191,14 +233,12 @@ public class HienThiCauHoiFragment extends Fragment {
             Toast.makeText(hienThiCauHoiActivity, "HẾT CÂU", Toast.LENGTH_SHORT).show();
         } else {
             //tắt timer
-            hienThiCauHoiActivity.countDownTimer.get(position).cancel();
+            hienThiCauHoiActivity.countDownTimer.get(getArguments().getInt(KEY_CH_POSITION)).cancel();
             //bật chuyển 2s
             hienThiCauHoiActivity.vpgShowCauHoi.setCurrentItem(hienThiCauHoiActivity.vpgShowCauHoi.getCurrentItem()+1);
         }
 
     }
-
-
 
     private void loaiBatSuKienSupport() {
         ivbtnSP[0].setOnClickListener(new View.OnClickListener() {
@@ -434,7 +474,7 @@ public class HienThiCauHoiFragment extends Fragment {
                 tangDiemLen();
             } else {
                 v.setBackgroundColor(Color.GREEN);
-                hienThiCauHoiActivity.giamMangNguoiChoi(position);
+                hienThiCauHoiActivity.giamMangNguoiChoi(getArguments().getInt(KEY_CH_POSITION));
             }
 
             //Kiểm tra xem khi đã ấn vào câu sai thì hiện câu đúng lên
@@ -458,8 +498,18 @@ public class HienThiCauHoiFragment extends Fragment {
 
     private void setDataText() {
         //hiện khi start view
-        this.cauHoi = getItem(position);
-        tvCauHoiSo.setText((position + 1) + "");
+        this.cauHoi = getItem(getArguments().getInt(KEY_CH_POSITION));
+        tvCauHoiSo.setText((getArguments().getInt(KEY_CH_POSITION)) + "");
+
+
+        //nếu nó bị notification update thì true
+        if (hienThiCauHoiActivity.checkCountTimerLoading){
+            hienThiCauHoiActivity.countDownTimer.get(getArguments().getInt(KEY_CH_POSITION,-1)).start();
+            hienThiCauHoiActivity.checkCountTimerLoading = false;
+        }
+
+        //khởi tạo
+        //tvTimer.setText(saveTime);
         tvCauHoi.setText(cauHoi.getNoiDung());
         btnPhuongAn[0].setText(cauHoi.getPhuongAnA());
         btnPhuongAn[1].setText(cauHoi.getPhuongAnB());

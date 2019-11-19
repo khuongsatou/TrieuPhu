@@ -14,7 +14,7 @@
             android:id="@+id/ivbtnDoiCauHoi"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5sp"
+            android:layout_margin="5dp"
             android:background="#8F8686"
             android:src="@drawable/ic_action_restart2" />
 
@@ -22,7 +22,7 @@
             android:id="@+id/ivbtnNamMoi"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5sp"
+            android:layout_margin="5dp"
             android:background="#F3CF6B22"
             android:src="@drawable/ic_action_fifty" />
 
@@ -30,7 +30,7 @@
             android:id="@+id/ivbtnTroGiupKhangGia"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5sp"
+            android:layout_margin="5dp"
             android:background="#F3CF6B22"
             android:src="@drawable/ic_action_people" />
 
@@ -38,7 +38,7 @@
             android:id="@+id/ivbtnGioNguoiThan"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5sp"
+            android:layout_margin="5dp"
             android:background="#F3CF6B22"
             android:src="@drawable/ic_action_phone" />
 
@@ -46,7 +46,7 @@
             android:id="@+id/ivbtnMuaCredit"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5sp"
+            android:layout_margin="5dp"
             android:background="#F3CF6B22"
             android:src="@drawable/ic_action_diamon" />
     </LinearLayout>

@@ -30,6 +30,7 @@ public class GlobalVariable {
     public static final int TOTAL_TIME_TIMER = 10000;
     public static final int TIME_CHUYEN_CAU_HOI = 2000;
     public static final int COUNT_TIME = 1000;
+    public static final String KEY_CH_POSITION = "position";
 
     //key dùng credit cho 1 câu hỏi
     public static final int GIA_DAP_AN = 100;

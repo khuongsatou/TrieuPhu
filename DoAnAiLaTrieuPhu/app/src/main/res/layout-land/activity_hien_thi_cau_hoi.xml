@@ -6,12 +6,12 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/vHeader"
-        layout="@layout/header_hien_thi_cau_hoi"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/vElevatorCountTimer"
+        layout="@layout/elevator_count_timer"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="85dp" />
+
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -27,7 +27,9 @@
         <com.nvk.doanailatrieuphu.Utilities.CustomViewPager
             android:id="@+id/vpgShowCauHoi"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+
+        </com.nvk.doanailatrieuphu.Utilities.CustomViewPager>
 
     </LinearLayout>
 
