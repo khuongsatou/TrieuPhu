@@ -81,4 +81,31 @@ class NguoiChoiController extends Controller
         ];
         return response()->json($result);
     }
+
+    public function upload(Request $request)
+    {
+        $target_dir = "upload/images";
+        if (!file_exists($target_dir)){
+            mkdir($target_dir,0777,true);
+        }
+        $result = null;
+        $tail =rand()."_".time().".jpeg";
+        $target_dir = $target_dir."/".$tail;
+        if(file_put_contents($target_dir,base64_decode($request->image))){
+            $nguoiChoi = NguoiChoi::find($request->id);
+            $nguoiChoi->hinh_dai_dien=$tail;
+            $nguoiChoi->save();
+            $result = [
+                "success"=>true,
+                "Messeger" => "Hình đã được upload",
+                "hinh_dai_dien"=>$tail
+            ];
+        }else{
+            $result = [
+                "success"=>false,
+                "Messeger" => "Hình Ngu"
+            ];
+        }
+        return $result;
+    }
 }

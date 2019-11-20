@@ -11,7 +11,7 @@ class LinhVucController extends Controller
     {
         $page = $request->page;
         $limit = $request->limit;
-        $linhVuc = LinhVuc::orderBy('ten_linh_vuc',"DESC")->skip(($page-1)*$limit)->take($limit)->get();
+        $linhVuc = LinhVuc::skip(($page-1)*$limit)->take($limit)->get();
         $result = [
             'success' => true,
             'total' => LinhVuc::count(),

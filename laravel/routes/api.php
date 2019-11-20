@@ -19,6 +19,7 @@ Route::prefix('nguoi_choi')->group(function(){
     Route::post('them','API\NguoiChoiController@store');
     Route::post('cap_nhat','API\NguoiChoiController@update');
     Route::post('cap_nhat_credit','API\NguoiChoiController@updateCredit');
+    Route::post('upload','API\NguoiChoiController@upload');
 });
 
 Route::prefix('luot_choi')->group(function(){

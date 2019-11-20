@@ -7,23 +7,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nvk.doanailatrieuphu.Model.NguoiChoi;
 import com.nvk.doanailatrieuphu.R;
+import com.squareup.picasso.Picasso;
 
 import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_DANGNHAP;
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE;
+import static com.nvk.doanailatrieuphu.Utilities.NetWorkUtilitis.BASE_IMAGE;
 
 
 public class MangHinhChinhActivity extends AppCompatActivity {
     public static final String KEY_PAGE = "page";
     public static final String KEY_LIMIT = "limit";
 
-
     public static final int KEY_REQUESTCODE = 123;
     private TextView tvTenDangNhap,tvCredit;
     private NguoiChoi nguoiChoi;
     private Intent intent;
+    private ImageView ivHinhDaiDien;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,10 @@ public class MangHinhChinhActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode ==KEY_REQUESTCODE && resultCode == RESULT_OK && data != null){
             this.nguoiChoi = (NguoiChoi) data.getSerializableExtra(KEY_DANGNHAP);
+            Picasso.get()
+                    .load(BASE_IMAGE+nguoiChoi.getHinhDaiDien())
+                    .error(R.drawable.logo_android)
+                    .into(ivHinhDaiDien);
             tvCredit.setText(this.nguoiChoi.getCredit()+"");
         }
     }
@@ -47,6 +55,11 @@ public class MangHinhChinhActivity extends AppCompatActivity {
         this.nguoiChoi = (NguoiChoi) getIntent().getSerializableExtra(KEY_DANGNHAP);
         tvTenDangNhap.setText(nguoiChoi.getTenDangNhap());
         tvCredit.setText(nguoiChoi.getCredit()+"");
+        Picasso.get()
+                .load(BASE_IMAGE+nguoiChoi.getHinhDaiDien())
+                .error(R.drawable.logo_android)
+                .into(ivHinhDaiDien);
+
     }
 
 
@@ -54,12 +67,13 @@ public class MangHinhChinhActivity extends AppCompatActivity {
     private void Radiation() {
         tvTenDangNhap = findViewById(R.id.tvTenDangNhap);
         tvCredit = findViewById(R.id.tvCredit);
+        ivHinhDaiDien = findViewById(R.id.ivHinhDaiDien);
     }
 
     public void XuLiQuanLiTaiKhoan(View view) {
         intent = new Intent(this,QuanLiTaiKhoanActivity.class);
         intent.putExtra(KEY_DANGNHAP,this.nguoiChoi);
-        startActivity(intent);
+        startActivityForResult(intent,KEY_REQUESTCODE);
     }
 
     public void XuLiTroChoiMoi(View view) {

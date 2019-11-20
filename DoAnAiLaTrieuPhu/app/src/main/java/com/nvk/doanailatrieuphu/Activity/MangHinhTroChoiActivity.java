@@ -115,13 +115,12 @@ public class MangHinhTroChoiActivity extends AppCompatActivity {
     }
 
     private void startVolley(Bundle data) {
-        final Map<String,String> map =new HashMap<>();
-        map.put(KEY_PAGE,String.valueOf(data == null ? PAGE_KHOI_TAO : data.getInt(KEY_PAGE)));
-        map.put(KEY_LIMIT,String.valueOf(data == null ? LIMIT_KHOI_TAO : data.getInt(KEY_LIMIT)));
+        final Map<String,String> startMap =new HashMap<>();
+        startMap.put(MangHinhChinhActivity.KEY_PAGE,String.valueOf(data == null ? PAGE_KHOI_TAO : data.getInt(MangHinhChinhActivity.KEY_PAGE)));
+        startMap.put(MangHinhChinhActivity.KEY_LIMIT,String.valueOf(data == null ? LIMIT_KHOI_TAO : data.getInt(MangHinhChinhActivity.KEY_LIMIT)));
         StringRequest request = new StringRequest(Request.Method.POST,BASE + URI_LINH_VUC, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("AAAAA",response);
                 try {
                     JSONObject objLinhVuc = new JSONObject(response);
                     int total = objLinhVuc.getInt("total");
@@ -144,11 +143,12 @@ public class MangHinhTroChoiActivity extends AppCompatActivity {
                         linhVuc.setTenLinhVuc(tenLinhVuc);
                         linhVucs.add(linhVuc);
                     }
+                    adapter.notifyDataSetChanged();
                     checkFinishLoading(totalPage);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                adapter.notifyDataSetChanged();
+
 
 
             }
@@ -160,7 +160,7 @@ public class MangHinhTroChoiActivity extends AppCompatActivity {
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                return map;
+                return startMap;
             }
         };
 

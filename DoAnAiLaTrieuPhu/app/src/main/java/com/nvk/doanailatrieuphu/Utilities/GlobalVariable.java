@@ -20,10 +20,10 @@ public class GlobalVariable {
     //public static final int PAGE_SIZE = 25;
 
     //Page Size < Limit khởi tạo , không nó sẽ không vào onScrolled
-    public static final int PAGE_SIZE = 2;
+    public static final int PAGE_SIZE = 5;
     public static final int PAGE_KHOI_TAO = 1;
     //public static final int LIMIT_KHOI_TAO = 25;
-    public static final int LIMIT_KHOI_TAO = 3;
+    public static final int LIMIT_KHOI_TAO = 6;
 
 
     //key dùng thời gian cho 1 câu hỏi

@@ -176,7 +176,7 @@ public class HienThiCauHoiFragment extends Fragment {
                 if (getArguments().getInt(KEY_CH_POSITION) != cauHois.size() -1){
                     hienThiCauHoiActivity.countDownTimer.get(getArguments().getInt(KEY_CH_POSITION)).start();
                 }else{
-                    //không được chạy
+                    //không được chạy khi loading
                 }
             }
 
@@ -184,7 +184,7 @@ public class HienThiCauHoiFragment extends Fragment {
     }
 
     private void createCountDownTime() {
-        //tạo được arr 0 , 1
+        //tạo được arr 0 , 1 nếu loading 2 page
         hienThiCauHoiActivity.countDownTimer.set(getArguments().getInt(KEY_CH_POSITION),new CountDownTimer(TOTAL_TIME_TIMER, COUNT_TIME) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -204,11 +204,6 @@ public class HienThiCauHoiFragment extends Fragment {
     }
 
     private void setTextTimer(String countTime) {
-        //chỉ gán 1 lần để biết nó đã count
-//        if (this.saveTime == null){
-//            this.saveTime = countTime;
-//        }
-        //nếu nó đã loading
         this.tvTimer.setText(countTime + "s");
     }
 
@@ -224,7 +219,6 @@ public class HienThiCauHoiFragment extends Fragment {
                 chuyenPage();
             }
         }.start();
-
     }
 
     public void chuyenPage() {

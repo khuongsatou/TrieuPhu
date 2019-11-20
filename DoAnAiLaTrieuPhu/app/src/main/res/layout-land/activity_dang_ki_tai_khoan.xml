@@ -42,7 +42,7 @@
                 android:layout_marginTop="16dp"
                 android:hint="@string/ten_dang_nhap"
                 android:inputType="textPersonName"
-                android:padding="16dp" />
+                android:padding="4dp" />
 
             <EditText
                 android:id="@+id/edtEmail"
@@ -51,7 +51,7 @@
                 android:layout_marginTop="16dp"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:padding="16dp"
+                android:padding="4dp"
                 android:text="yoshi1@gmail.com" />
 
             <EditText
@@ -61,7 +61,7 @@
                 android:layout_marginTop="16dp"
                 android:hint="@string/mat_khau"
                 android:inputType="textPassword"
-                android:padding="16dp"
+                android:padding="4dp"
                 android:text="123" />
 
             <EditText
@@ -71,7 +71,7 @@
                 android:layout_marginTop="16dp"
                 android:hint="@string/xac_nhan_mat_khau"
                 android:inputType="textPassword"
-                android:padding="16dp"
+                android:padding="4dp"
                 android:text="123" />
 
             <Button
