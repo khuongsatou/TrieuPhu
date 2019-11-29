@@ -158,11 +158,11 @@ public class QuanLiTaiKhoanActivity extends AppCompatActivity {
     }
 
     public void xuLiCapNhap(View view) {
-//        final int id = this.id_nguoiChoi;
-//        final String tenDangNhap = edtTenDangNhap.getText().toString().trim();
-//        final String email = edtEmail.getText().toString().trim();
-//        final String matKhau = edtMatKhau.getText().toString().trim();
-//        String xacNhanMatKhau = edtXacNhanMatKhau.getText().toString().trim();
+        final int id = this.id_nguoiChoi;
+        final String tenDangNhap = edtTenDangNhap.getText().toString().trim();
+        final String email = edtEmail.getText().toString().trim();
+        final String matKhau = edtMatKhau.getText().toString().trim();
+        String xacNhanMatKhau = edtXacNhanMatKhau.getText().toString().trim();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Uploading");
@@ -177,6 +177,7 @@ public class QuanLiTaiKhoanActivity extends AppCompatActivity {
                     JSONObject obj = new JSONObject(response);
                     if (obj.getBoolean("success")){
                         nguoiChoi.setHinhDaiDien(obj.getString("hinh_dai_dien"));
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -199,6 +200,8 @@ public class QuanLiTaiKhoanActivity extends AppCompatActivity {
                 String imageData = imageToString(bitmap);
                 params.put("id",String.valueOf(id_nguoiChoi));
                 params.put("image",imageData);
+
+
                 return params;
             }
         };

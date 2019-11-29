@@ -493,7 +493,7 @@ public class HienThiCauHoiFragment extends Fragment {
     private void setDataText() {
         //hiện khi start view
         this.cauHoi = getItem(getArguments().getInt(KEY_CH_POSITION));
-        tvCauHoiSo.setText((getArguments().getInt(KEY_CH_POSITION)) + "");
+        tvCauHoiSo.setText((getArguments().getInt(KEY_CH_POSITION)+1) + "");
 
 
         //nếu nó bị notification update thì true

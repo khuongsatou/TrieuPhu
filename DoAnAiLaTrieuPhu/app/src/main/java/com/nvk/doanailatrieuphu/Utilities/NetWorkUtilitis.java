@@ -39,13 +39,14 @@ import static com.nvk.doanailatrieuphu.Utilities.GlobalVariable.KEY_DANGNHAP;
 
 public class NetWorkUtilitis{
     //public static final String BASE = "http://localhost:8000/api/";//gốc
-    public static final String BASE = "http://192.168.43.137:8000/public/api/";//máy thật
-    public static final String BASE_IMAGE = "http://192.168.43.137:8000/public/upload/images/";//máy thật
+//    public static final String BASE = "http://192.168.43.137:8000/public/api/";//máy thật
+//    public static final String BASE_IMAGE = "http://192.168.43.137:8000/public/upload/images/";//máy thật
     //public static final String BASE = "http://10.0.3.2:8000/api/";//Genny
 
     //url
     //public static final String BASE = "http://192.168.1.14:8000/public/api/"; //asus
-    //public static final String BASE = "http://192.168.1.13:8000/public/api/"; //asus
+    public static final String BASE = "http://192.168.1.13:8000/public/api/"; //asus
+    public static final String BASE_IMAGE = "http://192.168.1.13:8000/public/upload/images/";//máy thật
     //public static final String BASE = "http://192.168.43.137:8000/public/api/"; //lenovo
 
     //URI Người chơi
