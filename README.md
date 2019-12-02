@@ -33,5 +33,5 @@
   3.2.2 Update version 2.5
       + API về app
       
-     <img src="https://github.com/khuongsatou/PageDocument/blob/master/Images/Anime/081a64cd2f6a0e44c32c241708eac85f.jpg" alt="081a64cd2f6a0e44c32c241708eac85f.jpg">
+    
 	  
