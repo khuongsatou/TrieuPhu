@@ -45,10 +45,15 @@ public class NetWorkUtilitis{
 
     //url
     //public static final String BASE = "http://192.168.1.14:8000/public/api/"; //asus
-    public static final String BASE = "http://192.168.1.13:8000/public/api/"; //asus
-    public static final String BASE_IMAGE = "http://192.168.1.13:8000/public/upload/images/";//máy thật
+//    public static final String BASE = "http://192.168.1.13:8000/public/api/"; //asus
+//    public static final String BASE_IMAGE = "http://192.168.1.13:8000/public/upload/images/";//máy thật
     //public static final String BASE = "http://192.168.43.137:8000/public/api/"; //lenovo
 
+//     public static final String BASE = "http://192.168.56.1:8000/public/api/"; //asus
+//     public static final String BASE_IMAGE = "http://192.168.56.1:8000/public/upload/images/";//máy thật
+
+    public static final String BASE = "http://khuongsatou.club/api/"; //web
+    public static final String BASE_IMAGE = "http://khuongsatou.club/upload/images/";//web
     //URI Người chơi
     public static final String URI_DANG_NHAP  = "nguoi_choi/dang_nhap";
     public static final String URI_NGUOI_CHOI_THEM ="nguoi_choi/them" ;

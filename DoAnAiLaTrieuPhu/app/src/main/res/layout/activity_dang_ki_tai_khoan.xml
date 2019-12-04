@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:text="yoshi1@gmail.com" />
+             />
 
         <EditText
             android:layout_marginTop="16dp"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/mat_khau"
             android:inputType="textPassword"
-            android:text="123" />
+             />
 
         <EditText
             android:layout_marginTop="16dp"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/xac_nhan_mat_khau"
             android:inputType="textPassword"
-            android:text="123" />
+           />
 
         <Button
             android:id="@+id/btnDangKi"

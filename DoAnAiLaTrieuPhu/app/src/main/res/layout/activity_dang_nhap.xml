@@ -33,7 +33,7 @@
             android:layout_weight="1"
             android:hint="@string/ten_dang_nhap"
             android:inputType="textPersonName"
-            android:text="admin"
+
             android:visibility="visible" />
 
         <EditText
@@ -44,7 +44,7 @@
             android:layout_weight="1"
             android:hint="@string/mat_khau"
             android:inputType="textPassword"
-            android:text="123" />
+            />
 
         <Button
             android:id="@+id/btnDangNhap"

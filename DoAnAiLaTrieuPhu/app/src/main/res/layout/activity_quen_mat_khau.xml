@@ -24,13 +24,13 @@
             app:srcCompat="@drawable/logo_user" />
 
         <EditText
-            android:padding="15dp"
+
             android:layout_marginTop="15dp"
             android:id="@+id/edtTenDangNhap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/ten_dang_nhap"
-            android:text="admin" />
+            />
 
         <EditText
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:text="yoshi240499@gmail.com" />
+            />
 
         <Button
             android:layout_marginTop="15dp"

@@ -169,7 +169,7 @@ public class QuanLiTaiKhoanActivity extends AppCompatActivity {
         progressDialog.setMessage("Please wait ....");
         progressDialog.show();
 
-        final StringRequest request = new StringRequest(Request.Method.POST, urlUpLoad, new Response.Listener<String>() {
+        final StringRequest request = new StringRequest(Request.Method.POST,  urlUpLoad, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressDialog.dismiss();
