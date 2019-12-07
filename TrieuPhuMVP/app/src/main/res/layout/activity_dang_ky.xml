@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.DangKyActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/include_hinh_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edtEmailDK"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/edtTenDangNhapDK"
+        app:layout_constraintStart_toStartOf="@+id/edtTenDangNhapDK"
+        app:layout_constraintTop_toBottomOf="@+id/edtTenDangNhapDK" />
+
+    <EditText
+        android:id="@+id/edtXacNhanMatKhauDK"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Xác nhận mật khẩu"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/edtMatKhauDK"
+        app:layout_constraintStart_toStartOf="@+id/edtMatKhauDK"
+        app:layout_constraintTop_toBottomOf="@+id/edtMatKhauDK" />
+
+    <EditText
+        android:id="@+id/edtMatKhauDK"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Mật Khẩu"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/edtEmailDK"
+        app:layout_constraintStart_toStartOf="@+id/edtEmailDK"
+        app:layout_constraintTop_toBottomOf="@+id/edtEmailDK" />
+
+    <EditText
+        android:id="@+id/edtTenDangNhapDK"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:hint="Tên Đăng Nhập"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/include2" />
+
+    <Button
+        android:id="@+id/btnDangKyDK"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Đăng Ký"
+        app:layout_constraintEnd_toEndOf="@+id/edtXacNhanMatKhauDK"
+        app:layout_constraintStart_toStartOf="@+id/edtXacNhanMatKhauDK"
+        app:layout_constraintTop_toBottomOf="@+id/edtXacNhanMatKhauDK" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.MangHinhChinhActivity">
+
+    <include
+        android:id="@+id/include3"
+        layout="@layout/include_hinh_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <Button
+        android:id="@+id/btnQuanLyTaiKhoan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Quản lý tài khoản"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/include4" />
+
+    <Button
+        android:id="@+id/btnLichSuChoi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Lịch sử chơi"
+        app:layout_constraintEnd_toEndOf="@+id/btnTroChoiMoi"
+        app:layout_constraintStart_toStartOf="@+id/btnTroChoiMoi"
+        app:layout_constraintTop_toBottomOf="@+id/btnTroChoiMoi" />
+
+    <Button
+        android:id="@+id/btnMuaCredit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Mua credit"
+        app:layout_constraintEnd_toEndOf="@+id/btnBangXepHang"
+        app:layout_constraintStart_toStartOf="@+id/btnBangXepHang"
+        app:layout_constraintTop_toBottomOf="@+id/btnBangXepHang" />
+
+    <Button
+        android:id="@+id/btnBangXepHang"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Bảng xếp hạng"
+        app:layout_constraintEnd_toEndOf="@+id/btnLichSuChoi"
+        app:layout_constraintStart_toStartOf="@+id/btnLichSuChoi"
+        app:layout_constraintTop_toBottomOf="@+id/btnLichSuChoi" />
+
+    <Button
+        android:id="@+id/btnTroChoiMoi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Trò chơi mới"
+        app:layout_constraintEnd_toEndOf="@+id/btnQuanLyTaiKhoan"
+        app:layout_constraintStart_toStartOf="@+id/btnQuanLyTaiKhoan"
+        app:layout_constraintTop_toBottomOf="@+id/btnQuanLyTaiKhoan" />
+
+    <include
+        android:id="@+id/include4"
+        layout="@layout/include_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/include3" />
+</androidx.constraintlayout.widget.ConstraintLayout>
