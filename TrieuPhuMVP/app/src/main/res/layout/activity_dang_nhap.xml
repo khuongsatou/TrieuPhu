@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.DangNhapActivity">
+    tools:context=".View.Activity.DangNhapActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -32,76 +32,50 @@
 
     <EditText
         android:id="@+id/edtTenDangNhap"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:paddingLeft="5dp"
-        android:background="@drawable/custom_edittext"
         android:text="admin"
         android:hint="Tên Đăng Nhập"
         android:inputType="textPersonName"
+        android:layout_width="0dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        style="@style/style_edittext_parent" />
 
     <EditText
         android:id="@+id/edtMatKhau"
+        style="@style/style_edittext_child"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:paddingLeft="5dp"
-        android:text="123"
-        android:hint="Mật Khẩu"
         android:background="@drawable/custom_edittext"
+        android:hint="Mật Khẩu"
         android:inputType="textPassword"
+        android:text="123"
         app:layout_constraintEnd_toEndOf="@+id/edtTenDangNhap"
         app:layout_constraintStart_toStartOf="@+id/edtTenDangNhap"
         app:layout_constraintTop_toBottomOf="@+id/edtTenDangNhap" />
 
     <Button
         android:id="@+id/btnDangNhap"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Đăng Nhập"
-        android:textColor="#F5FFFBFB"
-        android:textAllCaps="false"
         android:background="#0DA8EE"
-        android:fontFamily="sans-serif-black"
+        android:text="Đăng Nhập"
         app:layout_constraintEnd_toEndOf="@+id/edtMatKhau"
         app:layout_constraintStart_toStartOf="@+id/edtMatKhau"
-        app:layout_constraintTop_toBottomOf="@+id/edtMatKhau" />
+        app:layout_constraintTop_toBottomOf="@+id/edtMatKhau"
+        style="@style/style_button" />
 
     <Button
         android:id="@+id/btnQuenMatKhau"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="Quên Mật Khẩu"
-        android:textColor="#F5FFFBFB"
-        android:textAllCaps="false"
         android:background="#DFAD36F8"
-        android:fontFamily="sans-serif-black"
+        style="@style/style_button"
         app:layout_constraintEnd_toEndOf="@+id/btnDangNhap"
         app:layout_constraintStart_toStartOf="@+id/btnDangNhap"
         app:layout_constraintTop_toBottomOf="@+id/btnDangNhap" />
 
     <Button
         android:id="@+id/btnDangKy"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="Đăng Ký"
-        android:textColor="#F5FFFBFB"
-        android:textAllCaps="false"
         android:background="#F3F10A0A"
-        android:fontFamily="sans-serif-black"
+        style="@style/style_button"
         app:layout_constraintEnd_toEndOf="@+id/btnQuenMatKhau"
         app:layout_constraintStart_toStartOf="@+id/btnQuenMatKhau"
         app:layout_constraintTop_toBottomOf="@+id/btnQuenMatKhau" />

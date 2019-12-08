@@ -4,6 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.QuanLyTaiKhoanActivity">
+    tools:context=".View.Activity.QuanLyTaiKhoanActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <include
+        android:id="@+id/i_AvatarQLTK"
+        layout="@layout/include_avatar"
+        >
+    </include>
+
+    <Button
+        android:id="@+id/btnDoiHinhDaiDien"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:text="Đổi Hình Đại Diện"
+        android:textColor="#2196F3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/i_AvatarQLTK" />
+
+    <EditText
+        android:background="@drawable/custom_edittext"
+        android:id="@+id/edtEmailQLTK"
+        style="@style/style_edittext_child"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/edtTenDangNhapQLTK"
+        app:layout_constraintStart_toStartOf="@+id/edtTenDangNhapQLTK"
+        app:layout_constraintTop_toBottomOf="@+id/edtTenDangNhapQLTK" />
+
+    <EditText
+        android:background="@drawable/custom_edittext"
+        android:id="@+id/edtXacNhanMatKhauQLTK"
+        style="@style/style_edittext_child"
+        android:hint="Xác nhận mật khẩu"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/edtMatKhauQLTK"
+        app:layout_constraintStart_toStartOf="@+id/edtMatKhauQLTK"
+        app:layout_constraintTop_toBottomOf="@+id/edtMatKhauQLTK" />
+
+    <EditText
+        android:background="@drawable/custom_edittext"
+        android:id="@+id/edtMatKhauQLTK"
+        style="@style/style_edittext_child"
+        android:hint="Mật Khẩu"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/edtEmailQLTK"
+        app:layout_constraintStart_toStartOf="@+id/edtEmailQLTK"
+        app:layout_constraintTop_toBottomOf="@+id/edtEmailQLTK" />
+
+    <EditText
+        android:enabled="false"
+        android:background="@drawable/custom_edittext"
+        android:id="@+id/edtTenDangNhapQLTK"
+        style="@style/style_edittext_parent"
+        android:hint="Tên Đăng Nhập"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/btnDoiHinhDaiDien"
+        />
+
+    <Button
+        style="@style/style_button"
+        android:id="@+id/btnCapNhatQLTK"
+        android:text="Cập Nhật"
+        android:background="#2196F3"
+        app:layout_constraintEnd_toEndOf="@+id/edtXacNhanMatKhauQLTK"
+        app:layout_constraintStart_toStartOf="@+id/edtXacNhanMatKhauQLTK"
+        app:layout_constraintTop_toBottomOf="@+id/edtXacNhanMatKhauQLTK" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

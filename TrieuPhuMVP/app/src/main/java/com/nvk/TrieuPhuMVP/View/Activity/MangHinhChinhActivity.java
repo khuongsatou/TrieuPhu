@@ -1,4 +1,4 @@
-package com.nvk.TrieuPhuMVP.View;
+package com.nvk.TrieuPhuMVP.View.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,8 +9,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nvk.TrieuPhuMVP.Model.NguoiChoi;
 import com.nvk.TrieuPhuMVP.Presenter.MangHinhChinhPresenter;
 import com.nvk.TrieuPhuMVP.R;
+import com.nvk.TrieuPhuMVP.View.UI.MangHinhChinhView;
+import com.squareup.picasso.Picasso;
+
+import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.KEY_DANGNHAP;
+import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.BASE_IMAGE;
 
 public class MangHinhChinhActivity extends AppCompatActivity implements MangHinhChinhView, View.OnClickListener {
     private MangHinhChinhPresenter mangHinhChinhPresenter = new MangHinhChinhPresenter(this);
@@ -31,7 +37,19 @@ public class MangHinhChinhActivity extends AppCompatActivity implements MangHinh
 
         initView();
         initAction();
+        initLoad();
 
+    }
+
+    private void initLoad() {
+        mangHinhChinhPresenter.setNguoiChoi((NguoiChoi)getIntent().getSerializableExtra(KEY_DANGNHAP));
+        NguoiChoi nguoiChoi = mangHinhChinhPresenter.getNguoiChoi();
+        tvTenDangNhap.setText(nguoiChoi.getTen_dang_nhap());
+        tvCredit.setText(nguoiChoi.getCredit()+"");
+        Picasso.get()
+                .load(BASE_IMAGE+nguoiChoi.getHinh_dai_dien())
+                .error(R.drawable.logo_android)
+                .into(ivHinhDaiDien);
     }
 
     private void initAction() {
@@ -60,19 +78,29 @@ public class MangHinhChinhActivity extends AppCompatActivity implements MangHinh
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnQuanLyTaiKhoan:
-                
+                intent = new Intent(this,QuanLyTaiKhoanActivity.class);
+                mangHinhChinhPresenter.navigate(intent);
+                startActivityForResult(intent,KEY_REQUESTCODE);
                 break;
             case R.id.btnTroChoiMoi:
-
+                intent = new Intent(this,MangHinhTroChoiActivity.class);
+                mangHinhChinhPresenter.navigate(intent);
+                startActivityForResult(intent,KEY_REQUESTCODE);
                 break;
             case R.id.btnLichSuChoi:
-
+                intent = new Intent(this,LichSuCauHoiActivity.class);
+                mangHinhChinhPresenter.navigate(intent);
+                startActivityForResult(intent,KEY_REQUESTCODE);
                 break;
             case R.id.btnBangXepHang:
-
+                intent = new Intent(this,BangXepHangActivity.class);
+                mangHinhChinhPresenter.navigate(intent);
+                startActivityForResult(intent,KEY_REQUESTCODE);
                 break;
             case R.id.btnMuaCredit:
-
+                intent = new Intent(this,MuaCreditActivity.class);
+                mangHinhChinhPresenter.navigate(intent);
+                startActivityForResult(intent,KEY_REQUESTCODE);
                 break;
         }
     }

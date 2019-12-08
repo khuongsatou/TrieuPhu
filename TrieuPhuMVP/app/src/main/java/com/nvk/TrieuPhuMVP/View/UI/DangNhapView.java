@@ -1,4 +1,4 @@
-package com.nvk.TrieuPhuMVP.View;
+package com.nvk.TrieuPhuMVP.View.UI;
 
 import android.app.ProgressDialog;
 

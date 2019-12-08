@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.DangKyActivity">
+    tools:context=".View.Activity.DangKyActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
@@ -30,11 +30,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:background="@drawable/custom_edittext"
         android:id="@+id/edtEmailDK"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
+        style="@style/style_edittext_child"
         android:hint="Email"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/edtTenDangNhapDK"
@@ -42,39 +40,29 @@
         app:layout_constraintTop_toBottomOf="@+id/edtTenDangNhapDK" />
 
     <EditText
+        android:background="@drawable/custom_edittext"
         android:id="@+id/edtXacNhanMatKhauDK"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
+        style="@style/style_edittext_child"
         android:hint="Xác nhận mật khẩu"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/edtMatKhauDK"
         app:layout_constraintStart_toStartOf="@+id/edtMatKhauDK"
         app:layout_constraintTop_toBottomOf="@+id/edtMatKhauDK" />
 
     <EditText
+        android:background="@drawable/custom_edittext"
         android:id="@+id/edtMatKhauDK"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
+        style="@style/style_edittext_child"
         android:hint="Mật Khẩu"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/edtEmailDK"
         app:layout_constraintStart_toStartOf="@+id/edtEmailDK"
         app:layout_constraintTop_toBottomOf="@+id/edtEmailDK" />
 
     <EditText
+        android:background="@drawable/custom_edittext"
         android:id="@+id/edtTenDangNhapDK"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
+        style="@style/style_edittext_parent"
         android:hint="Tên Đăng Nhập"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
@@ -82,11 +70,10 @@
         app:layout_constraintTop_toBottomOf="@+id/include2" />
 
     <Button
+        style="@style/style_button"
         android:id="@+id/btnDangKyDK"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="Đăng Ký"
+        android:background="#2196F3"
         app:layout_constraintEnd_toEndOf="@+id/edtXacNhanMatKhauDK"
         app:layout_constraintStart_toStartOf="@+id/edtXacNhanMatKhauDK"
         app:layout_constraintTop_toBottomOf="@+id/edtXacNhanMatKhauDK" />

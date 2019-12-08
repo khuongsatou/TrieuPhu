@@ -1,4 +1,4 @@
-package com.nvk.TrieuPhuMVP.View;
+package com.nvk.TrieuPhuMVP.View.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.nvk.TrieuPhuMVP.R;
 
-public class MuaCreditActivity extends AppCompatActivity {
+public class MuaCreditActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

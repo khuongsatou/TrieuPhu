@@ -1,4 +1,4 @@
-package com.nvk.TrieuPhuMVP.View;
+package com.nvk.TrieuPhuMVP.View.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley;
 import com.nvk.TrieuPhuMVP.Presenter.DangKyPresenter;
 import com.nvk.TrieuPhuMVP.R;
 import com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis;
+import com.nvk.TrieuPhuMVP.View.UI.DangKyView;
 
 public class DangKyActivity extends AppCompatActivity implements DangKyView, View.OnClickListener{
     private EditText edtTenDangNhapDK,edtMatKhauDK,edtEmailDK,edtXacNhanMatKhauDK;

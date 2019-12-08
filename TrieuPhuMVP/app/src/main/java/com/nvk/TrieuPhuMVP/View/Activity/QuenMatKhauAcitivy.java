@@ -1,10 +1,9 @@
-package com.nvk.TrieuPhuMVP.View;
+package com.nvk.TrieuPhuMVP.View.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +20,11 @@ import com.nvk.TrieuPhuMVP.R;
 import com.nvk.TrieuPhuMVP.Utilities.EmptyForm;
 import com.nvk.TrieuPhuMVP.Utilities.InternetBackground;
 import com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis;
-
-import org.w3c.dom.Text;
+import com.nvk.TrieuPhuMVP.View.UI.QuenMatKhauView;
 
 import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.checkConnect;
 
-public class QuenMatKhauAcitivy extends AppCompatActivity implements View.OnClickListener, EmptyForm, InternetBackground,QuenMatKhauView {
+public class QuenMatKhauAcitivy extends AppCompatActivity implements View.OnClickListener, EmptyForm, InternetBackground, QuenMatKhauView {
     private EditText edtTenDangNhapQMK,edtEmailQMK;
     private Button btnLayLaiMatKhau;
     private QuenMatKhauPresenter quenMatKhauView = new QuenMatKhauPresenter(this);

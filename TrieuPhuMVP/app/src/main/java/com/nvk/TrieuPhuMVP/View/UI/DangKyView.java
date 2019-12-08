@@ -1,16 +1,12 @@
-package com.nvk.TrieuPhuMVP.View;
+package com.nvk.TrieuPhuMVP.View.UI;
 
 import android.content.Intent;
 
+import com.nvk.TrieuPhuMVP.Utilities.CheckExistForm;
 import com.nvk.TrieuPhuMVP.Utilities.EmptyForm;
 import com.nvk.TrieuPhuMVP.Utilities.InternetBackground;
 
-public interface DangKyView extends EmptyForm, InternetBackground {
-    boolean existUserName(String username);
-    boolean existEmail(String email);
-    boolean checkRepass(String pass,String repass);
-    void setErrorRepass();
+public interface DangKyView extends EmptyForm, InternetBackground , CheckExistForm {
     void registerSuccess();
     void registerFail();
-
 }

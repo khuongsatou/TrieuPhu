@@ -1,34 +1,29 @@
 package com.nvk.TrieuPhuMVP.Presenter;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.nvk.TrieuPhuMVP.Model.NguoiChoi;
-import com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis;
-import com.nvk.TrieuPhuMVP.View.DangNhapView;
+import com.nvk.TrieuPhuMVP.View.UI.DangNhapView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.nvk.TrieuPhuMVP.Model.NguoiChoi.COLUMN_MAT_KHAU;
 import static com.nvk.TrieuPhuMVP.Model.NguoiChoi.COLUMN_TEN_DANG_NHAP;
-import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.KEY_DANGNHAP;
 import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.BASE;
 import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.URI_DANG_NHAP;
 
 public class DangNhapPresenter {
     private DangNhapView dangNhapView;
+
     public DangNhapPresenter(DangNhapView dangNhapView) {
         this.dangNhapView = dangNhapView;
     }
@@ -39,7 +34,7 @@ public class DangNhapPresenter {
         }
     }
 
-    public void login(final String tenDangNhap, final String matKhau){
+    public void handleLogin(final String tenDangNhap, final String matKhau){
         if (tenDangNhap.isEmpty()){
             dangNhapView.setErrorUsername();
         }else if(matKhau.isEmpty()){

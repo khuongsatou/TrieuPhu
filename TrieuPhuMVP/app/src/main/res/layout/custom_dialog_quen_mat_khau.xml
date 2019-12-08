@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tvDialog"
+        android:text="Hộp thoại"
+        android:textSize="30sp"
+        android:textColor="#F7F1F1"
+        android:background="#333"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
+        />
+    <TextView
+        android:layout_marginTop="16dp"
+        android:id="@+id/tvDialogMatKhau"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+
+        android:textSize="40sp" />
+
+    <Button
+        android:background="#F73F3F"
+        android:id="@+id/btnDialogDong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/style_button"
+        android:text="Close" />
 </LinearLayout>

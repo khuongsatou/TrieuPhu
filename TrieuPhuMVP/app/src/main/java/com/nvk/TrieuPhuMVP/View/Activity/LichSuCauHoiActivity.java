@@ -1,4 +1,4 @@
-package com.nvk.TrieuPhuMVP.View;
+package com.nvk.TrieuPhuMVP.View.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

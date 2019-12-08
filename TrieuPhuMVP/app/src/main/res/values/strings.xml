@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TrieuPhuMVP</string>
+
+    <string name="string_empty">Không được bỏ trống</string>
+    <string name="string_matched">Không Khớp với mật khẩu</string>
+    <string name="string_server_disconnect">Máy chủ không kết nối</string>
+    <string name="string_server_internet">Vui Lòng Kiểm tra Internet</string>
+    <string name="string_success">Thành công</string>
+    <string name="string_fail">Thất Bại</string>
 </resources>

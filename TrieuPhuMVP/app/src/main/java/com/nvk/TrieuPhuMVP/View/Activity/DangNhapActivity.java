@@ -1,4 +1,4 @@
-package com.nvk.TrieuPhuMVP.View;
+package com.nvk.TrieuPhuMVP.View.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,9 +16,8 @@ import com.android.volley.toolbox.Volley;
 import com.nvk.TrieuPhuMVP.Model.NguoiChoi;
 import com.nvk.TrieuPhuMVP.Presenter.DangNhapPresenter;
 import com.nvk.TrieuPhuMVP.R;
-import com.nvk.TrieuPhuMVP.Utilities.EmptyForm;
-import com.nvk.TrieuPhuMVP.Utilities.InternetBackground;
 import com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis;
+import com.nvk.TrieuPhuMVP.View.UI.DangNhapView;
 
 import java.io.Serializable;
 
@@ -81,6 +80,7 @@ public class DangNhapActivity extends AppCompatActivity  implements DangNhapView
 
     @Override
     public void loginSuccess() {
+
         Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
     }
 

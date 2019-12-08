@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.QuenMatKhauAcitivy">
+    tools:context=".View.Activity.QuenMatKhauAcitivy">
 
 
 
@@ -33,25 +33,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/edtLayLaiMatKhau"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:background="#2196F3"
+        android:id="@+id/btnLayLaiMatKhau"
+        style="@style/style_button"
         android:text="Lấy Lại Mật Khẩu"
         app:layout_constraintEnd_toEndOf="@+id/edtEmailQMK"
         app:layout_constraintStart_toStartOf="@+id/edtEmailQMK"
         app:layout_constraintTop_toBottomOf="@+id/edtEmailQMK" />
 
     <EditText
-        android:id="@+id/edtTenDangNhap"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
+        android:background="@drawable/custom_edittext"
+        android:id="@+id/edtTenDangNhapQMK"
+        style="@style/style_edittext_parent"
         android:hint="Tên Đăng Nhập"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -59,15 +52,13 @@
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
     <EditText
+        android:background="@drawable/custom_edittext"
         android:id="@+id/edtEmailQMK"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
+        style="@style/style_edittext_child"
         android:hint="Email"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/edtTenDangNhap"
-        app:layout_constraintStart_toStartOf="@+id/edtTenDangNhap"
-        app:layout_constraintTop_toBottomOf="@+id/edtTenDangNhap" />
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/edtTenDangNhapQMK"
+        app:layout_constraintStart_toStartOf="@+id/edtTenDangNhapQMK"
+        app:layout_constraintTop_toBottomOf="@+id/edtTenDangNhapQMK" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
