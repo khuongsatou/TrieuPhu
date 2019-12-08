@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.nvk.TrieuPhuMVP.R;
 
-public class MangHinhChinhActivity extends AppCompatActivity {
+public class BangXepHangActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mang_hinh_chinh);
+        setContentView(R.layout.activity_bang_xep_hang);
     }
 }

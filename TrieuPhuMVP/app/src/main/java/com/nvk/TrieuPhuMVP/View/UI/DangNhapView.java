@@ -1,0 +1,14 @@
+package com.nvk.TrieuPhuMVP.View;
+
+import android.app.ProgressDialog;
+
+import com.android.volley.toolbox.StringRequest;
+import com.nvk.TrieuPhuMVP.Model.NguoiChoi;
+import com.nvk.TrieuPhuMVP.Utilities.EmptyForm;
+import com.nvk.TrieuPhuMVP.Utilities.InternetBackground;
+
+public interface DangNhapView extends InternetBackground , EmptyForm {
+    void loginFail();
+    void loginSuccess();
+    void navigate(NguoiChoi nguoiChoi);
+}

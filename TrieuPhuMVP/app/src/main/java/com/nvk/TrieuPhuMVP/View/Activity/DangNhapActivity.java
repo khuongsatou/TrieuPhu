@@ -11,17 +11,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.nvk.TrieuPhuMVP.Model.NguoiChoi;
 import com.nvk.TrieuPhuMVP.Presenter.DangNhapPresenter;
 import com.nvk.TrieuPhuMVP.R;
+import com.nvk.TrieuPhuMVP.Utilities.EmptyForm;
+import com.nvk.TrieuPhuMVP.Utilities.InternetBackground;
 import com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis;
 
 import java.io.Serializable;
-import java.util.Map;
 
 import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.KEY_DANGNHAP;
 import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.checkConnect;
@@ -31,24 +30,26 @@ public class DangNhapActivity extends AppCompatActivity  implements DangNhapView
     private Button btnDangNhap, btnDangKy, btnQuenMatKhau;
     private DangNhapPresenter dangNhapPresenter = new DangNhapPresenter(this);
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_nhap);
 
 
-        innitView();
-        innitAction();
+        initView();
+        initAction();
 
     }
 
-    private void innitAction() {
+    private void initAction() {
         btnDangNhap.setOnClickListener(this);
         btnDangKy.setOnClickListener(this);
         btnQuenMatKhau.setOnClickListener(this);
     }
 
-    private void innitView() {
+    private void initView() {
         edtTenDangNhap = findViewById(R.id.edtTenDangNhap);
         edtMatKhau = findViewById(R.id.edtMatKhau);
         btnDangNhap = findViewById(R.id.btnDangNhap);
@@ -63,7 +64,7 @@ public class DangNhapActivity extends AppCompatActivity  implements DangNhapView
             case R.id.btnDangNhap:
                 String tenDangNhap = edtTenDangNhap.getText().toString().trim();
                 String matKhau = edtMatKhau.getText().toString().trim();
-                dangNhapPresenter.login(tenDangNhap, matKhau);
+                dangNhapPresenter.handleLogin(tenDangNhap, matKhau);
                 break;
             case R.id.btnDangKy:
                 startActivity(new Intent(this, DangKyActivity.class));
@@ -98,6 +99,16 @@ public class DangNhapActivity extends AppCompatActivity  implements DangNhapView
     @Override
     public void setErrorPassword() {
         edtMatKhau.setError("Vui lòng nhập mật khẩu");
+    }
+
+    @Override
+    public void setErrorEmail() {
+
+    }
+
+    @Override
+    public void clearForm() {
+
     }
 
     @Override
