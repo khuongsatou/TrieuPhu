@@ -27,7 +27,7 @@ import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.PAGE_KHOI_TAO;
 import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.PAGE_SIZE;
 import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.BASE;
 import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.URI_BANG_XEP_HANG;
-import static com.nvk.TrieuPhuMVP.View.Activity.MangHinhChinhActivity.KEY_LIMIT;
+import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.KEY_LIMIT;;
 
 public class BangXepHangPresenter {
     private BangXepHangView bangXepHangView;

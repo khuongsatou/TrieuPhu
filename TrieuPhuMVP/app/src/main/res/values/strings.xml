@@ -13,4 +13,7 @@
     <string name="string_mua_credit">Mua Credit</string>
     <string name="string_bang_xep_hang">Bảng Xếp Hạng</string>
     <string name="string_lich_su_choi">Lịch Sử Chơi</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

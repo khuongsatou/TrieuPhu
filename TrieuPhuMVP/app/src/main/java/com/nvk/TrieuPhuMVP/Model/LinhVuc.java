@@ -1,6 +1,8 @@
 package com.nvk.TrieuPhuMVP.Model;
 
-public class LinhVuc {
+import java.io.Serializable;
+
+public class LinhVuc implements Serializable {
     private int id;
     private String ten_linh_vuc;
     private boolean xoa;

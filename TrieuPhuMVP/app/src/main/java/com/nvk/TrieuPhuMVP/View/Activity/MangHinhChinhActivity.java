@@ -24,8 +24,6 @@ public class MangHinhChinhActivity extends AppCompatActivity implements MangHinh
     private MangHinhChinhPresenter mangHinhChinhPresenter = new MangHinhChinhPresenter(this);
     private Button btnQuanLyTaiKhoan,btnTroChoiMoi,btnLichSuChoi,btnBangXepHang,btnMuaCredit;
 
-    public static final String KEY_PAGE = "page";
-    public static final String KEY_LIMIT = "limit";
 
 
     public static final int KEY_REQUESTCODE = 123;

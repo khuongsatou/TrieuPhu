@@ -64,8 +64,8 @@ public class MuaCreditActivity extends AppCompatActivity implements MuaCreditVie
     private void initView() {
         rcvGoiCredit = findViewById(R.id.rcvGoiCredit);
         View view = findViewById(R.id.i_header_credit);
-        tvTenTaiKhoanHeader = view.findViewById(R.id.tvTenTaiKhoanHeader);
-        tvCreditHeader = view.findViewById(R.id.tvCreditHeader);
+        tvTenTaiKhoanHeader = view.findViewById(R.id.tvTenTaiKhoanHeader_1);
+        tvCreditHeader = view.findViewById(R.id.tvCreditHeader_1);
         tvTilte = view.findViewById(R.id.tvTitle);
     }
 

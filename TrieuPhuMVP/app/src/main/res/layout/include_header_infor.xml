@@ -35,7 +35,7 @@
         app:layout_constraintGuide_percent="0.66" />
 
     <TextView
-        android:id="@+id/tvTenTaiKhoanHeader"
+        android:id="@+id/tvTenTaiKhoanHeader_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_textview"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvCreditHeader"
+        android:id="@+id/tvCreditHeader_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_editext_credit"
@@ -57,7 +57,7 @@
         android:textColor="#FAF5F5"
         android:textStyle="bold"
 
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvTenTaiKhoanHeader"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvTenTaiKhoanHeader_2"
         app:layout_constraintEnd_toStartOf="@+id/guideline23"
         app:layout_constraintStart_toStartOf="@+id/guideline21" />
 
@@ -105,6 +105,6 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline15"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline14"
-        app:layout_constraintTop_toBottomOf="@+id/tvTenTaiKhoanHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTenTaiKhoanHeader_1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

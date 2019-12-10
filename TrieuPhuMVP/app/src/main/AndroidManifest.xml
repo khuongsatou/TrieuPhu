@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.Activity.LichSuChoiActivity"></activity>
+        <activity android:name=".View.Activity.HienThiCauHoiActivity"></activity>
+        <activity android:name=".View.Activity.LichSuChoiActivity" />
         <activity android:name=".View.Activity.MuaCreditActivity" />
         <activity android:name=".View.Activity.BangXepHangActivity" />
         <activity android:name=".View.Activity.MangHinhTroChoiActivity" />

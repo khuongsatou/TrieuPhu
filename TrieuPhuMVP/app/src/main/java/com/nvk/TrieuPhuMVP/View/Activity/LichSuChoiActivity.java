@@ -14,11 +14,9 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.nvk.TrieuPhuMVP.Adapter.BangXepHangAdapter;
 import com.nvk.TrieuPhuMVP.Adapter.LichSuChoiAdapter;
 import com.nvk.TrieuPhuMVP.Model.LuotChoi;
 import com.nvk.TrieuPhuMVP.Model.NguoiChoi;
-import com.nvk.TrieuPhuMVP.Presenter.BangXepHangPresenter;
 import com.nvk.TrieuPhuMVP.Presenter.LichSuChoiPresenter;
 import com.nvk.TrieuPhuMVP.R;
 import com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis;
@@ -81,8 +79,8 @@ public class LichSuChoiActivity extends AppCompatActivity implements LichSuChoiV
     private void initView() {
         rcvLichSuChoi = findViewById(R.id.rcvLichSuChoi);
         View view = findViewById(R.id.i_header_lich_su_choi);
-        tvTenTaiKhoanHeader = view.findViewById(R.id.tvTenTaiKhoanHeader);
-        tvCreditHeader = view.findViewById(R.id.tvCreditHeader);
+        tvTenTaiKhoanHeader = view.findViewById(R.id.tvTenTaiKhoanHeader_1);
+        tvCreditHeader = view.findViewById(R.id.tvCreditHeader_1);
         tvTilte = view.findViewById(R.id.tvTitle);
     }
 

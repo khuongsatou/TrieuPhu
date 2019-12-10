@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
+
+    <TextView
+        android:id="@+id/tvTenTaiKhoanHeader_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_textview"
+        android:text="nvKhuong"
+        android:textColor="#FAF5F5"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline18"
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCreditHeader_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_editext_credit"
+        android:gravity="center"
+        android:text="2000"
+        android:textColor="#FAF5F5"
+        android:textStyle="bold"
+
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvTenTaiKhoanHeader_2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline23"
+        app:layout_constraintStart_toStartOf="@+id/guideline21" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="24dp"
+        android:layout_height="19dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline15"
+        app:layout_constraintStart_toStartOf="@+id/guideline22"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/diamon" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.88125" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.86" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:text="Điểm"
+        app:layout_constraintEnd_toStartOf="@+id/guideline15"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
+        app:layout_constraintTop_toBottomOf="@+id/tvTenTaiKhoanHeader_2"
+        style="@style/style_text_view_title" />
+
+    <ImageView
+        android:id="@+id/ivMang5"
+        android:layout_width="15dp"
+        android:layout_height="19dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvTitle"
+        app:layout_constraintStart_toStartOf="@+id/guideline28"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_action_heart_full" />
+
+    <ImageView
+        android:id="@+id/ivMang1"
+        android:layout_width="15dp"
+        android:layout_height="19dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMang2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline18"
+        app:layout_constraintStart_toEndOf="@+id/ivMang2"
+        app:layout_constraintTop_toTopOf="@+id/ivMang2"
+        app:srcCompat="@drawable/ic_action_heart_full" />
+
+    <ImageView
+        android:id="@+id/ivMang3"
+        android:layout_width="15dp"
+        android:layout_height="19dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMang4"
+        app:layout_constraintStart_toEndOf="@+id/ivMang4"
+        app:layout_constraintTop_toTopOf="@+id/ivMang4"
+        app:srcCompat="@drawable/ic_action_heart_full" />
+
+    <ImageView
+        android:id="@+id/ivMang2"
+        android:layout_width="15dp"
+        android:layout_height="19dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMang3"
+        app:layout_constraintStart_toEndOf="@+id/ivMang3"
+        app:layout_constraintTop_toTopOf="@+id/ivMang3"
+        app:srcCompat="@drawable/ic_action_heart_full" />
+
+    <ImageView
+        android:id="@+id/ivMang4"
+        android:layout_width="15dp"
+        android:layout_height="19dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMang5"
+        app:layout_constraintStart_toEndOf="@+id/ivMang5"
+        app:layout_constraintTop_toTopOf="@+id/ivMang5"
+        app:srcCompat="@drawable/ic_action_heart_full" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="Câu Hỏi"
+        android:textColor="#333"
+        app:layout_constraintBottom_toTopOf="@+id/guideline29"
+        app:layout_constraintEnd_toStartOf="@+id/guideline21"
+        app:layout_constraintStart_toStartOf="@+id/guideline28"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <ImageButton
+        android:id="@+id/ivDoiCauHoi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/ivNamMuoi"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/guideline36"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_action_restart2" />
+
+    <ImageButton
+        android:id="@+id/ivTroGiupKhangGia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/ivNamMuoi"
+        app:layout_constraintEnd_toStartOf="@+id/ivGoiNguoiThan"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivNamMuoi"
+        app:layout_constraintTop_toTopOf="@+id/ivNamMuoi"
+        app:srcCompat="@drawable/ic_action_people" />
+
+    <ImageButton
+        android:id="@+id/ivNamMuoi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/ivDoiCauHoi"
+        app:layout_constraintEnd_toStartOf="@+id/ivTroGiupKhangGia"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivDoiCauHoi"
+        app:layout_constraintTop_toTopOf="@+id/ivDoiCauHoi"
+        app:srcCompat="@drawable/ic_action_fifty" />
+
+    <ImageButton
+        android:id="@+id/ivGoiNguoiThan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/ivTroGiupKhangGia"
+        app:layout_constraintEnd_toStartOf="@+id/ivMuaDapAn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivTroGiupKhangGia"
+        app:layout_constraintTop_toTopOf="@+id/ivTroGiupKhangGia"
+        android:src="@drawable/ic_action_phone" />
+
+    <ImageButton
+        android:id="@+id/ivMuaDapAn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/ivGoiNguoiThan"
+        app:layout_constraintEnd_toStartOf="@+id/guideline37"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivGoiNguoiThan"
+        app:layout_constraintTop_toTopOf="@+id/ivGoiNguoiThan"
+        app:srcCompat="@drawable/ic_action_diamon" />
+</androidx.constraintlayout.widget.ConstraintLayout>

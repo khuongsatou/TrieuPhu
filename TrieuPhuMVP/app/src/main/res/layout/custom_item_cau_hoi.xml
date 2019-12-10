@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_marginTop="14dp"
+    android:layout_marginBottom="2dp"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:textColor="#fff"
+        style="@style/style_button_linh_vuc"
+        android:background="@drawable/custom_button"
+        android:id="@+id/btnItemLinhVuc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Văn Học" />
+</LinearLayout>

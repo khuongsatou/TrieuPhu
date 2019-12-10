@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +18,6 @@ import com.nvk.TrieuPhuMVP.Adapter.BangXepHangAdapter;
 import com.nvk.TrieuPhuMVP.Model.NguoiChoi;
 import com.nvk.TrieuPhuMVP.Presenter.BangXepHangPresenter;
 import com.nvk.TrieuPhuMVP.R;
-import com.nvk.TrieuPhuMVP.Utilities.InternetBackground;
 import com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis;
 import com.nvk.TrieuPhuMVP.View.UI.BangXepHangView;
 
@@ -82,8 +80,8 @@ public class BangXepHangActivity extends AppCompatActivity implements BangXepHan
     private void initView() {
         rcvBangXepHang = findViewById(R.id.rcvBangXepHang);
         View view = findViewById(R.id.i_header_bxh);
-        tvTenTaiKhoanHeader = view.findViewById(R.id.tvTenTaiKhoanHeader);
-        tvCreditHeader = view.findViewById(R.id.tvCreditHeader);
+        tvTenTaiKhoanHeader = view.findViewById(R.id.tvTenTaiKhoanHeader_1);
+        tvCreditHeader = view.findViewById(R.id.tvCreditHeader_1);
         tvTilte = view.findViewById(R.id.tvTitle);
     }
 
