@@ -23,8 +23,9 @@
     <include
         android:id="@+id/i_AvatarQLTK"
         layout="@layout/include_avatar"
-        >
-    </include>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></include>
 
     <Button
         android:id="@+id/btnDoiHinhDaiDien"

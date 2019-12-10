@@ -33,6 +33,12 @@ public class NguoiChoi implements Serializable {
         this.credit = 0;
         this.xoa = false;
     }
+    public NguoiChoi(int id, String ten_dang_nhap, String hinh_dai_dien, int diem_cao_nhat) {
+        this.id = id;
+        this.ten_dang_nhap = ten_dang_nhap;
+        this.hinh_dai_dien = hinh_dai_dien;
+        this.diem_cao_nhat = diem_cao_nhat;
+    }
 
     public NguoiChoi(int id, String ten_dang_nhap, String mat_khau, String email, String hinh_dai_dien, int diem_cao_nhat, int credit, boolean xoa) {
         this.id = id;

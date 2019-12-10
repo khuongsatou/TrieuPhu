@@ -1,8 +1,10 @@
 package com.nvk.TrieuPhuMVP.View.Activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +27,7 @@ public class MangHinhChinhActivity extends AppCompatActivity implements MangHinh
     public static final String KEY_PAGE = "page";
     public static final String KEY_LIMIT = "limit";
 
+
     public static final int KEY_REQUESTCODE = 123;
     private TextView tvTenDangNhap,tvCredit;
     private Intent intent;
@@ -43,11 +46,10 @@ public class MangHinhChinhActivity extends AppCompatActivity implements MangHinh
 
     private void initLoad() {
         mangHinhChinhPresenter.setNguoiChoi((NguoiChoi)getIntent().getSerializableExtra(KEY_DANGNHAP));
-        NguoiChoi nguoiChoi = mangHinhChinhPresenter.getNguoiChoi();
-        tvTenDangNhap.setText(nguoiChoi.getTen_dang_nhap());
-        tvCredit.setText(nguoiChoi.getCredit()+"");
+        tvTenDangNhap.setText(mangHinhChinhPresenter.getNguoiChoi().getTen_dang_nhap());
+        tvCredit.setText(mangHinhChinhPresenter.getNguoiChoi().getCredit()+"");
         Picasso.get()
-                .load(BASE_IMAGE+nguoiChoi.getHinh_dai_dien())
+                .load(BASE_IMAGE+mangHinhChinhPresenter.getNguoiChoi().getHinh_dai_dien())
                 .error(R.drawable.logo_android)
                 .into(ivHinhDaiDien);
     }
@@ -70,9 +72,23 @@ public class MangHinhChinhActivity extends AppCompatActivity implements MangHinh
         ivHinhDaiDien = v_avatar.findViewById(R.id.iv_hinhDaiDien);
         View v_profile = findViewById(R.id.i_profile);
         tvTenDangNhap = v_profile.findViewById(R.id.tvTenDangNhap);
-        tvCredit = v_profile.findViewById(R.id.tvCredit);
+        tvCredit = v_profile.findViewById(R.id.tvSoTien);
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode ==KEY_REQUESTCODE && resultCode == RESULT_OK && data != null){
+            mangHinhChinhPresenter.setNguoiChoi((NguoiChoi) data.getSerializableExtra(KEY_DANGNHAP));
+            Picasso.get()
+                    .load(BASE_IMAGE+mangHinhChinhPresenter.getNguoiChoi().getHinh_dai_dien())
+                    .error(R.drawable.logo_android)
+                    .into(ivHinhDaiDien);
+            tvCredit.setText(mangHinhChinhPresenter.getNguoiChoi().getCredit()+"");
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -88,7 +104,7 @@ public class MangHinhChinhActivity extends AppCompatActivity implements MangHinh
                 startActivityForResult(intent,KEY_REQUESTCODE);
                 break;
             case R.id.btnLichSuChoi:
-                intent = new Intent(this,LichSuCauHoiActivity.class);
+                intent = new Intent(this,LichSuChoiActivity.class);
                 mangHinhChinhPresenter.navigate(intent);
                 startActivityForResult(intent,KEY_REQUESTCODE);
                 break;

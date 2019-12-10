@@ -123,7 +123,7 @@ public class DangKyActivity extends AppCompatActivity implements DangKyView, Vie
 
     @Override
     public boolean checkInternet() {
-        return false;
+        return NetWorkUtilitis.checkConnect(this);
     }
 
     @Override

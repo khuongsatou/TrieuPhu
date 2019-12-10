@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,29 +15,30 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.nvk.TrieuPhuMVP.Adapter.BangXepHangAdapter;
+import com.nvk.TrieuPhuMVP.Adapter.LichSuChoiAdapter;
+import com.nvk.TrieuPhuMVP.Model.LuotChoi;
 import com.nvk.TrieuPhuMVP.Model.NguoiChoi;
 import com.nvk.TrieuPhuMVP.Presenter.BangXepHangPresenter;
+import com.nvk.TrieuPhuMVP.Presenter.LichSuChoiPresenter;
 import com.nvk.TrieuPhuMVP.R;
-import com.nvk.TrieuPhuMVP.Utilities.InternetBackground;
 import com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis;
-import com.nvk.TrieuPhuMVP.View.UI.BangXepHangView;
+import com.nvk.TrieuPhuMVP.View.UI.LichSuChoiView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.KEY_DANGNHAP;
 
-public class BangXepHangActivity extends AppCompatActivity implements BangXepHangView {
-    private RecyclerView rcvBangXepHang;
-    private BangXepHangAdapter adapter;
-    private BangXepHangPresenter bangXepHangPresenter = new BangXepHangPresenter(this);
+public class LichSuChoiActivity extends AppCompatActivity implements LichSuChoiView {
+    private RecyclerView rcvLichSuChoi;
+    private LichSuChoiAdapter adapter;
+    private LichSuChoiPresenter lichSuChoiPresenter = new LichSuChoiPresenter(this);
     private TextView tvCreditHeader,tvTenTaiKhoanHeader,tvTilte;
-    private List<NguoiChoi> nguoiChois = new ArrayList<>();
-
+    private List<LuotChoi> luotChois = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bang_xep_hang);
+        setContentView(R.layout.activity_lich_su_choi);
 
         initView();
         initAdapter();
@@ -47,23 +47,22 @@ public class BangXepHangActivity extends AppCompatActivity implements BangXepHan
     }
 
     private void initAdapter() {
-        adapter = new BangXepHangAdapter(this,nguoiChois);
-        rcvBangXepHang.setLayoutManager(new LinearLayoutManager(this));
-        rcvBangXepHang.setAdapter(adapter);
+        adapter = new LichSuChoiAdapter(this,luotChois);
+        rcvLichSuChoi.setLayoutManager(new LinearLayoutManager(this));
+        rcvLichSuChoi.setAdapter(adapter);
     }
 
     private void initLoad() {
-        bangXepHangPresenter.setNguoiChoi((NguoiChoi) getIntent().getSerializableExtra(KEY_DANGNHAP));
-        NguoiChoi nguoiChoi = bangXepHangPresenter.getNguoiChoi();
-        tvTilte.setText(getString(R.string.string_bang_xep_hang));
+        lichSuChoiPresenter.setNguoiChoi((NguoiChoi) getIntent().getSerializableExtra(KEY_DANGNHAP));
+        NguoiChoi nguoiChoi = lichSuChoiPresenter.getNguoiChoi();
+        tvTilte.setText(getString(R.string.string_lich_su_choi));
         tvTenTaiKhoanHeader.setText(nguoiChoi.getTen_dang_nhap());
         tvCreditHeader.setText(nguoiChoi.getCredit()+"");
-
-        bangXepHangPresenter.loadData(null);
+        lichSuChoiPresenter.loadData(null);
     }
 
     private void initAction() {
-        rcvBangXepHang.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        rcvLichSuChoi.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -72,16 +71,16 @@ public class BangXepHangActivity extends AppCompatActivity implements BangXepHan
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                LinearLayoutManager manager = (LinearLayoutManager) rcvBangXepHang.getLayoutManager();
-                bangXepHangPresenter.handleLoadListPlayer(manager.getItemCount(),manager.getChildCount(),manager.findFirstVisibleItemPosition());
+                LinearLayoutManager manager = (LinearLayoutManager) rcvLichSuChoi.getLayoutManager();
+                lichSuChoiPresenter.handleLoadListPlayer(manager.getItemCount(),manager.getChildCount(),manager.findFirstVisibleItemPosition());
 
             }
         });
     }
 
     private void initView() {
-        rcvBangXepHang = findViewById(R.id.rcvBangXepHang);
-        View view = findViewById(R.id.i_header_bxh);
+        rcvLichSuChoi = findViewById(R.id.rcvLichSuChoi);
+        View view = findViewById(R.id.i_header_lich_su_choi);
         tvTenTaiKhoanHeader = view.findViewById(R.id.tvTenTaiKhoanHeader);
         tvCreditHeader = view.findViewById(R.id.tvCreditHeader);
         tvTilte = view.findViewById(R.id.tvTitle);
@@ -125,26 +124,26 @@ public class BangXepHangActivity extends AppCompatActivity implements BangXepHan
 
     @Override
     public void updateItemAdapter() {
-        nguoiChois.add(null);
-        rcvBangXepHang.post(new Runnable() {
+        luotChois.add(null);
+        rcvLichSuChoi.post(new Runnable() {
             @Override
             public void run() {
-                adapter.notifyItemInserted(nguoiChois.size()-1);
+                adapter.notifyItemInserted(luotChois.size()-1);
             }
         });
     }
 
     @Override
     public void removeItemAdapter() {
-        if (nguoiChois.size() > 0){
-            nguoiChois.remove(nguoiChois.size()-1);
-            adapter.notifyItemRemoved(nguoiChois.size());
+        if (luotChois.size() > 0){
+            luotChois.remove(luotChois.size()-1);
+            adapter.notifyItemRemoved(luotChois.size());
         }
     }
 
     @Override
-    public void updateList(NguoiChoi nguoiChoi) {
-        nguoiChois.add(nguoiChoi);
+    public void updateList(LuotChoi luotChoi) {
+        luotChois.add(luotChoi);
     }
 
     @Override

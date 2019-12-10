@@ -7,4 +7,10 @@
     <string name="string_server_internet">Vui Lòng Kiểm tra Internet</string>
     <string name="string_success">Thành công</string>
     <string name="string_fail">Thất Bại</string>
+    <string name="string_buy_credit_success">Bạn đã mua thành công</string>
+    <string name="string_buy_credit_fail">Bạn đã mua thất bại</string>
+    <!--    Màng Hình-->
+    <string name="string_mua_credit">Mua Credit</string>
+    <string name="string_bang_xep_hang">Bảng Xếp Hạng</string>
+    <string name="string_lich_su_choi">Lịch Sử Chơi</string>
 </resources>

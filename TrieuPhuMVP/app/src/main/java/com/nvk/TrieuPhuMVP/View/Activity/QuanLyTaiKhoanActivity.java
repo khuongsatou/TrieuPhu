@@ -36,6 +36,7 @@ import java.io.InputStream;
 import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.KEY_DANGNHAP;
 import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.BASE;
 import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.BASE_IMAGE;
+import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.checkConnect;
 
 public class QuanLyTaiKhoanActivity extends AppCompatActivity implements View.OnClickListener, QuanLyTaiKhoanView {
     private static final int CODE_GALLERY_REQUEST = 123;
@@ -59,11 +60,10 @@ public class QuanLyTaiKhoanActivity extends AppCompatActivity implements View.On
 
     private void initLoad() {
         quanLyTaiKhoanPresenter.setNguoiChoi(((NguoiChoi) getIntent().getSerializableExtra(KEY_DANGNHAP)));
-        NguoiChoi nguoiChoi = quanLyTaiKhoanPresenter.getNguoiChoi();
-        edtTenDangNhapQLTK.setText(nguoiChoi.getTen_dang_nhap());
-        edtEmailQLTK.setText(nguoiChoi.getEmail());
+        edtTenDangNhapQLTK.setText(quanLyTaiKhoanPresenter.getNguoiChoi().getTen_dang_nhap());
+        edtEmailQLTK.setText(quanLyTaiKhoanPresenter.getNguoiChoi().getEmail());
         Picasso.get()
-                .load(BASE_IMAGE+nguoiChoi.getHinh_dai_dien())
+                .load(BASE_IMAGE+quanLyTaiKhoanPresenter.getNguoiChoi().getHinh_dai_dien())
                 .error(R.drawable.logo_android)
                 .into(ivLogo);
     }
@@ -215,12 +215,12 @@ public class QuanLyTaiKhoanActivity extends AppCompatActivity implements View.On
 
     @Override
     public boolean checkInternet() {
-        return false;
+        return checkConnect(this);
     }
 
     @Override
     public void closeApp() {
-
+        NetWorkUtilitis.showDialogNetWork("Internet không được bật", this).show();
     }
 
     @Override

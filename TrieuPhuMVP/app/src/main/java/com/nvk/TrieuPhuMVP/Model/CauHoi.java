@@ -2,33 +2,36 @@ package com.nvk.TrieuPhuMVP.Model;
 
 public class CauHoi {
     private int id;
-    private String ten_dang_nhap;
-    private String mat_khau;
-    private String email;
-    private String hinh_dai_dien;
-    private int diem_cau_nhat;
-    private int credit;
+    private String noi_dung;
+    private int linh_vuc_id;
+    private String phuong_an_a;
+    private String  phuong_an_b;
+    private String  phuong_an_c;
+    private String  phuong_an_d;
+    private String dap_an;
     private boolean xoa;
 
     public CauHoi() {
         this.id = 0;
-        this.ten_dang_nhap = "";
-        this.mat_khau = "";
-        this.email = "";
-        this.hinh_dai_dien = "";
-        this.diem_cau_nhat = 0;
-        this.credit = 0;
+        this.noi_dung = "";
+        this.linh_vuc_id = 0;
+        this.phuong_an_a = "";
+        this.phuong_an_b = "";
+        this.phuong_an_c = "";
+        this.phuong_an_d = "";
+        this.dap_an = "";
         this.xoa = false;
     }
-    public CauHoi(int id, String ten_dang_nhap, String mat_khau, String email, String hinh_dai_dien, int diem_cau_nhat, int credit, boolean xoa) {
-        super();
+
+    public CauHoi(int id, String noi_dung, int linh_vuc_id, String phuong_an_a, String phuong_an_b, String phuong_an_c, String phuong_an_d, String dap_an, boolean xoa) {
         this.id = id;
-        this.ten_dang_nhap = ten_dang_nhap;
-        this.mat_khau = mat_khau;
-        this.email = email;
-        this.hinh_dai_dien = hinh_dai_dien;
-        this.diem_cau_nhat = diem_cau_nhat;
-        this.credit = credit;
+        this.noi_dung = noi_dung;
+        this.linh_vuc_id = linh_vuc_id;
+        this.phuong_an_a = phuong_an_a;
+        this.phuong_an_b = phuong_an_b;
+        this.phuong_an_c = phuong_an_c;
+        this.phuong_an_d = phuong_an_d;
+        this.dap_an = dap_an;
         this.xoa = xoa;
     }
 
@@ -36,31 +39,71 @@ public class CauHoi {
         return id;
     }
 
-    public String getTen_dang_nhap() {
-        return ten_dang_nhap;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getMat_khau() {
-        return mat_khau;
+    public String getNoi_dung() {
+        return noi_dung;
     }
 
-    public String getEmail() {
-        return email;
+    public void setNoi_dung(String noi_dung) {
+        this.noi_dung = noi_dung;
     }
 
-    public String getHinh_dai_dien() {
-        return hinh_dai_dien;
+    public int getLinh_vuc_id() {
+        return linh_vuc_id;
     }
 
-    public int getDiem_cau_nhat() {
-        return diem_cau_nhat;
+    public void setLinh_vuc_id(int linh_vuc_id) {
+        this.linh_vuc_id = linh_vuc_id;
     }
 
-    public int getCredit() {
-        return credit;
+    public String getPhuong_an_a() {
+        return phuong_an_a;
+    }
+
+    public void setPhuong_an_a(String phuong_an_a) {
+        this.phuong_an_a = phuong_an_a;
+    }
+
+    public String getPhuong_an_b() {
+        return phuong_an_b;
+    }
+
+    public void setPhuong_an_b(String phuong_an_b) {
+        this.phuong_an_b = phuong_an_b;
+    }
+
+    public String getPhuong_an_c() {
+        return phuong_an_c;
+    }
+
+    public void setPhuong_an_c(String phuong_an_c) {
+        this.phuong_an_c = phuong_an_c;
+    }
+
+    public String getPhuong_an_d() {
+        return phuong_an_d;
+    }
+
+    public void setPhuong_an_d(String phuong_an_d) {
+        this.phuong_an_d = phuong_an_d;
+    }
+
+    public String getDap_an() {
+        return dap_an;
+    }
+
+    public void setDap_an(String dap_an) {
+        this.dap_an = dap_an;
     }
 
     public boolean isXoa() {
         return xoa;
+    }
+
+    public void setXoa(boolean xoa) {
+        this.xoa = xoa;
     }
 }

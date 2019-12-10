@@ -113,28 +113,23 @@ public class DangNhapActivity extends AppCompatActivity  implements DangNhapView
 
     @Override
     public void setErrorInternet() {
-        Toast.makeText(this, "Internet đã tắt", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,getString(R.string.string_server_internet),Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void setErrorServer() {
-        Toast.makeText(this, "Server không phản hồi", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,getString(R.string.string_server_disconnect),Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public boolean checkInternet() {
-        return checkConnect(this);
+        return NetWorkUtilitis.checkConnect(this);
     }
 
     @Override
     public void closeApp() {
-        NetWorkUtilitis.showDialogNetWork("Internet không được bật", this).show();
+        NetWorkUtilitis.showDialogNetWork(getString(R.string.string_server_internet), this).show();
     }
-
-    @Override
-    public ProgressDialog showDialog() {
-        return  NetWorkUtilitis.showProress(this);
-}
 
     @Override
     public void closeDialog(ProgressDialog dialog) {
@@ -143,8 +138,13 @@ public class DangNhapActivity extends AppCompatActivity  implements DangNhapView
 
     @Override
     public void loadBackGround(StringRequest request) {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(request);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
+    }
+
+    @Override
+    public ProgressDialog showDialog() {
+        return NetWorkUtilitis.showProress(this);
     }
 }
 
