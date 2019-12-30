@@ -17,6 +17,8 @@ import com.nvk.TrieuPhuMVP.R;
 import com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis;
 import com.nvk.TrieuPhuMVP.View.UI.DangKyView;
 
+import java.util.regex.Pattern;
+
 public class DangKyActivity extends AppCompatActivity implements DangKyView, View.OnClickListener{
     private EditText edtTenDangNhapDK,edtMatKhauDK,edtEmailDK,edtXacNhanMatKhauDK;
     private Button btnDangKyDK;
@@ -99,8 +101,11 @@ public class DangKyActivity extends AppCompatActivity implements DangKyView, Vie
 
     @Override
     public void setErrorEmail() {
-        edtEmailDK.setError("Bạn chưa nhập");
-        edtEmailDK.requestFocus();
+
+            edtEmailDK.setError("Email không hợp lệ");
+            edtEmailDK.requestFocus();
+
+
     }
 
     @Override

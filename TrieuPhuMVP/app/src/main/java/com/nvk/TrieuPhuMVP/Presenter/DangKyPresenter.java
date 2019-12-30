@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import static com.nvk.TrieuPhuMVP.Model.NguoiChoi.COLUMN_EMAIL;
 import static com.nvk.TrieuPhuMVP.Model.NguoiChoi.COLUMN_MAT_KHAU;
@@ -23,7 +24,13 @@ import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.URI_NGUOI_CHOI_THEM;
 
 public class DangKyPresenter {
     private DangKyView dangKyView;
-
+    private static final Pattern EMAIL_ADRESS =
+            Pattern.compile("^[a-zA-Z0-9]{0,64}"
+                    +"@"
+                    +"[a-zA-Z0-9\\-]{0,64}"
+                    +"\\."
+                    +"[a-zA-Z0-9\\-]{0,25}"
+            );
     public DangKyPresenter(DangKyView DangKyView) {
         this.dangKyView = DangKyView;
     }
@@ -31,7 +38,11 @@ public class DangKyPresenter {
     public void handleRegister(final String tenDangNhap, final String email, final String matKhau,String xacNhanMatKhau){
         if (tenDangNhap.isEmpty()){
             dangKyView.setErrorUsername();
-        }else if(email.isEmpty()){
+        }
+        else if (!EMAIL_ADRESS.matcher(email).matches()){
+            dangKyView.setErrorEmail();
+        }
+        else if(email.isEmpty()){
             dangKyView.setErrorEmail();
         }else if(matKhau.isEmpty()){
             dangKyView.setErrorPassword();

@@ -7,11 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +16,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,6 +27,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
 import com.nvk.TrieuPhuMVP.Adapter.CauHoiAdapter;
 import com.nvk.TrieuPhuMVP.Model.CauHoi;
 import com.nvk.TrieuPhuMVP.Model.NguoiChoi;
@@ -37,6 +45,7 @@ import com.nvk.TrieuPhuMVP.View.Activity.HienThiCauHoiActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -237,12 +246,12 @@ public class HienThiCauHoiFragment extends Fragment {
                 anHaiDapAnSai();
             }
         });
-//        ivbtnSP[2].setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                troGiupKhangGia();
-//            }
-//        });
+        ivbtnSP[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                troGiupKhangGia();
+            }
+        });
         ivbtnSP[3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -350,53 +359,67 @@ public class HienThiCauHoiFragment extends Fragment {
 
     }
 
-//    private void troGiupKhangGia() {
-//        if (!hienThiCauHoiActivity.ischeckedSP[2]) {
-//            final Dialog alert = new Dialog(hienThiCauHoiActivity);
-//            View view = LayoutInflater.from(hienThiCauHoiActivity).inflate(R.layout.custom_dialog_tro_giup_khang_gia, null, false);
-//            alert.setContentView(view);
-//            Button btnXinCamOn = view.findViewById(R.id.btnXinCamOn);
-//            BarChart bcBieuDoCot = view.findViewById(R.id.bcBieuDoCot);
-//
-//            bcBieuDoCot.getDescription().setEnabled(false);
-//            bcBieuDoCot.setFitBars(true);
-//
-//            ArrayList<BarEntry> yBarChart = new ArrayList<>();
-//            //Nà ní
-//            int random_1 = (int) (Math.random() * 100);
-//            int r2 = 100 - random_1;
-//            int random_2 = (int) (Math.random() * 100 % (r2 + 1));
-//            int r3 = 100 - (random_1 + random_2);
-//            int random_3 = (int) (Math.random() * 100 % (r3 + 1));
-//            int r4 = 100 - (random_1 + random_2 + random_3);
-//            //viết dư số 2 đã delete
-//            int random_4 = r4;
-//
-//            yBarChart.add(new BarEntry(1, random_1));
-//            yBarChart.add(new BarEntry(2, random_2));
-//            yBarChart.add(new BarEntry(3, random_3));
-//            yBarChart.add(new BarEntry(4, random_4));
-//
-//
-//            BarDataSet set = new BarDataSet(yBarChart, "Trợ Giúp Kháng Giả");
-//            set.setColors(ColorTemplate.MATERIAL_COLORS);
-//            set.setDrawValues(true);
-//
-//            BarData data = new BarData(set);
-//            bcBieuDoCot.setData(data);
-//            bcBieuDoCot.invalidate();
-//            bcBieuDoCot.animateY(500);
-//
-//            btnXinCamOn.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    alert.dismiss();
-//                }
-//            });
-//            alert.show();
-//            hienThiCauHoiActivity.ischeckedSP[2] = true;
-//        }
-//    }
+    private void troGiupKhangGia() {
+        if (!hienThiCauHoiActivity.ischeckedSP[2]) {
+            final Dialog alert = new Dialog(hienThiCauHoiActivity);
+            View view = LayoutInflater.from(hienThiCauHoiActivity).inflate(R.layout.custom_dialog_tro_giup_khang_gia, null, false);
+            alert.setContentView(view);
+            Button btnXinCamOn = view.findViewById(R.id.btnXinCamOn);
+            BarChart bcBieuDoCot = view.findViewById(R.id.bcBieuDoCot);
+
+            bcBieuDoCot.getDescription().setEnabled(false);
+            bcBieuDoCot.setFitBars(true);
+            bcBieuDoCot.setDrawGridBackground(false);
+
+            ArrayList<BarEntry> yBarChart = new ArrayList<>();
+            //Nà ní
+            int random_1 = (int) (Math.random() * 100);
+            int r2 = 100 - random_1;
+            int random_2 = (int) (Math.random() * 100 % (r2 + 1));
+            int r3 = 100 - (random_1 + random_2);
+            int random_3 = (int) (Math.random() * 100 % (r3 + 1));
+            int r4 = 100 - (random_1 + random_2 + random_3);
+            //viết dư số 2 đã delete
+            int random_4 = r4;
+
+            yBarChart.add(new BarEntry(1, random_1));
+            yBarChart.add(new BarEntry(2, random_2));
+            yBarChart.add(new BarEntry(3, random_3));
+            yBarChart.add(new BarEntry(4, random_4));
+
+
+            BarDataSet set = new BarDataSet(yBarChart, "Trợ Giúp Kháng Giả");
+            set.setColors(ColorTemplate.MATERIAL_COLORS);
+            set.setDrawValues(true);
+
+            BarData data = new BarData(set);
+            XAxis xAxis = bcBieuDoCot.getXAxis();
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+            final String[] labels = new String[]{"","A","B","C","D"};
+            IndexAxisValueFormatter formatter = new IndexAxisValueFormatter(labels);
+            xAxis.setTextSize(20f);
+            xAxis.setGranularity(1f);
+            xAxis.setValueFormatter(formatter);
+
+            bcBieuDoCot.setData(data);
+            xAxis.setDrawGridLines(false);
+            bcBieuDoCot.getAxisLeft().setEnabled(false);
+            bcBieuDoCot.getAxisRight().setEnabled(false);
+            bcBieuDoCot.getLegend().setEnabled(false);
+            bcBieuDoCot.getDescription().setEnabled(false);
+            bcBieuDoCot.invalidate();
+            bcBieuDoCot.animateY(500);
+
+            btnXinCamOn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alert.dismiss();
+                }
+            });
+            alert.show();
+            hienThiCauHoiActivity.ischeckedSP[2] = true;
+        }
+    }
 
 
     private void anHaiDapAnSai() {

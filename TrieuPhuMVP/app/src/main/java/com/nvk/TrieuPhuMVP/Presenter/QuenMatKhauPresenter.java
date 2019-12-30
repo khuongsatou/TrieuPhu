@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import static com.nvk.TrieuPhuMVP.Model.NguoiChoi.COLUMN_EMAIL;
 import static com.nvk.TrieuPhuMVP.Model.NguoiChoi.COLUMN_TEN_DANG_NHAP;
@@ -22,7 +23,13 @@ import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.URI_MAT_KHAU;
 
 public class QuenMatKhauPresenter {
     private QuenMatKhauView quenMatKhauView;
-
+    private static final Pattern EMAIL_ADRESS =
+            Pattern.compile("^[a-zA-Z0-9]{0,64}"
+                    +"@"
+                    +"[a-zA-Z0-9\\-]{0,64}"
+                    +"\\."
+                    +"[a-zA-Z0-9\\-]{0,25}"
+            );
     public QuenMatKhauPresenter(QuenMatKhauView quenMatKhauView) {
         this.quenMatKhauView = quenMatKhauView;
     }
@@ -32,7 +39,10 @@ public class QuenMatKhauPresenter {
             quenMatKhauView.setErrorUsername();
         } else if (email.isEmpty()) {
             quenMatKhauView.setErrorEmail();
-        } else {
+        }
+        else if (!EMAIL_ADRESS.matcher(email).matches()){
+            quenMatKhauView.setErrorEmail();
+        }else {
             final ProgressDialog dialog = quenMatKhauView.showDialog();
             dialog.show();
             final StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_MAT_KHAU, new Response.Listener<String>() {

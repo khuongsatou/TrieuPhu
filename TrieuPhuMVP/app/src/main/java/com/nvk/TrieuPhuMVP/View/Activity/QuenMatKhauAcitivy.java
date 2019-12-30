@@ -95,7 +95,7 @@ public class QuenMatKhauAcitivy extends AppCompatActivity implements View.OnClic
 
     @Override
     public void setErrorUsername() {
-        edtTenDangNhapQMK.setError("Tên đăng nhập không được bỏ trống");
+        edtTenDangNhapQMK.setError("Tên đăng nhập Không Hợp Lệ");
     }
 
     @Override
@@ -105,7 +105,7 @@ public class QuenMatKhauAcitivy extends AppCompatActivity implements View.OnClic
 
     @Override
     public void setErrorEmail() {
-        edtEmailQMK.setError("Email Không được bỏ trống");
+        edtEmailQMK.setError("Email Không Hợp Lệ");
     }
 
     @Override
