@@ -12,6 +12,25 @@ class QuanTriVienController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function hienThiFormDangNhap(){
+        return view('login');
+    }
+    public function xuLyDangNhap(Request $req){
+        $credentials = [
+            'ten_dang_nhap'=>$req->ten_dang_nhap,
+            'password'=>$req->mat_khau
+        ];
+        if(!auth('web')->attempt($credentials)){
+            return "Đăng Nhập Không Thành Công";
+        }
+        return redirect()->route('trang_chu');
+    }
+    public function dangXuat(){
+        auth('web')->logout();
+        return redirect()->route('dang_nhap');
+    }
+
+
     public function index()
     {
         $quanTriViens = QuanTriVien::all();

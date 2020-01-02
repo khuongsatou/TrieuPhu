@@ -12,15 +12,20 @@ use Illuminate\Http\Request;
 |
 */
 //Test get App
+Route::middleware(['assign.guard:api'],'jwt.auth')->group(function(){
+    Route::post('lay_thong_tin','API\NguoiChoiController@layThongTin');
+});
+
 Route::prefix('nguoi_choi')->group(function(){
-    Route::post('danh_sach','API\NguoiChoiController@getNguoiChoi');
-    Route::post('dang_nhap','API\NguoiChoiController@getResultLogin');
-    Route::post('mat_khau','API\NguoiChoiController@getPassWord');
+    //Route::post('danh_sach','API\NguoiChoiController@getNguoiChoi');
+    Route::post('dang_nhap','API\NguoiChoiController@dangNhap');
+    // Route::post('mat_khau','API\NguoiChoiController@getPassWord');
     Route::post('them','API\NguoiChoiController@store');
     Route::post('cap_nhat','API\NguoiChoiController@update');
     Route::post('cap_nhat_credit','API\NguoiChoiController@updateCredit');
     Route::post('upload','API\NguoiChoiController@upload');
 });
+
 
 Route::prefix('luot_choi')->group(function(){
     Route::post('tim','API\LuotChoiController@getLuotChoiById');

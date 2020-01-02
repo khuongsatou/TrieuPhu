@@ -40,9 +40,9 @@ class CauHoiController extends Controller
         $cauHoi->noi_dung =$request->noi_dung;
         $cauHoi->linh_vuc_id =$request->linh_vuc_id;
         $cauHoi->phuong_an_a =$request->phuong_an_a;
-        $cauHoi->phuong_an_b =$request->phuong_an_a;
-        $cauHoi->phuong_an_c =$request->phuong_an_a;
-        $cauHoi->phuong_an_d =$request->phuong_an_a;
+        $cauHoi->phuong_an_b =$request->phuong_an_b;
+        $cauHoi->phuong_an_c =$request->phuong_an_c;
+        $cauHoi->phuong_an_d =$request->phuong_an_d;
         $cauHoi->dap_an =$request->dap_an;
         $cauHoi->save();
         return redirect()->route('cau_hoi.danh_sach');
@@ -84,9 +84,9 @@ class CauHoiController extends Controller
         $cauHoi->noi_dung =$request->noi_dung;
         $cauHoi->linh_vuc_id =$request->linh_vuc_id;
         $cauHoi->phuong_an_a =$request->phuong_an_a;
-        $cauHoi->phuong_an_b =$request->phuong_an_a;
-        $cauHoi->phuong_an_c =$request->phuong_an_a;
-        $cauHoi->phuong_an_d =$request->phuong_an_a;
+        $cauHoi->phuong_an_b =$request->phuong_an_b;
+        $cauHoi->phuong_an_c =$request->phuong_an_c;
+        $cauHoi->phuong_an_d =$request->phuong_an_d;
         $cauHoi->dap_an =$request->dap_an;
         $cauHoi->save();
         return redirect()->route('cau_hoi.danh_sach');

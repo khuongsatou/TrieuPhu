@@ -8,14 +8,37 @@ use App\NguoiChoi;
 
 class NguoiChoiController extends Controller
 {
-    public function getResultLogin(Request $request){
-        $nguoiChoi = NguoiChoi::where('ten_dang_nhap',$request->ten_dang_nhap)->where('mat_khau',$request->mat_khau)->first();
-        if($nguoiChoi == null){
-            return response()->json(['success'=>false]);
+    public function dangNhap(Request $req){
+        $credentials = [
+            'ten_dang_nhap'=>$req->ten_dang_nhap,
+            'password'=>$req->mat_khau
+        ];
+        if(!$token = auth('api')->attempt($credentials)){
+            return response()->json(['status'=>false,'message'=>'Unauthorized.'],401);
         }
-        $result = ['success'=>true,'nguoi_choi'=>$nguoiChoi];
-        return response()->json($result);
+        
+        return response()->json([
+            'status'=>true,
+            'message'=>'Authorized',
+            'token'=>$token,
+            'type'=>'bearer',
+            'expires'=>auth('api')->factory()->getTTL()*60
+        ],200);
     }
+
+    public function layThongTin(){
+        return auth('api')->user();
+    }
+
+
+    // public function getResultLogin(Request $request){
+    //     $nguoiChoi = NguoiChoi::where('ten_dang_nhap',$request->ten_dang_nhap)->where('mat_khau',$request->mat_khau)->first();
+    //     if($nguoiChoi == null){
+    //         return response()->json(['success'=>false]);
+    //     }
+    //     $result = ['success'=>true,'nguoi_choi'=>$nguoiChoi];
+    //     return response()->json($result);
+    // }
 
     public function getPassWord(Request $request){
         $nguoiChoi = NguoiChoi::where('ten_dang_nhap',$request->ten_dang_nhap)->where('email',$request->email)->first();

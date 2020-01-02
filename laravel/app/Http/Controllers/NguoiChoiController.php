@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\NguoiChoi;
 use App\LichSuMuaCredit;
@@ -40,7 +40,7 @@ class NguoiChoiController extends Controller
     {
         $nguoiChoi = new NguoiChoi();
         $nguoiChoi->ten_dang_nhap = $request->ten_dang_nhap;
-        $nguoiChoi->mat_khau = $request->mat_khau;
+        $nguoiChoi->mat_khau = Hash::make($request->mat_khau);
         $nguoiChoi->email = $request->email;
         $nguoiChoi->hinh_dai_dien = $request->hinh_dai_dien;
         $nguoiChoi->diem_cao_nhat = $request->diem_cao_nhat;
@@ -93,7 +93,7 @@ class NguoiChoiController extends Controller
     {
         $nguoiChoi = NguoiChoi::find($id);
         $nguoiChoi->ten_dang_nhap = $request->ten_dang_nhap;
-        $nguoiChoi->mat_khau = $request->mat_khau;
+        $nguoiChoi->mat_khau = Hash::make($request->mat_khau);
         $nguoiChoi->email = $request->email;
         $nguoiChoi->hinh_dai_dien = $request->hinh_dai_dien;
         $nguoiChoi->diem_cao_nhat = $request->diem_cao_nhat;
