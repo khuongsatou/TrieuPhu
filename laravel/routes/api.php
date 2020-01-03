@@ -17,9 +17,9 @@ Route::middleware(['assign.guard:api'],'jwt.auth')->group(function(){
 });
 
 Route::prefix('nguoi_choi')->group(function(){
-    Route::post('danh_sach','API\NguoiChoiController@getNguoiChoi');
+    //Route::post('danh_sach','API\NguoiChoiController@getNguoiChoi');
     Route::post('dang_nhap','API\NguoiChoiController@dangNhap');
-    Route::post('mat_khau','API\NguoiChoiController@getPassWord');
+    // Route::post('mat_khau','API\NguoiChoiController@getPassWord');
     Route::post('them','API\NguoiChoiController@store');
     Route::post('cap_nhat','API\NguoiChoiController@update');
     Route::post('cap_nhat_credit','API\NguoiChoiController@updateCredit');

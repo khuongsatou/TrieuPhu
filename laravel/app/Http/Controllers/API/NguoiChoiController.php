@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\NguoiChoi;
-use DB;
 
 class NguoiChoiController extends Controller
 {
@@ -28,15 +27,21 @@ class NguoiChoiController extends Controller
     }
 
     public function layThongTin(){
-
         return auth('api')->user();
     }
 
 
+    // public function getResultLogin(Request $request){
+    //     $nguoiChoi = NguoiChoi::where('ten_dang_nhap',$request->ten_dang_nhap)->where('mat_khau',$request->mat_khau)->first();
+    //     if($nguoiChoi == null){
+    //         return response()->json(['success'=>false]);
+    //     }
+    //     $result = ['success'=>true,'nguoi_choi'=>$nguoiChoi];
+    //     return response()->json($result);
+    // }
 
     public function getPassWord(Request $request){
-        //$nguoiChoi = NguoiChoi::where('ten_dang_nhap',$request->ten_dang_nhap)->where('email',$request->email)->first();
-        $nguoiChoi = DB::table('nguoi_choi')->where('ten_dang_nhap',$request->ten_dang_nhap)->where('email',$request->email)->first();
+        $nguoiChoi = NguoiChoi::where('ten_dang_nhap',$request->ten_dang_nhap)->where('email',$request->email)->first();
         if($nguoiChoi == null){
             return response()->json(['success'=>false]);
          }

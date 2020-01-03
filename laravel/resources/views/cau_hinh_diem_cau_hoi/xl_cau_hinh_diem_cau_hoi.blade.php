@@ -57,6 +57,8 @@
                 @endif 
                 >
               </div>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="diem"><span class="required text-danger">@if(isset($loi_diem)) Điểm không vượt 1.000.000 @endif</span>
+              </label>
             </div>
 
 
