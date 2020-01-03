@@ -37,7 +37,15 @@ class LinhVucController extends Controller
     public function store(Request $request)
     {
         $linhVuc = new LinhVuc();
-        $linhVuc->ten_linh_vuc = $request->ten_linh_vuc;
+       
+        if (strlen( $request->ten_linh_vuc)>30) {
+            $loi_ten_lv ="1";
+            return View('linh_vuc.xl_linh_vuc',compact('loi_ten_lv','linhVuc'));
+        }
+        else
+        {
+             $linhVuc->ten_linh_vuc = $request->ten_linh_vuc;
+        }
         $linhVuc->save();
         return redirect()->route('linh_vuc.danh_sach');
     }
@@ -77,7 +85,14 @@ class LinhVucController extends Controller
     public function update(Request $request, $id)
     {
         $linhVuc = LinhVuc::find($id);
-        $linhVuc->ten_linh_vuc = $request->ten_linh_vuc;
+        if (strlen( $request->ten_linh_vuc)>30) {
+            $loi_ten_lv ="1";
+            return View('linh_vuc.xl_linh_vuc',compact('loi_ten_lv','linhVuc'));
+        }
+        else
+        {
+             $linhVuc->ten_linh_vuc = $request->ten_linh_vuc;
+        }
         $linhVuc->save();
         return redirect()->route('linh_vuc.danh_sach');
     }

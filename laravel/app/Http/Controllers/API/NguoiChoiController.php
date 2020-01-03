@@ -5,10 +5,6 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\NguoiChoi;
-use DB;
-use Illuminate\Support\Facades\Hash;
-use App\Mail\DemoMail;
-use Illuminate\Support\Facades\Mail;
 
 class NguoiChoiController extends Controller
 {
@@ -35,22 +31,24 @@ class NguoiChoiController extends Controller
     }
 
 
+    // public function getResultLogin(Request $request){
+    //     $nguoiChoi = NguoiChoi::where('ten_dang_nhap',$request->ten_dang_nhap)->where('mat_khau',$request->mat_khau)->first();
+    //     if($nguoiChoi == null){
+    //         return response()->json(['success'=>false]);
+    //     }
+    //     $result = ['success'=>true,'nguoi_choi'=>$nguoiChoi];
+    //     return response()->json($result);
+    // }
 
     public function getPassWord(Request $request){
-        $nguoiChoi = DB::table('nguoi_choi')->where('ten_dang_nhap',$request->ten_dang_nhap)->where('email',$request->email)->first();
+        $nguoiChoi = NguoiChoi::where('ten_dang_nhap',$request->ten_dang_nhap)->where('email',$request->email)->first();
         if($nguoiChoi == null){
             return response()->json(['success'=>false]);
-        }
-        DB::table('nguoi_choi')->where('ten_dang_nhap',$request->ten_dang_nhap)->update(['mat_khau' => Hash::make('123')]);
-        $objDemo = new \stdClass();
-        $objDemo->nguoi_nhan = $nguoiChoi->ten_dang_nhap;
-        $objDemo->mat_khau = '123';
-        $objDemo->nguoi_gui = "Admin APP Trieu Phu";
-        Mail::to("yoshi240499@gmail.com")->send(new DemoMail($objDemo));
-        $result = [
+         }
+         $result = [
              'success'=>true,
              'nguoi_choi'=>$nguoiChoi
-        ];
+         ];
          return response()->json($result);
     }
 
