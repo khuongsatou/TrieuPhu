@@ -45,6 +45,11 @@
                 @endif 
                 >
               </div>
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ten_dang_nhap"><span class="required text-danger">@if(isset($loi_ten_nguoi_choi))
+                Tên không vượt quá 50 kí tự
+              @endif
+               </span>
+              </label>
             </div>
 
             <div class="form-group">
@@ -57,6 +62,11 @@
                 @endif 
                 >
               </div>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mat_khau"><span class="required text-danger">@if(isset($loi_mk_nguoi_choi))
+                Mật Khẩu không vượt quá 250 kí tự
+              @endif
+               </span>
+              </label>
             </div>
 
             <div class="form-group">
@@ -69,6 +79,11 @@
                 @endif 
                 >
               </div>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email"><span class="required text-danger">@if(isset($loi_email_nguoi_choi))
+                Enail không đúng định dạng
+              @endif
+               </span>
+              </label>
             </div>
 
             <div class="form-group">
@@ -92,6 +107,11 @@
                 @endif 
                 >
               </div>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="diem_cao_nhat"><span class="required text-danger">@if(isset($loi_diem_nguoi_choi))
+                Điểm không vượt quá 1.000.000
+              @endif
+               </span>
+              </label>
             </div>
 
             <div class="form-group">
@@ -104,6 +124,11 @@
                 @endif 
                 >
               </div>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="credit"><span class="required text-danger">@if(isset($loi_credit_nguoi_choi))
+                Credit không vượt quá 1.000.000
+              @endif
+               </span>
+              </label>
             </div>
            
             <div class="ln_solid"></div>
