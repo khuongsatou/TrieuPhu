@@ -46,10 +46,6 @@
                 @endif 
                 >
               </div>
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ten_dang_nhap"><span class="required text-danger">@if(isset($loi_ten_dn))
-                Tên đăng nhập không vượt quá 250 kí tự
-              @endif</span>
-              </label>
             </div>
 
             <div class="form-group">
@@ -62,10 +58,6 @@
                 @endif 
                 >
               </div>
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mat_khau"><span class="required text-danger">@if(isset($loi_mk))
-                Mật khẩu không vượt quá 250 kí tự
-              @endif</span>
-              </label>
             </div>
 
             <div class="form-group">
@@ -78,17 +70,13 @@
                 @endif 
                 >
               </div>
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ho_ten"><span class="required text-danger">@if(isset($loi_ho_ten))
-                Họ tên không vượt quá 250 kí tự
-              @endif</span>
-              </label>
             </div>
 
           
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <a href="{{ route('quan_tri_vien.danh_sach') }}" class="btn btn-danger" type="button">Hủy</a>
+                <a href="{{ route('nguoi_choi.danh_sach') }}" class="btn btn-danger" type="button">Hủy</a>
                 @if(!isset($quanTriVien))
                   <a href="" class="btn btn-primary" type="reset">Clear</a>
                 @endif

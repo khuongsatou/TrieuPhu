@@ -36,25 +36,7 @@ class CauHinhTroGiupController extends Controller
     public function store(Request $request)
     {
         $cauHinhTroGiup = new CauHinhTroGiup();
-      
-        if ($request->loai_tro_giup==1||$request->loai_tro_giup==2||$request->loai_tro_giup==3||$request->loai_tro_giup==4) {
-            $cauHinhTroGiup->loai_tro_giup = $request->loai_tro_giup;
-        }
-        else
-        {
-            $loi_loai_tro_giup="1";
-            return View('cau_hinh_tro_giup.xl_cau_hinh_tro_giup',compact('loi_loai_tro_giup'));
-        }
-
-        if (strlen($request->credit) > 6) {
-            $loi_credit_tro_giup = '1';
-            
-           return View('cau_hinh_tro_giup.xl_cau_hinh_tro_giup',compact('loi_credit_tro_giup'));
-        }
-        else
-        {
-            $cauHinhTroGiup->credit = $request->credit;
-        }
+        $cauHinhTroGiup->loai_tro_giup = $request->loai_tro_giup;
         $cauHinhTroGiup->thu_tu = $request->thu_tu;
         $cauHinhTroGiup->save();
         return redirect()->route('cau_hinh_tro_giup.danh_sach');
@@ -93,27 +75,9 @@ class CauHinhTroGiupController extends Controller
     public function update(Request $request, $id)
     {
         $cauHinhTroGiup =  CauHinhTroGiup::find($id);
-        if ($request->loai_tro_giup==1||$request->loai_tro_giup==2||$request->loai_tro_giup==3||$request->loai_tro_giup==4) {
-            $cauHinhTroGiup->loai_tro_giup = $request->loai_tro_giup;
-        }
-        else
-        {
-            $loi_loai_tro_giup="1";
-            return View('cau_hinh_tro_giup.xl_cau_hinh_tro_giup',compact('cauHinhTroGiup','loi_loai_tro_giup'));
-        }
-       
-        
-        if (strlen($request->credit) > 6) {
-            $loi_credit = '1';
-            
-           return View('cau_hinh_tro_giup.xl_cau_hinh_tro_giup',compact('loi_credit','cauHinhTroGiup'));
-        }
-        else
-        {
-            $cauHinhTroGiup->credit = $request->credit;
-        }
-
+        $cauHinhTroGiup->loai_tro_giup = $request->loai_tro_giup;
         $cauHinhTroGiup->thu_tu = $request->thu_tu;
+        $cauHinhTroGiup->credit = $request->credit;
         $cauHinhTroGiup->save();
         return redirect()->route('cau_hinh_tro_giup.danh_sach');
     }

@@ -24,7 +24,7 @@ class CauHinhAppController extends Controller
      */
     public function create()
     {
-        return View('cau_hinh_app.xl_cau_hinh_app');
+        return redirect()->route('cau_hinh_app.xl_dang_nhap');
     }
 
     /**

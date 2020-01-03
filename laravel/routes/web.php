@@ -11,29 +11,14 @@
 |
 */
 
+
+
 //Login
 Route::middleware('auth:web')->group(function(){
     Route::get('/', 'HomeController@index')->name('trang_chu');
     Route::get('dang_xuat', 'QuanTriVienController@dangXuat')->name('dang_xuat');
-});
-Route::middleware('guest:web')->group(function(){
-    Route::get('dang_nhap', 'QuanTriVienController@hienThiFormDangNhap')->name('dang_nhap');
-    Route::post('xu_ly_dang_nhap', 'QuanTriVienController@xuLyDangNhap')->name('xu_ly_dang_nhap');
-});
 
-
-
-//Home
-// Route::prefix('/')->group(function(){
-//     Route::name('.')->group(function(){
-//         Route::get('/','HomeController@index')->name('index');
-//         Route::get('/login','HomeController@login')->name('login');
-        
-//     });
-// });
-
-
-//Bảng
+    //Bảng
 Route::prefix('linh_vuc')->group(function(){
     Route::name('linh_vuc.')->group(function(){
         Route::get('/','LinhVucController@index')->name('danh_sach');
@@ -180,5 +165,21 @@ Route::prefix('cau_hinh_tro_giup')->group(function(){
         Route::get('/xoa/{id}','CauHinhTroGiupController@destroy')->name('xoa');
     });
 });
+
+
+
+});
+Route::middleware('guest:web')->group(function(){
+    Route::get('dang_nhap', 'QuanTriVienController@hienThiFormDangNhap')->name('dang_nhap');
+    Route::post('xu_ly_dang_nhap', 'QuanTriVienController@xuLyDangNhap')->name('xu_ly_dang_nhap');
+});
+
+
+
+//Home
+
+
+
+
 
 

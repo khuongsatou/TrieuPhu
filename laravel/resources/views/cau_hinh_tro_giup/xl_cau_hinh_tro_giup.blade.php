@@ -39,21 +39,12 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="loai_tro_giup">Loại trợ giúp: <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <!-- <input name="loai_tro_giup" type="text" id="loai_tro_giup" required="required" class="form-control col-md-7 col-xs-12" 
+                <input name="loai_tro_giup" type="text" id="loai_tro_giup" required="required" class="form-control col-md-7 col-xs-12" 
                 @if(isset($cauHinhTroGiup))
                     value="{{$cauHinhTroGiup->loai_tro_giup}}"
                 @endif 
-                > -->
-                <select id="loai_tro_giup" required="required" class="form-control col-md-7 col-xs-12"
-                   >  
-                  <option value="1" <?php if (isset($cauHinhTroGiup) && $cauHinhTroGiup->loai_tro_giup == 1) echo "selected=\"selected\"";  ?>>Đổi câu</option>}  
-                  <option value="2" <?php if (isset($cauHinhTroGiup) && $cauHinhTroGiup->loai_tro_giup == 2) echo "selected=\"selected\"";  ?>>50/50</option>  
-                  <option value="3" <?php if (isset($cauHinhTroGiup) && $cauHinhTroGiup->loai_tro_giup == 3) echo "selected=\"selected\"";  ?>>Khán Giả</option>  
-                  <option value="4" <?php if (isset($cauHinhTroGiup) && $cauHinhTroGiup->loai_tro_giup == 4) echo "selected=\"selected\"";  ?>>Người Thân</option>  
-                
-                </select>  
+                >
               </div>
-
             </div>
 
             <div class="form-group">
@@ -79,10 +70,6 @@
                 @endif 
                 >
               </div>
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="credit"><span class="required text-danger">@if(isset($loi_credit_tro_giup))
-                  Credit không vượt qua 1.000.000
-                @endif</span>
-              </label>
             </div>
 
            

@@ -45,10 +45,6 @@
                 @endif 
                 >
               </div>
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ten_linh_vuc"><span class="required text-danger">@if(isset($loi_ten_lv))
-                Tên không vượt quá 30 kí tự
-              @endif</span>
-              </label>
             </div>
            
             <div class="ln_solid"></div>

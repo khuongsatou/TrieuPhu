@@ -36,37 +36,9 @@ class GoiCreditController extends Controller
     public function store(Request $request)
     {
         $goiCredit= new GoiCredit();
-        // $goiCredit->ten_goi = $request->ten_goi;
-        if (strlen($request->ten_goi) > 250) {
-            $loi_ten = "1";
-            
-            return View('goi_credit.xl_goi_credit',compact('loi_ten'));
-        }
-        else
-        {
-            $goiCredit->ten_goi = $request->ten_goi;
-        }
-        
-        if (strlen($request->credit) > 6) {
-            $loi_credit = "1";
-            
-           return View('goi_credit.xl_goi_credit',compact('loi_credit'));
-        }
-        else
-        {
-            $goiCredit->credit = $request->credit;
-        }
-       
-        if (strlen($request->credit) > 5) {
-            $loi_tien = "1";
-            
-           return View('goi_credit.xl_goi_credit',compact('loi_tien'));
-        }
-        else
-        {
-             $goiCredit->so_tien = $request->so_tien;
-        }
-
+        $goiCredit->ten_goi = $request->ten_goi;
+        $goiCredit->credit = $request->credit;
+        $goiCredit->so_tien = $request->so_tien;
         $goiCredit->save();
         return redirect()->route('goi_credit.danh_sach');
     }
@@ -104,38 +76,9 @@ class GoiCreditController extends Controller
     public function update(Request $request, $id)
     {
         $goiCredit= GoiCredit::find($id);
-        // $goiCredit->ten_goi = $request->ten_goi;
-        // $goiCredit->credit = $request->credit;
-        // $goiCredit->so_tien = $request->so_tien;
-        if (strlen($request->ten_goi) > 250) {
-            $loi_ten = "1";
-            
-            return View('goi_credit.xl_goi_credit',compact('loi_ten','goiCredit'));
-        }
-        else
-        {
-            $goiCredit->ten_goi = $request->ten_goi;
-        }
-        
-        if (strlen($request->credit) > 6) {
-            $loi_credit = "1";
-            
-           return View('goi_credit.xl_goi_credit',compact('loi_credit','goiCredit'));
-        }
-        else
-        {
-            $goiCredit->credit = $request->credit;
-        }
-       
-        if (strlen($request->so_tien) > 6) {
-            $loi_tien = "1";
-            
-           return View('goi_credit.xl_goi_credit',compact('loi_tien','goiCredit'));
-        }
-        else
-        {
-             $goiCredit->so_tien = $request->so_tien;
-        }
+        $goiCredit->ten_goi = $request->ten_goi;
+        $goiCredit->credit = $request->credit;
+        $goiCredit->so_tien = $request->so_tien;
         $goiCredit->save();
         return redirect()->route('goi_credit.danh_sach');
     }
