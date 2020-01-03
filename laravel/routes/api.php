@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
 //Test get App
 Route::middleware(['assign.guard:api'],'jwt.auth')->group(function(){
     Route::post('lay_thong_tin','API\NguoiChoiController@layThongTin');
