@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,12 +23,15 @@ import com.nvk.TrieuPhuMVP.View.UI.DangNhapView;
 import java.io.Serializable;
 
 import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.KEY_DANGNHAP;
+import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.KEY_SHARE_PRE;
+import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.TOKEN;
 import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.checkConnect;
 
 public class DangNhapActivity extends AppCompatActivity  implements DangNhapView,View.OnClickListener{
     private EditText edtTenDangNhap, edtMatKhau;
     private Button btnDangNhap, btnDangKy, btnQuenMatKhau;
     private DangNhapPresenter dangNhapPresenter = new DangNhapPresenter(this);
+    public SharedPreferences sharedPreferences;
 
 
 
@@ -46,9 +50,11 @@ public class DangNhapActivity extends AppCompatActivity  implements DangNhapView
         btnDangNhap.setOnClickListener(this);
         btnDangKy.setOnClickListener(this);
         btnQuenMatKhau.setOnClickListener(this);
+
     }
 
     private void initView() {
+        sharedPreferences = getSharedPreferences(KEY_SHARE_PRE, MODE_PRIVATE);
         edtTenDangNhap = findViewById(R.id.edtTenDangNhap);
         edtMatKhau = findViewById(R.id.edtMatKhau);
         btnDangNhap = findViewById(R.id.btnDangNhap);
@@ -80,14 +86,19 @@ public class DangNhapActivity extends AppCompatActivity  implements DangNhapView
 
     @Override
     public void loginSuccess() {
-
         Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void navigate(NguoiChoi nguoiChoi) {
+    public void saveReference(String token) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(TOKEN,token);
+        editor.apply();
+    }
+
+    @Override
+    public void navigate() {
         Intent intent = new Intent(this,MangHinhChinhActivity.class);
-        intent.putExtra(KEY_DANGNHAP, (Serializable) nguoiChoi);
         startActivity(intent);
     }
 

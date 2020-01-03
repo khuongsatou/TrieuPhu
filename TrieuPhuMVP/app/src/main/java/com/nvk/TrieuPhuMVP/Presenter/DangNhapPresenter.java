@@ -1,6 +1,7 @@
 package com.nvk.TrieuPhuMVP.Presenter;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 import static com.nvk.TrieuPhuMVP.Model.NguoiChoi.COLUMN_MAT_KHAU;
 import static com.nvk.TrieuPhuMVP.Model.NguoiChoi.COLUMN_TEN_DANG_NHAP;
+import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.TOKEN;
 import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.BASE;
 import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.URI_DANG_NHAP;
 
@@ -33,6 +35,7 @@ public class DangNhapPresenter {
             dangNhapView.closeApp();
         }
     }
+
 
     public void handleLogin(final String tenDangNhap, final String matKhau){
         if (tenDangNhap.isEmpty()){
@@ -51,21 +54,12 @@ public class DangNhapPresenter {
                             dangNhapView.setErrorInternet();
                         }else {
                             JSONObject objLogin = new JSONObject(response);
-                            boolean result = objLogin.getBoolean("success");
-                            if (result) {
-                                JSONObject objNguoiChoi = objLogin.getJSONObject("nguoi_choi");
-                                NguoiChoi nguoiChoi = new NguoiChoi(
-                                        objNguoiChoi.getInt("id"),
-                                        objNguoiChoi.getString("ten_dang_nhap"),
-                                        objNguoiChoi.getString("mat_khau"),
-                                        objNguoiChoi.getString("email"),
-                                        objNguoiChoi.getString("hinh_dai_dien"),
-                                        objNguoiChoi.getInt("diem_cao_nhat"),
-                                        objNguoiChoi.getInt("credit"),
-                                        false);
-                                dangNhapView.navigate(nguoiChoi);
-                                dangNhapView.loginSuccess();
-                            } else {
+                            boolean status = objLogin.getBoolean("status");
+                            if (status){
+                                 dangNhapView.saveReference(objLogin.getString("token"));
+                                 dangNhapView.navigate();
+                                 dangNhapView.loginSuccess();
+                            }else{
                                 dangNhapView.loginFail();
                             }
                         }

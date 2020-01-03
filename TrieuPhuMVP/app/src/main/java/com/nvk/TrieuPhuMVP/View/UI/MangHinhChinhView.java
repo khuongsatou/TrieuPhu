@@ -1,5 +1,8 @@
 package com.nvk.TrieuPhuMVP.View.UI;
 
-public interface MangHinhChinhView {
+import com.nvk.TrieuPhuMVP.Utilities.InternetBackground;
 
+public interface MangHinhChinhView extends InternetBackground {
+    String getReference();
+    void restartData();
 }

@@ -10,5 +10,6 @@ import com.nvk.TrieuPhuMVP.Utilities.InternetBackground;
 public interface DangNhapView extends InternetBackground , EmptyForm {
     void loginFail();
     void loginSuccess();
-    void navigate(NguoiChoi nguoiChoi);
+    void saveReference(String token);
+    void navigate();
 }

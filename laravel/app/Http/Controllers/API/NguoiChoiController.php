@@ -27,6 +27,7 @@ class NguoiChoiController extends Controller
     }
 
     public function layThongTin(){
+
         return auth('api')->user();
     }
 
@@ -40,17 +41,17 @@ class NguoiChoiController extends Controller
     //     return response()->json($result);
     // }
 
-    public function getPassWord(Request $request){
-        $nguoiChoi = NguoiChoi::where('ten_dang_nhap',$request->ten_dang_nhap)->where('email',$request->email)->first();
-        if($nguoiChoi == null){
-            return response()->json(['success'=>false]);
-         }
-         $result = [
-             'success'=>true,
-             'nguoi_choi'=>$nguoiChoi
-         ];
-         return response()->json($result);
-    }
+    // public function getPassWord(Request $request){
+    //     $nguoiChoi = NguoiChoi::where('ten_dang_nhap',$request->ten_dang_nhap)->where('email',$request->email)->first();
+    //     if($nguoiChoi == null){
+    //         return response()->json(['success'=>false]);
+    //      }
+    //      $result = [
+    //          'success'=>true,
+    //          'nguoi_choi'=>$nguoiChoi
+    //      ];
+    //      return response()->json($result);
+    // }
 
     public function store(Request $request){
         $checkUser = NguoiChoi::where('ten_dang_nhap',$request->ten_dang_nhap)->orWhere('email',$request->email)->first();

@@ -3,6 +3,7 @@ package com.nvk.TrieuPhuMVP.View.Activity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,20 +11,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.nvk.TrieuPhuMVP.Model.NguoiChoi;
 import com.nvk.TrieuPhuMVP.Presenter.MangHinhChinhPresenter;
 import com.nvk.TrieuPhuMVP.R;
+import com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis;
 import com.nvk.TrieuPhuMVP.View.UI.MangHinhChinhView;
 import com.squareup.picasso.Picasso;
 
 import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.KEY_DANGNHAP;
+import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.KEY_SHARE_PRE;
+import static com.nvk.TrieuPhuMVP.Utilities.GlobalVariable.TOKEN;
 import static com.nvk.TrieuPhuMVP.Utilities.NetWorkUtilitis.BASE_IMAGE;
 
 public class MangHinhChinhActivity extends AppCompatActivity implements MangHinhChinhView, View.OnClickListener {
     private MangHinhChinhPresenter mangHinhChinhPresenter = new MangHinhChinhPresenter(this);
     private Button btnQuanLyTaiKhoan,btnTroChoiMoi,btnLichSuChoi,btnBangXepHang,btnMuaCredit;
-
+    private SharedPreferences sharedPreferences;
 
 
     public static final int KEY_REQUESTCODE = 123;
@@ -43,14 +51,13 @@ public class MangHinhChinhActivity extends AppCompatActivity implements MangHinh
     }
 
     private void initLoad() {
-        mangHinhChinhPresenter.setNguoiChoi((NguoiChoi)getIntent().getSerializableExtra(KEY_DANGNHAP));
-        tvTenDangNhap.setText(mangHinhChinhPresenter.getNguoiChoi().getTen_dang_nhap());
-        tvCredit.setText(mangHinhChinhPresenter.getNguoiChoi().getCredit()+"");
-        Picasso.get()
-                .load(BASE_IMAGE+mangHinhChinhPresenter.getNguoiChoi().getHinh_dai_dien())
-                .error(R.drawable.logo_android)
-                .into(ivHinhDaiDien);
+          sharedPreferences = getSharedPreferences(KEY_SHARE_PRE, MODE_PRIVATE);
+          mangHinhChinhPresenter.handleInfo();
+//        mangHinhChinhPresenter.setNguoiChoi((NguoiChoi)getIntent().getSerializableExtra(KEY_DANGNHAP));
+
     }
+
+
 
     private void initAction() {
         btnQuanLyTaiKhoan.setOnClickListener(this);
@@ -117,5 +124,56 @@ public class MangHinhChinhActivity extends AppCompatActivity implements MangHinh
                 startActivityForResult(intent,KEY_REQUESTCODE);
                 break;
         }
+    }
+
+    @Override
+    public void setErrorInternet() {
+        Toast.makeText(this,getString(R.string.string_server_internet),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setErrorServer() {
+        Toast.makeText(this,getString(R.string.string_server_disconnect),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean checkInternet() {
+        return NetWorkUtilitis.checkConnect(this);
+    }
+
+    @Override
+    public void closeApp() {
+        NetWorkUtilitis.showDialogNetWork(getString(R.string.string_server_internet), this).show();
+    }
+
+    @Override
+    public void closeDialog(ProgressDialog dialog) {
+        dialog.dismiss();
+    }
+
+    @Override
+    public void loadBackGround(StringRequest request) {
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
+    }
+
+    @Override
+    public ProgressDialog showDialog() {
+        return NetWorkUtilitis.showProress(this);
+    }
+
+    @Override
+    public String getReference() {
+        return sharedPreferences.getString(TOKEN,"");
+    }
+
+    @Override
+    public void restartData() {
+        tvTenDangNhap.setText(mangHinhChinhPresenter.getNguoiChoi().getTen_dang_nhap());
+        tvCredit.setText(mangHinhChinhPresenter.getNguoiChoi().getCredit()+"");
+        Picasso.get()
+                .load(BASE_IMAGE+mangHinhChinhPresenter.getNguoiChoi().getHinh_dai_dien())
+                .error(R.drawable.logo_android)
+                .into(ivHinhDaiDien);
     }
 }

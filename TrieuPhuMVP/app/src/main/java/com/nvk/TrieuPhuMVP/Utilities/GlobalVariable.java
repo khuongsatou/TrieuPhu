@@ -38,6 +38,8 @@ public class GlobalVariable {
     public static final int GIA_DIEM = 50;
 
 
-    //key table
+    //key Token
+    public static final String TOKEN = "token";
+    public static final String KEY_SHARE_PRE = "token";
 
 }

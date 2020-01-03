@@ -14,6 +14,7 @@ public class NetWorkUtilitis {
 
     //URI Người chơi
     public static final String URI_DANG_NHAP  = "nguoi_choi/dang_nhap";
+    public static final String URI_LAY_THONG_TIN  = "lay_thong_tin";
     public static final String URI_NGUOI_CHOI_THEM ="nguoi_choi/them" ;
     public static final String URI_MAT_KHAU ="nguoi_choi/mat_khau";
     public static final String URI_NGUOI_CHOI_CAP_NHAT ="nguoi_choi/cap_nhat" ;
