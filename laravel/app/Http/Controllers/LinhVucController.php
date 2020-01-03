@@ -36,16 +36,16 @@ class LinhVucController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'ten_linh_vuc.required' => 'Không bỏ trống',
+            'ten_linh_vuc.max' => 'Tối đa 20',
+        ];
+        $this->validate($request,[
+            'ten_linh_vuc'=>'required|max:20',
+        ],$messages);
+
         $linhVuc = new LinhVuc();
-       
-        if (strlen( $request->ten_linh_vuc)>30) {
-            $loi_ten_lv ="1";
-            return View('linh_vuc.xl_linh_vuc',compact('loi_ten_lv','linhVuc'));
-        }
-        else
-        {
-             $linhVuc->ten_linh_vuc = $request->ten_linh_vuc;
-        }
+        $linhVuc->ten_linh_vuc = $request->ten_linh_vuc;
         $linhVuc->save();
         return redirect()->route('linh_vuc.danh_sach');
     }
@@ -71,6 +71,7 @@ class LinhVucController extends Controller
      */
     public function edit($id)
     {
+
         $linhVuc = LinhVuc::find($id);
         return View('linh_vuc.xl_linh_vuc',compact('linhVuc'));
     }
@@ -84,15 +85,15 @@ class LinhVucController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'ten_linh_vuc.required' => 'Không bỏ trống',
+            'ten_linh_vuc.max' => 'Tối đa 20',
+        ];
+        $this->validate($request,[
+            'ten_linh_vuc'=>'required|max:20',
+        ],$messages);
         $linhVuc = LinhVuc::find($id);
-        if (strlen( $request->ten_linh_vuc)>30) {
-            $loi_ten_lv ="1";
-            return View('linh_vuc.xl_linh_vuc',compact('loi_ten_lv','linhVuc'));
-        }
-        else
-        {
-             $linhVuc->ten_linh_vuc = $request->ten_linh_vuc;
-        }
+        $linhVuc->ten_linh_vuc = $request->ten_linh_vuc;
         $linhVuc->save();
         return redirect()->route('linh_vuc.danh_sach');
     }

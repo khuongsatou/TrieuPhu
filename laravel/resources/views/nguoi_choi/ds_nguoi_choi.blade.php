@@ -38,7 +38,7 @@
                         <tr>
                           <th>ID</th>
                           <th>Tên Đăng Nhập</th>
-                          <th>Mật Khẩu</th>
+                          
                           <th>Email</th>
                           <th>Hình Đại Diện</th>
                           <th>Điểm Cao Nhất</th>
@@ -54,9 +54,9 @@
                         <tr>
                           <td>{{ $item->id }}</td>
                           <td>{{ $item->ten_dang_nhap }}</td>
-                          <td>{{ $item->mat_khau }}</td>
+                          
                           <td>{{ $item->email }}</td>
-                          <td>{{ $item->hinh_dai_dien }}</td>
+                          <td><img width="50" height="50" src="{{ asset('/upload/images').'/'.$item->hinh_dai_dien }}" alt=""></td>
                           <td>{{ $item->diem_cao_nhat }}</td>
                           <td>{{ $item->credit }}</td>
                           <td>

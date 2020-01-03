@@ -39,48 +39,47 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ten_goi">Tên Gói: <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="ten_goi" type="text" id="ten_goi" required="required" class="form-control col-md-7 col-xs-12" 
+                <input name="ten_goi" type="text" id="ten_goi" required="required" class="@error('ten_goi') is-invalid @enderror form-control col-md-7 col-xs-12" 
                 @if(isset($goiCredit))
                     value="{{$goiCredit->ten_goi}}"
                 @endif 
                 >
+                @error('ten_goi')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+
+
               </div>
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ten_goi"><span class="required text-danger">@if(isset($loi_ten))
-                Tên không quá 250 kí tự
-              @endif</span>
-              </label>
             </div>
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ten_goi">Credit: <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="credit" type="number" id="credit" required="required" class="form-control col-md-7 col-xs-12" 
+                <input name="credit" type="number" id="credit" required="required" class="@error('credit') is-invalid @enderror form-control col-md-7 col-xs-12" 
                 @if(isset($goiCredit))
                     value="{{$goiCredit->credit}}"
                 @endif 
                 >
+                @error('credit')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ten_goi"><span class="required text-danger">@if(isset($loi_credit))
-                Không vượt qua 1.000.000
-              @endif</span>
-              </label>
             </div>
            
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="so_tien">Số Tiền: <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="so_tien" type="number" id="so_tien" required="required" class="form-control col-md-7 col-xs-12" 
+                <input name="so_tien" type="number" id="so_tien" required="required" class="@error('so_tien') is-invalid @enderror form-control col-md-7 col-xs-12" 
                 @if(isset($goiCredit))
                     value="{{$goiCredit->so_tien}}"
                 @endif 
                 >
+                @error('so_tien')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ten_goi"><span class="required text-danger">@if(isset($loi_tien))
-                Không vượt qua 1.000.000
-              @endif</span>
-              </label>
             </div>
            
            

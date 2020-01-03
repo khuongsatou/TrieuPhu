@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\QuanTriVien;
+use Illuminate\Support\Facades\Hash;
 
 class QuanTriVienController extends Controller
 {
@@ -56,36 +57,9 @@ class QuanTriVienController extends Controller
     public function store(Request $request)
     {
         $quanTriVien = new QuanTriVien();
-           if (strlen($request->ten_dang_nhap) > 250) {
-            $loi_ten_dn = "1";
-            
-            return View('quan_tri_vien.xl_quan_tri_vien',compact('loi_ten_dn'));
-        }
-        else
-        {
-            $quanTriVien->ten_dang_nhap = $request->ten_dang_nhap;
-        }
-
-        if (strlen($request->mat_khau) > 250) {
-            $loi_mk = "1";
-            
-            return View('quan_tri_vien.xl_quan_tri_vien',compact('loi_mk'));
-        }
-        else
-        {
-            $quanTriVien->mat_khau = $request->mat_khau;
-        }
-
-        if (strlen($request->ho_ten) > 250) {
-            $loi_ho_ten = "1";
-            
-            return View('quan_tri_vien.xl_quan_tri_vien',compact('loi_ho_ten'));
-        }
-        else
-        {
-            $quanTriVien->ho_ten = $request->ho_ten;
-        }
-
+        $quanTriVien->ten_dang_nhap = $request->ten_dang_nhap;
+        $quanTriVien->mat_khau = Hash::make($request->mat_khau);
+        $quanTriVien->ho_ten = $request->ho_ten;
         $quanTriVien->save();
         return redirect()->route('quan_tri_vien.danh_sach');
     }
@@ -123,37 +97,9 @@ class QuanTriVienController extends Controller
     public function update(Request $request, $id)
     {
         $quanTriVien = QuanTriVien::find($id);
-        if (strlen($request->ten_dang_nhap) > 250) {
-            $loi_ten_dn = "1";
-            
-            return View('quan_tri_vien.xl_quan_tri_vien',compact('quanTriVien','loi_ten_dn'));
-        }
-        else
-        {
-            $quanTriVien->ten_dang_nhap = $request->ten_dang_nhap;
-        }
-
-        if (strlen($request->mat_khau) > 250) {
-            $loi_mk = "1";
-            
-            return View('quan_tri_vien.xl_quan_tri_vien',compact('quanTriVien','loi_mk'));
-        }
-        else
-        {
-            $quanTriVien->mat_khau = $request->mat_khau;
-        }
-
-        if (strlen($request->ho_ten) > 250) {
-            $loi_ho_ten = "1";
-            
-            return View('quan_tri_vien.xl_quan_tri_vien',compact('quanTriVien','loi_ho_ten'));
-        }
-        else
-        {
-            $quanTriVien->ho_ten = $request->ho_ten;
-        }
-        
-        
+        $quanTriVien->ten_dang_nhap = $request->ten_dang_nhap;
+        $quanTriVien->mat_khau = Hash::make($request->mat_khau);
+        $quanTriVien->ho_ten = $request->ho_ten;
         $quanTriVien->save();
         return redirect()->route('quan_tri_vien.danh_sach');
     }

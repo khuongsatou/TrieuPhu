@@ -70,7 +70,7 @@
                         <tr>
                           <th>ID</th>
                           <th>Tên Đăng Nhập</th>
-                          <th>Mật Khẩu</th>
+                         
                           <th>Họ Tên</th>
                           <th></th>
                   
@@ -83,7 +83,7 @@
                         <tr>
                           <td>{{ $item->id }}</td>
                           <td>{{ $item->ten_dang_nhap }}</td>
-                          <td>{{ $item->mat_khau }}</td>
+               
                           <td>{{ $item->ho_ten }}</td>
                           <td>
                             <a href="{{ route('quan_tri_vien.cap_nhat',['id' => $item->id]) }}" type="button" class="btn btn-round btn-primary"><i class="fa fa-pencil"></i></a>

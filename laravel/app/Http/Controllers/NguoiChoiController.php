@@ -38,59 +38,34 @@ class NguoiChoiController extends Controller
      */
     public function store(Request $request)
     {
-        $nguoiChoi = new NguoiChoi();
-        //ten
-        if (strlen($request->ten_dang_nhap)>50) {
-            $loi_ten_nguoi_choi='1';
-            return View('nguoi_choi.xl_nguoi_choi',compact('loi_ten_nguoi_choi'));
-        }
-        else
-        {
-            $nguoiChoi->ten_dang_nhap = $request->ten_dang_nhap;
-        }
-        //mat khau
-        if (strlen($request->mat_khau)>250) {
-            $loi_mk_nguoi_choi='1';
-            return View('nguoi_choi.xl_nguoi_choi',compact('loi_mk_nguoi_choi'));
-        }
-        else
-        {
-            $nguoiChoi->mat_khau = Hash::make($request->mat_khau);
-        }
-        
-        //email
-        if (preg_match ("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+\.[A-Za-z]{2,6}$/", $request->email))
-        {
-            $nguoiChoi->email = $request->email;
-        }
-        else
-        {
-            $loi_email_nguoi_choi='1';
-            return View('nguoi_choi.xl_nguoi_choi',compact('loi_email_nguoi_choi'));
-        }
-        //hinh dai dien
-        $nguoiChoi->hinh_dai_dien = $request->hinh_dai_dien;
+        $messages = [
+            'ten_dang_nhap.required' => 'Chưa nhập',
+            'ten_dang_nhap.regex' => 'Sai định dạng',
+            'mat_khau.required' => 'Chưa nhập',
+            'email.required' => 'Chưa nhập',
+            'email.email' => 'Sai định dạng',
+            'hinh_dai_dien.required' => 'Chưa nhập',
+            'diem_cao_nhat.required' => 'Chưa nhập',
+            'diem_cao_nhat.regex' => 'Sai Định dạng',
+            'credit.required' => 'Chưa nhập',
+            'credit.regex' => 'Sai Định dạng'
+        ];
+        $this->validate($request,[
+            'ten_dang_nhap' => 'required|regex:/^[A-Za-z.-_]+$/',
+            'mat_khau' => 'required',
+            'email' => 'required|email',
+            'hinh_dai_dien' => 'required',
+            'diem_cao_nhat' => 'required|regex:/^[0-9]+$/',
+            'credit' => 'required|regex:/^[0-9]+$/'
+        ],$messages);
 
-        //diêm
-        
-        if (strlen($request->diem_cao_nhat)>6) {
-            $loi_diem_nguoi_choi='1';
-            return View('nguoi_choi.xl_nguoi_choi',compact('loi_diem_nguoi_choi'));
-        }
-        else
-        {
-            $nguoiChoi->diem_cao_nhat = $request->diem_cao_nhat;
-        }
-        //credit
-        if (strlen($request->credit)>6) {
-            $loi_credit_nguoi_choi='1';
-            return View('nguoi_choi.xl_nguoi_choi',compact('loi_credit_nguoi_choi'));
-        }
-        else
-        {
-            $nguoiChoi->credit = $request->credit;
-        }
-        
+        $nguoiChoi = new NguoiChoi();
+        $nguoiChoi->ten_dang_nhap = $request->ten_dang_nhap;
+        $nguoiChoi->mat_khau = Hash::make($request->mat_khau);
+        $nguoiChoi->email = $request->email;
+        $nguoiChoi->hinh_dai_dien = $request->hinh_dai_dien;
+        $nguoiChoi->diem_cao_nhat = $request->diem_cao_nhat;
+        $nguoiChoi->credit = $request->credit;
         $nguoiChoi->save();
         return redirect()->route('nguoi_choi.danh_sach');
     }
@@ -137,64 +112,33 @@ class NguoiChoiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'ten_dang_nhap.required' => 'Chưa nhập',
+            'ten_dang_nhap.regex' => 'Sai định dạng',
+            'mat_khau.required' => 'Chưa nhập',
+            'email.required' => 'Chưa nhập',
+            'email.email' => 'Sai định dạng',
+            'hinh_dai_dien.required' => 'Chưa nhập',
+            'diem_cao_nhat.required' => 'Chưa nhập',
+            'diem_cao_nhat.regex' => 'Sai Định dạng',
+            'credit.required' => 'Chưa nhập',
+            'credit.regex' => 'Sai Định dạng'
+        ];
+        $this->validate($request,[
+            'ten_dang_nhap' => 'required|regex:/^[A-Za-z.-_]+$/',
+            'mat_khau' => 'required',
+            'email' => 'required|email',
+            'hinh_dai_dien' => 'required',
+            'diem_cao_nhat' => 'required|regex:/^[0-9]+$/',
+            'credit' => 'required|regex:/^[0-9]+$/'
+        ],$messages);
         $nguoiChoi = NguoiChoi::find($id);
-        // $nguoiChoi->ten_dang_nhap = $request->ten_dang_nhap;
-        // $nguoiChoi->mat_khau = Hash::make($request->mat_khau);
-        // $nguoiChoi->email = $request->email;
-        // $nguoiChoi->hinh_dai_dien = $request->hinh_dai_dien;
-        // $nguoiChoi->diem_cao_nhat = $request->diem_cao_nhat;
-        // $nguoiChoi->credit = $request->credit;
-        //ten
-        if (strlen($request->ten_dang_nhap)>50) {
-            $loi_ten_nguoi_choi='1';
-            return View('nguoi_choi.xl_nguoi_choi',compact('nguoiChoi','loi_ten_nguoi_choi'));
-        }
-        else
-        {
-            $nguoiChoi->ten_dang_nhap = $request->ten_dang_nhap;
-        }
-        //mat khau
-        if (strlen($request->mat_khau)>250) {
-            $loi_mk_nguoi_choi='1';
-            return View('nguoi_choi.xl_nguoi_choi',compact('nguoiChoi','loi_mk_nguoi_choi'));
-        }
-        else
-        {
-            $nguoiChoi->mat_khau = Hash::make($request->mat_khau);
-        }
-        
-        //email
-        if (preg_match ("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+\.[A-Za-z]{2,6}$/", $request->email))
-        {
-            $nguoiChoi->email = $request->email;
-        }
-        else
-        {
-            $loi_email_nguoi_choi='1';
-            return View('nguoi_choi.xl_nguoi_choi',compact('nguoiChoi','loi_email_nguoi_choi'));
-        }
-        //hinh dai dien
+        $nguoiChoi->ten_dang_nhap = $request->ten_dang_nhap;
+        $nguoiChoi->mat_khau = Hash::make($request->mat_khau);
+        $nguoiChoi->email = $request->email;
         $nguoiChoi->hinh_dai_dien = $request->hinh_dai_dien;
-
-        //diêm
-        
-        if (strlen($request->diem_cao_nhat)>6) {
-            $loi_diem_nguoi_choi='1';
-            return View('nguoi_choi.xl_nguoi_choi',compact('nguoiChoi','loi_diem_nguoi_choi'));
-        }
-        else
-        {
-            $nguoiChoi->diem_cao_nhat = $request->diem_cao_nhat;
-        }
-        //credit
-        if (strlen($request->credit)>6) {
-            $loi_credit_nguoi_choi='1';
-            return View('nguoi_choi.xl_nguoi_choi',compact('nguoiChoi','loi_credit_nguoi_choi'));
-        }
-        else
-        {
-            $nguoiChoi->credit = $request->credit;
-        }
+        $nguoiChoi->diem_cao_nhat = $request->diem_cao_nhat;
+        $nguoiChoi->credit = $request->credit;
         $nguoiChoi->save();
         return redirect()->route('nguoi_choi.danh_sach');
     }

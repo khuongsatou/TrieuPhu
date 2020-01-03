@@ -37,14 +37,7 @@ class CauHinhDiemCauHoiController extends Controller
     {
         $cauHinhDiemCauHoi  =new CauHinhDiemCauHoi();
         $cauHinhDiemCauHoi->thu_tu = $request->thu_tu;
-        if (strlen($request->diem)>6) {
-            $loi_diem='1';
-            return View('cau_hinh_diem_cau_hoi.xl_cau_hinh_diem_cau_Hoi',compact('loi_diem'));
-        }
-        else{
-             $cauHinhDiemCauHoi->diem = $request->diem;
-        }
-       
+        $cauHinhDiemCauHoi->diem = $request->diem;
         $cauHinhDiemCauHoi->save();
         return redirect()->route('cau_hinh_diem_cau_hoi.danh_sach');
     }
@@ -83,13 +76,7 @@ class CauHinhDiemCauHoiController extends Controller
     {
         $cauHinhDiemCauHoi  =CauHinhDiemCauHoi::find($id);
         $cauHinhDiemCauHoi->thu_tu = $request->thu_tu;
-        if (strlen($request->diem)>6) {
-            $loi_diem='1';
-            return View('cau_hinh_diem_cau_hoi.xl_cau_hinh_diem_cau_Hoi',compact('cauHinhDiemCauHoi','loi_diem'));
-        }
-        else{
-             $cauHinhDiemCauHoi->diem = $request->diem;
-        }
+        $cauHinhDiemCauHoi->diem = $request->diem;
         $cauHinhDiemCauHoi->save();
         return redirect()->route('cau_hinh_diem_cau_hoi.danh_sach');
     }

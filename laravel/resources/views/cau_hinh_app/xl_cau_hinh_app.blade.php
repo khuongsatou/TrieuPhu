@@ -6,9 +6,9 @@
         <div class="x_title">
           <h2>
             @if(isset($cauHoi))
-                Cập Nhật Câu Hỏi
+                Cập Nhật Cấu Hình App
             @else
-                Thêm Câu Hỏi
+                Thêm Câu Hình App
             @endif
             </h2>
           <ul class="nav navbar-right panel_toolbox">
@@ -36,10 +36,10 @@
         
             @csrf
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="noi_dung">Nội Dung: <span class="required">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="noi_dung">Cơ Hội Sai: <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="noi_dung" type="text" id="noi_dung" required="required" class="form-control col-md-7 col-xs-12" 
+                <input name="co_hoi_sai" type="text" id="noi_dung" required="required" class="form-control col-md-7 col-xs-12" 
                 @if(isset($cauHoi))
                     value="{{$cauHoi->noi_dung}}"
                 @endif 
@@ -48,73 +48,12 @@
             </div>
 
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="linh_vuc_id">Lĩnh Vực: <span class="required">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="linh_vuc_id">Thời Gian Trả Lời: <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="linh_vuc_id" type="number" id="linh_vuc_id" required="required" class="form-control col-md-7 col-xs-12" 
+                <input name="thoi_gian_tra_loi" type="number" id="linh_vuc_id" required="required" class="form-control col-md-7 col-xs-12" 
                 @if(isset($cauHoi))
                     value="{{$cauHoi->linh_vuc_id}}"
-                @endif 
-                >
-              </div>
-            </div>
-
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phuong_an_a">Phương Án A: <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="phuong_an_a" type="text" id="phuong_an_a" required="required" class="form-control col-md-7 col-xs-12" 
-                @if(isset($cauHoi))
-                    value="{{$cauHoi->phuong_an_a}}"
-                @endif 
-                >
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phuong_an_b">Phương Án B: <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="phuong_an_b" type="text" id="phuong_an_b" required="required" class="form-control col-md-7 col-xs-12" 
-                @if(isset($cauHoi))
-                    value="{{$cauHoi->phuong_an_b}}"
-                @endif 
-                >
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phuong_an_c">Phương Án C: <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="phuong_an_c" type="text" id="phuong_an_c" required="required" class="form-control col-md-7 col-xs-12" 
-                @if(isset($cauHoi))
-                    value="{{$cauHoi->phuong_an_c}}"
-                @endif 
-                >
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phuong_an_d">Phương Án D: <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="phuong_an_d" type="text" id="phuong_an_d" required="required" class="form-control col-md-7 col-xs-12" 
-                @if(isset($cauHoi))
-                    value="{{$cauHoi->phuong_an_d}}"
-                @endif 
-                >
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dap_an">Đáp Án: <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="dap_an" type="text" id="dap_an" required="required" class="form-control col-md-7 col-xs-12" 
-                @if(isset($cauHoi))
-                    value="{{$cauHoi->dap_an}}"
                 @endif 
                 >
               </div>

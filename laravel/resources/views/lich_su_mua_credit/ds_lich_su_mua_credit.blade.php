@@ -53,9 +53,9 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_support">
-                  <a href="{{ route('lich_su_mua_credit.them')}}" style="background-color:#337ab7;color:#fff;border-color:#2e6da4" class="btn btn-app">
+                  {{-- <a href="{{ route('lich_su_mua_credit.them')}}" style="background-color:#337ab7;color:#fff;border-color:#2e6da4" class="btn btn-app">
                           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Thêm Mới
-                      </a>
+                      </a> --}}
                       <a href="" style="background-color:#4B5F71;color:#fff;border-color:#364B5F" class="btn btn-app">
                           <i class="fa fa-repeat"></i></span> Phục Hồi
                       </a>

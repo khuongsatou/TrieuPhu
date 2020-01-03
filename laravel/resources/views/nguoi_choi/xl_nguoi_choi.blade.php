@@ -39,96 +39,87 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ten_dang_nhap">Tên Đăng Nhập: <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="ten_dang_nhap" type="text" id="ten_dang_nhap" required="required" class="form-control col-md-7 col-xs-12" 
+                <input name="ten_dang_nhap" type="text" id="ten_dang_nhap" required="required" class="@error('ten_dang_nhap') is-invalid @enderror form-control col-md-7 col-xs-12" 
                 @if(isset($nguoiChoi))
                     value="{{$nguoiChoi->ten_dang_nhap}}"
                 @endif 
                 >
+                @error('ten_dang_nhap')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+
               </div>
-               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ten_dang_nhap"><span class="required text-danger">@if(isset($loi_ten_nguoi_choi))
-                Tên không vượt quá 50 kí tự
-              @endif
-               </span>
-              </label>
             </div>
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mat_khau">Mật Khẩu: <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="mat_khau" type="password" id="mat_khau" required="required" class="form-control col-md-7 col-xs-12" 
-                @if(isset($nguoiChoi))
-                    value="{{$nguoiChoi->mat_khau}}"
-                @endif 
+                <input name="mat_khau" type="password" id="mat_khau" required="required" class="@error('mat_khau') is-invalid @enderror form-control col-md-7 col-xs-12" 
                 >
+                @error('mat_khau')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mat_khau"><span class="required text-danger">@if(isset($loi_mk_nguoi_choi))
-                Mật Khẩu không vượt quá 250 kí tự
-              @endif
-               </span>
-              </label>
             </div>
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email: <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="email" type="email" id="email" required="required" class="form-control col-md-7 col-xs-12" 
+                <input name="email" type="email" id="email" required="required" class="@error('email') is-invalid @enderror form-control col-md-7 col-xs-12" 
                 @if(isset($nguoiChoi))
                     value="{{$nguoiChoi->email}}"
                 @endif 
                 >
+                @error('email')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email"><span class="required text-danger">@if(isset($loi_email_nguoi_choi))
-                Enail không đúng định dạng
-              @endif
-               </span>
-              </label>
             </div>
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="hinh_dai_dien">Hình Đại Diện: <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="hinh_dai_dien" type="text" id="hinh_dai_dien" required="required" class="form-control col-md-7 col-xs-12" 
+                <input name="hinh_dai_dien" type="text" id="hinh_dai_dien" required="required" class="@error('hinh_dai_dien') is-invalid @enderror form-control col-md-7 col-xs-12" 
                 @if(isset($nguoiChoi))
                     value="{{$nguoiChoi->hinh_dai_dien}}"
                 @endif 
                 >
+                @error('hinh_dai_dien')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
             </div>
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="diem_cao_nhat">Điểm Cao Nhất: <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="diem_cao_nhat" type="number" id="diem_cao_nhat" required="required" class="form-control col-md-7 col-xs-12" 
+                <input name="diem_cao_nhat" type="number" id="diem_cao_nhat" required="required" class="@error('diem_cao_nhat') is-invalid @enderror form-control col-md-7 col-xs-12" 
                 @if(isset($nguoiChoi))
                     value="{{$nguoiChoi->diem_cao_nhat}}"
                 @endif 
                 >
+                @error('diem_cao_nhat')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="diem_cao_nhat"><span class="required text-danger">@if(isset($loi_diem_nguoi_choi))
-                Điểm không vượt quá 1.000.000
-              @endif
-               </span>
-              </label>
             </div>
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="credit">Credit: <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="credit" type="text" id="credit" required="required" class="form-control col-md-7 col-xs-12" 
+                <input name="credit" type="number" id="credit" required="required" class="@error('credit') is-invalid @enderror form-control col-md-7 col-xs-12" 
                 @if(isset($nguoiChoi))
                     value="{{$nguoiChoi->credit}}"
                 @endif 
                 >
+                @error('credit')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="credit"><span class="required text-danger">@if(isset($loi_credit_nguoi_choi))
-                Credit không vượt quá 1.000.000
-              @endif
-               </span>
-              </label>
             </div>
            
             <div class="ln_solid"></div>

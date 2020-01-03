@@ -39,16 +39,15 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ten_linh_vuc">Tên lĩnh vực: <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="ten_linh_vuc" type="text" id="ten_linh_vuc" required="required" class="form-control col-md-7 col-xs-12" 
+                <input name="ten_linh_vuc" type="text" id="ten_linh_vuc" required="required" class="@error('ten_linh_vuc') is-invalid @enderror form-control col-md-7 col-xs-12" 
                 @if(isset($linhVuc))
                     value="{{$linhVuc->ten_linh_vuc}}"
                 @endif 
                 >
+                @error('ten_linh_vuc')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ten_linh_vuc"><span class="required text-danger">@if(isset($loi_ten_lv))
-                Tên không vượt quá 30 kí tự
-              @endif</span>
-              </label>
             </div>
            
             <div class="ln_solid"></div>

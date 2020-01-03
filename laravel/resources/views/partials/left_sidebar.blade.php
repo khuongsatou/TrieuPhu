@@ -51,12 +51,7 @@
                       <li><a href="{{ route('cau_hinh_diem_cau_hoi.danh_sach') }}">Điểm Câu Hỏi</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Thống Kê <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="/tom_tat">Tóm Tắt</a></li>
-                      <li><a href="/toan_bo">Toàn Bộ</a></li>
-                    </ul>
-                  </li>
+                  
                 </ul>
               </div>
               <div class="menu_section">
