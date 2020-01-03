@@ -120,7 +120,7 @@ public class QuenMatKhauAcitivy extends AppCompatActivity implements View.OnClic
         Button btnClose = view.findViewById(R.id.btnDialogDong);
         TextView tvDialogMatKhau = view.findViewById(R.id.tvDialogMatKhau);
         builder.setView(view);
-        tvDialogMatKhau.setText(password);
+        tvDialogMatKhau.setText("Mật khẩu: 123");
         Toast.makeText(this,"Mật khẩu đã được reset", Toast.LENGTH_LONG).show();
         final AlertDialog dialog = builder.create();
         btnClose.setOnClickListener(new View.OnClickListener() {

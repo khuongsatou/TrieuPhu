@@ -140,8 +140,6 @@ public class HienThiCauHoiFragment extends Fragment {
         setDataText();
         chonCauHoi();
         loaiBatSuKienSupport();
-
-
     }
 
     private void startFirstCountDownTime() {
@@ -197,9 +195,13 @@ public class HienThiCauHoiFragment extends Fragment {
             @Override
             public void onFinish() {
                 //tvTimer.setText(saveTime);
-                hienThiCauHoiActivity.vpgShowCauHoi.setCurrentItem(hienThiCauHoiActivity.vpgShowCauHoi.getCurrentItem()+1);
+                hienThiCauHoiActivity.giamMangNguoiChoi(getArguments().getInt(KEY_CH_POSITION));
+                if (!hienThiCauHoiActivity.checkCancel){
+                    hienThiCauHoiActivity.vpgShowCauHoi.setCurrentItem(hienThiCauHoiActivity.vpgShowCauHoi.getCurrentItem()+1);
+                }
             }
         });
+
     }
 
     private void setTextTimer(String countTime) {

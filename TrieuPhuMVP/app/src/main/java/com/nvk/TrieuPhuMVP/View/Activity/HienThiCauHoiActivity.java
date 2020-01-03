@@ -74,7 +74,7 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
     private boolean checkLastPage = false;
     private int currentPage = 1;
     public ArrayList<CountDownTimer> countDownTimer = new ArrayList<>();
-
+    public boolean checkCancel =false;
 
 
     @Override
@@ -232,7 +232,8 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
     }
 
     public void giamMangNguoiChoi(int position) {
-        if (this.diemSoMang == 5){
+        if (this.diemSoMang == 4){
+            ivMang[this.diemSoMang].setImageResource(R.drawable.ic_action_heart_low);
             showDialogKetThucLuotChoi(position);
             vpgShowCauHoi.setEnabled(false);
         }else{
@@ -242,13 +243,14 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
     }
 
     private void showDialogKetThucLuotChoi(final int position) {
+        checkCancel = true;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.custom_dialog_ket_thuc,null,false);
         final TextView tvDiemKT = view.findViewById(R.id.tvDiemKT);
         Button btnThemLuot = view.findViewById(R.id.btnThemLuotKT);
         Button btnKetThuc = view.findViewById(R.id.btnKetThucKT);
         builder.setView(view);
-
+        builder.setCancelable(false);
         tvDiemKT.setText("Điểm: "+this.tongDiem);
 
         final AlertDialog dialog = builder.create();
@@ -257,11 +259,10 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int giaLuotChoi = nguoiChoi.getCredit() - GIA_LUOT_CHOI;
                 nguoiChoi.setCredit(giaLuotChoi);
+                muaMang();
                 dialog.dismiss();
             }
         });
-
-
 
         btnKetThuc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -319,6 +320,12 @@ public class HienThiCauHoiActivity extends AppCompatActivity {
             dialog.dismiss();
         }
 
+
+    }
+
+    private void muaMang() {
+        ivMang[this.diemSoMang].setImageResource(R.drawable.ic_action_heart_full);
+        this.checkCancel = false;
     }
 
     @Override

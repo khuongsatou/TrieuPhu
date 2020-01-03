@@ -85,6 +85,7 @@ public class MuaCreditAdapter extends RecyclerView.Adapter<MuaCreditAdapter.MuaC
         public void onClick(View v) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Mua Credit");
+            builder.setCancelable(false);
             builder.setMessage("Bạn Có Muốn Mua Gem Không?");
             builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                 @Override

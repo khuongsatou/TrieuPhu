@@ -14,16 +14,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.Activity.HienThiCauHoiActivity"></activity>
-        <activity android:name=".View.Activity.LichSuChoiActivity" />
-        <activity android:name=".View.Activity.MuaCreditActivity" />
-        <activity android:name=".View.Activity.BangXepHangActivity" />
-        <activity android:name=".View.Activity.MangHinhTroChoiActivity" />
-        <activity android:name=".View.Activity.QuanLyTaiKhoanActivity" />
-        <activity android:name=".View.Activity.MangHinhChinhActivity" />
-        <activity android:name=".View.Activity.DangKyActivity" />
-        <activity android:name=".View.Activity.QuenMatKhauAcitivy" />
-        <activity android:name=".View.Activity.DangNhapActivity">
+        <activity android:name=".View.Activity.HienThiCauHoiActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".View.Activity.LichSuChoiActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".View.Activity.MuaCreditActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".View.Activity.BangXepHangActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".View.Activity.MangHinhTroChoiActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".View.Activity.QuanLyTaiKhoanActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".View.Activity.MangHinhChinhActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".View.Activity.DangKyActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".View.Activity.QuenMatKhauAcitivy"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".View.Activity.DangNhapActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
