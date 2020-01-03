@@ -39,8 +39,11 @@ public class DangNhapActivity extends AppCompatActivity  implements DangNhapView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_nhap);
-
-
+        sharedPreferences = getSharedPreferences(KEY_SHARE_PRE, MODE_PRIVATE);
+        String token = sharedPreferences.getString(TOKEN,null);
+        if(token !=null){
+            navigate();
+        }
         initView();
         initAction();
 
@@ -54,7 +57,6 @@ public class DangNhapActivity extends AppCompatActivity  implements DangNhapView
     }
 
     private void initView() {
-        sharedPreferences = getSharedPreferences(KEY_SHARE_PRE, MODE_PRIVATE);
         edtTenDangNhap = findViewById(R.id.edtTenDangNhap);
         edtMatKhau = findViewById(R.id.edtMatKhau);
         btnDangNhap = findViewById(R.id.btnDangNhap);

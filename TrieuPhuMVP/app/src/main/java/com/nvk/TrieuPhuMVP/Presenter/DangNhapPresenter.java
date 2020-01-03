@@ -45,6 +45,9 @@ public class DangNhapPresenter {
         }else{
             final ProgressDialog dialog = dangNhapView.showDialog();
             dialog.show();
+            final Map<String,String> map = new HashMap<>();
+            map.put(COLUMN_TEN_DANG_NHAP,tenDangNhap);
+            map.put(COLUMN_MAT_KHAU,matKhau);
             StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_DANG_NHAP, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -70,14 +73,11 @@ public class DangNhapPresenter {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    dangNhapView.setErrorServer();
+                    dangNhapView.loginFail();
                 }
             }){
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String,String> map = new HashMap<>();
-                    map.put(COLUMN_TEN_DANG_NHAP,tenDangNhap);
-                    map.put(COLUMN_MAT_KHAU,matKhau);
                     return map;
                 }
             };

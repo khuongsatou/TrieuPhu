@@ -48,7 +48,6 @@ public class MangHinhChinhPresenter {
     public void handleInfo(){
         final ProgressDialog dialog = mangHinhChinhView.showDialog();
         dialog.show();
-        Log.d("AAAAAA", "getHeaders: "+mangHinhChinhView.getReference());
         StringRequest request = new StringRequest(Request.Method.POST, BASE + URI_LAY_THONG_TIN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

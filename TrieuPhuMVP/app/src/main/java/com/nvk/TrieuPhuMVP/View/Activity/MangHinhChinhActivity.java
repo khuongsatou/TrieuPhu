@@ -3,7 +3,9 @@ package com.nvk.TrieuPhuMVP.View.Activity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -50,11 +52,31 @@ public class MangHinhChinhActivity extends AppCompatActivity implements MangHinh
 
     }
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Thông Báo");
+        builder.setMessage("Bạn có muốn đăng xuất?");
+        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                sharedPreferences.edit().clear().apply();
+                dialog.dismiss();
+                finish();
+            }
+        });
+        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
     private void initLoad() {
           sharedPreferences = getSharedPreferences(KEY_SHARE_PRE, MODE_PRIVATE);
           mangHinhChinhPresenter.handleInfo();
-//        mangHinhChinhPresenter.setNguoiChoi((NguoiChoi)getIntent().getSerializableExtra(KEY_DANGNHAP));
-
     }
 
 
@@ -164,7 +186,7 @@ public class MangHinhChinhActivity extends AppCompatActivity implements MangHinh
 
     @Override
     public String getReference() {
-        return sharedPreferences.getString(TOKEN,"");
+        return sharedPreferences.getString(TOKEN,null);
     }
 
     @Override
