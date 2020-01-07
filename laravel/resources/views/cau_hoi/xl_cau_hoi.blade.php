@@ -46,34 +46,6 @@
                 >
               </div>
             </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="linh_vuc_id">Lĩnh Vực: <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                  <select id="linh_vuc_id" name="linh_vuc_id" required="required" class="form-control col-md-7 col-xs-12"
-                  >  
-                 <option value="1" <?php if (isset($cauHoi) && $cauHoi->linh_vuc_id == 1) echo "selected=\"selected\"";  ?>>Thể Thao</option>}  
-                 <option value="2" <?php if (isset($cauHoi) && $cauHoi->linh_vuc_id == 2) echo "selected=\"selected\"";  ?>>Lịch Sử</option>  
-                 <option value="3" <?php if (isset($cauHoi) && $cauHoi->linh_vuc_id == 3) echo "selected=\"selected\"";  ?>>Âm Nhạc - Phim</option>  
-                 <option value="4" <?php if (isset($cauHoi) && $cauHoi->linh_vuc_id == 4) echo "selected=\"selected\"";  ?>>Địa lí</option> 
-                 <option value="5" <?php if (isset($cauHoi) && $cauHoi->linh_vuc_id == 5) echo "selected=\"selected\"";  ?>>Văn Học</option>}  
-                 <option value="6" <?php if (isset($cauHoi) && $cauHoi->linh_vuc_id == 6) echo "selected=\"selected\"";  ?>>Y học</option>  
-                 <option value="7" <?php if (isset($cauHoi) && $cauHoi->linh_vuc_id == 7) echo "selected=\"selected\"";  ?>>Văn Hóa- Sự Kiện</option>  
-                 <option value="8" <?php if (isset($cauHoi) && $cauHoi->linh_vuc_id == 8) echo "selected=\"selected\"";  ?>>Khoa Học Tự Nhiên</option>   
-                 <option value="9" <?php if (isset($cauHoi) && $cauHoi->linh_vuc_id == 9) echo "selected=\"selected\"";  ?>>Anime - Manga</option>  
-               
-               </select> 
-
-                {{-- <input name="linh_vuc_id" type="number" id="linh_vuc_id" required="required" class="form-control col-md-7 col-xs-12" 
-                @if(isset($cauHoi))
-                    value="{{$cauHoi->linh_vuc_id}}"
-                @endif 
-                > --}}
-              </div>
-            </div>
-
-
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phuong_an_a">Phương Án A: <span class="required">*</span>
               </label>
@@ -130,15 +102,43 @@
               <div class="col-md-6 col-sm-6 col-xs-12">
                   <select id="dap_an" name="dap_an" required="required" class="form-control col-md-7 col-xs-12"
                   >  
-                 <option value="A" <?php if (isset($cauHoi) && $cauHoi->dap_an == 'A') echo "selected=\"selected\"";  ?>>A</option>}  
-                 <option value="B" <?php if (isset($cauHoi) && $cauHoi->dap_an == 'B') echo "selected=\"selected\"";  ?>>B</option>  
-                 <option value="C" <?php if (isset($cauHoi) && $cauHoi->dap_an == 'C') echo "selected=\"selected\"";  ?>>C</option>  
-                 <option value="D" <?php if (isset($cauHoi) && $cauHoi->dap_an == 'D') echo "selected=\"selected\"";  ?>>D</option>  
-               
+                  @for($i=0; $i < count($dapAns); $i++)
+                    <option value="{{ $dapAns[$i] }}"
+                      @if(isset($cauHoi))
+                          @if($dapAns[$i] == $cauHoi->dap_an)
+                             selected
+                          @endif
+                      @endif
+                      >
+                      {{ $dapAns[$i] }}
+                    </option>
+                  @endfor
                 </select>   
               </div>
             </div>
            
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="linh_vuc_id">Lĩnh Vực: <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                  <select id="linh_vuc_id" name="linh_vuc_id" required="required" class="form-control col-md-7 col-xs-12"
+                  > 
+                  @foreach($linhVucs as $item)
+                    <option value="{{ $item->id }}"
+                      @if(isset($cauHoi))
+                          @if($item->id == $cauHoi->linh_vuc_id)
+                             selected
+                          @endif
+                      @endif
+                      >
+                      {{ $item->ten_linh_vuc }}
+                    </option>
+                  @endforeach
+
+               </select> 
+              </div>
+            </div>
+
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

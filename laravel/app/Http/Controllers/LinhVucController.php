@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\LinhVuc;
 use App\CauHoi;
+use App\Rules\OlymicYear;
 class LinhVucController extends Controller
 {
     /**
@@ -36,14 +37,18 @@ class LinhVucController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-            'ten_linh_vuc.required' => 'Không bỏ trống',
-            'ten_linh_vuc.max' => 'Tối đa 20',
-        ];
-        $this->validate($request,[
-            'ten_linh_vuc'=>'required|max:20',
-        ],$messages);
+        // $messages = [
+        //     'ten_linh_vuc.required' => 'Không bỏ trống',
+        //     'ten_linh_vuc.max' => 'Tối đa 20',
+        // ];
+        // $this->validate($request,[
+        //     'ten_linh_vuc'=>'required|max:20',
+        // ],$messages);
+        $this->validate($request,['ten_linh_vuc'=>new OlymicYear()]);
 
+        if(LinhVuc::where('ten_linh_vuc',$request->ten_linh_vuc)->exists()){
+            return 'Found';
+        }
         $linhVuc = new LinhVuc();
         $linhVuc->ten_linh_vuc = $request->ten_linh_vuc;
         $linhVuc->save();

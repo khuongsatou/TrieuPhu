@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\CauHoi;
-
+use App\LinhVuc;
 class CauHoiController extends Controller
 {
+    private $dapAns = ['A','B','C','D'];
+    
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +27,9 @@ class CauHoiController extends Controller
      */
     public function create()
     {
-        return View('cau_hoi.xl_cau_hoi');
+        $linhVucs = LinhVuc::all();
+        $dapAns = $this->dapAns;
+        return View('cau_hoi.xl_cau_hoi',compact('linhVucs','dapAns'));
     }
 
     /**
@@ -36,7 +40,7 @@ class CauHoiController extends Controller
      */
     public function store(Request $request)
     {
-       
+        
         $cauHoi = new CauHoi();
         $cauHoi->noi_dung =$request->noi_dung;
         $cauHoi->linh_vuc_id =$request->linh_vuc_id;
@@ -68,8 +72,10 @@ class CauHoiController extends Controller
      */
     public function edit($id)
     {
+        $linhVucs = LinhVuc::all();
         $cauHoi = CauHoi::find($id);
-        return View('cau_hoi.xl_cau_hoi',compact('cauHoi'));
+        $dapAns = $this->dapAns;
+        return View('cau_hoi.xl_cau_hoi',compact('cauHoi','linhVucs','dapAns'));
     }
 
     /**
